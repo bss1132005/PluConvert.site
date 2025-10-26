@@ -59,6 +59,11 @@
         .dropdown-menu a.disabled-link:hover { background-color: transparent; color: var(--text-secondary-color); }
         .nav-item-dropdown .dropdown-toggle svg { transition: transform 0.3s ease; }
         .nav-item-dropdown:hover .dropdown-toggle svg { transform: rotate(180deg); }
+        
+        /* NEW STYLES FOR ORGANIZED DROPDOWN */
+        .dropdown-header { padding: 12px 18px 8px; font-weight: 600; font-size: 0.8rem; color: var(--text-secondary-color); text-transform: uppercase; letter-spacing: 0.5px; }
+        .dropdown-divider { height: 1px; background-color: var(--border-color); margin: 8px 0; }
+        
         #signup-modal { display: none; position: fixed; z-index: 200; padding-top: 100px; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.5); -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px); }
         .modal-content { background-color: var(--bg-color); margin: auto; padding: 30px; border-radius: 12px; width: 90%; max-width: 400px; box-shadow: 0 10px 25px rgba(0,0,0,0.4); color: var(--text-color); animation: fadeIn 0.3s; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
@@ -138,26 +143,11 @@
         .footer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; margin-bottom: 40px; } .footer-col h4 { color: var(--heading-color); margin-bottom: 15px; font-size: 1.1rem; } .footer-col ul { list-style: none; } .footer-col ul li { margin-bottom: 10px; } .footer-col a { text-decoration: none; color: var(--text-secondary-color); transition: color 0.3s ease; } .footer-col a:hover { color: var(--primary-color); }
         .footer-col a.footer-link { cursor: pointer; }
         .footer-bottom { text-align: center; padding-top: 20px; border-top: 1px solid var(--border-color); font-size: 0.9rem; }
-        #payment-modal { display: none; position: fixed; z-index: 300; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.6); -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px); padding-top: 80px; }
-        .payment-modal-content { background-color: var(--bg-color); margin: auto; padding: 30px; border-radius: 12px; width: 90%; max-width: 450px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); color: var(--text-color); animation: fadeIn 0.3s; position: relative; }
-        .payment-modal-content h2 { text-align: center; font-size: 1.5rem; margin-bottom: 15px; }
-        .payment-modal-subtitle { text-align: center; color: var(--text-secondary-color); margin-bottom: 25px; display: flex; justify-content: center; align-items: center; gap: 12px; font-size: 0.95rem; }
-        .payment-modal-subtitle img { height: 22px; }
-        #paypal-button-container { margin: 0 auto; max-width: 350px; min-height: 120px; }
-        #payment-message { margin-top: 20px; text-align: center; font-weight: 600; font-size: 1.1rem; }
-        .mobile-nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 5px; z-index: 1001; }
-        .mobile-nav-toggle .hamburger-icon { width: 28px; height: 24px; display: flex; flex-direction: column; justify-content: space-between; }
-        .mobile-nav-toggle .hamburger-icon span { display: block; width: 100%; height: 3px; background-color: var(--heading-color); border-radius: 2px; transition: all 0.3s ease-in-out; }
-        .mobile-nav-toggle.is-active .hamburger-icon span:nth-child(1) { transform: translateY(10px) rotate(45deg); }
-        .mobile-nav-toggle.is-active .hamburger-icon span:nth-child(2) { opacity: 0; }
-        .mobile-nav-toggle.is-active .hamburger-icon span:nth-child(3) { transform: translateY(-11px) rotate(-45deg); }
-        .mobile-nav-menu { display: none; position: fixed; top: 85px; left: 0; width: 100%; height: calc(100vh - 85px); background-color: var(--bg-color); z-index: 999; padding: 30px; text-align: center; overflow-y: auto; }
-        .mobile-nav-menu ul { list-style: none; display: flex; flex-direction: column; gap: 20px; }
-        .mobile-nav-menu ul li a { font-size: 1.5rem; font-weight: 600; color: var(--heading-color); text-decoration: none; padding: 10px; display: block; }
-        .mobile-nav-menu ul li .btn { font-size: 1.2rem; margin-top: 20px; }
-        .mobile-nav-menu .nav-item-dropdown .dropdown-menu { position: static; display: block; transform: none; border: none; box-shadow: none; background: transparent; min-width: unset; opacity: 1; visibility: visible; padding-top: 15px; }
-        .mobile-nav-menu .nav-item-dropdown .dropdown-menu a { font-size: 1.1rem; font-weight: 400; color: var(--text-secondary-color); }
-        .mobile-nav-menu .nav-item-dropdown:hover .dropdown-toggle svg { transform: none; }
+        #payment-modal { display: none; /* ... */ }
+        .payment-modal-content { /* ... */ }
+        .mobile-nav-toggle { display: none; /* ... */ }
+        .mobile-nav-menu { display: none; /* ... */ }
+
         @media (max-width: 768px) {
             .main-nav ul { display: none; }
             .mobile-nav-toggle { display: block; }
@@ -186,8 +176,16 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a href="/">All-in-One Converter</a></li>
-                            <li><a href="/image-compressor.html">Image Compressor</a></li>
-                            <li><a href="/pdf-tools.html">PDF Tools</a></li>
+                            <li class="dropdown-divider"></li>
+                            <li class="dropdown-header">Web &amp; Image</li>
+                            <li><a href="/jpg-converter.html">JPG Converter</a></li>
+                            <li><a href="/png-converter.html">PNG Converter</a></li>
+                            <li><a href="/gif-converter.html">GIF Converter</a></li>
+                            <li><a href="/webp-converter.html">WEBP Converter</a></li>
+                            <li><a href="/avif-converter.html">AVIF Converter</a></li>
+                            <li><a href="/tiff-converter.html">TIFF Converter</a></li>
+                            <li><a href="/jp2-converter.html">JP2 Converter</a></li>
+                            <li class="dropdown-divider"></li>
                             <li><a href="#" class="disabled-link">Video Converter (Soon)</a></li>
                         </ul>
                     </li>
@@ -197,9 +195,8 @@
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">API Documentation</a></li>
+                            <li><a href="/api-docs.html">API Documentation</a></li>
                             <li><a href="#">Developer Status</a></li>
-                            <li><a href="#">Client Libraries</a></li>
                         </ul>
                     </li>
                     <li>
