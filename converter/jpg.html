@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="description" content="Free and secure online tool to convert any image to the high-quality JPG format right in your browser."/>
+    <title>JPG Converter - PlusConvert</title>
+    <!-- Paste the entire <head> section from your index.html here (including all styles) -->
+</head>
+<body>
+
+    <header class="main-header">
+        <!-- Paste your entire <header> section from index.html here -->
+    </header>
+
+    <main>
+        <div id="main-view">
+            <section class="hero drop-zone">
+                <div class="container">
+                    <h1>JPG Converter</h1>
+                    <p>Easily convert your images to the high-quality, universally compatible JPG format.</p>
+                    <div id="file-upload-area">
+                        <input type="file" id="file-upload" name="file-upload" accept="image/*" multiple="multiple"/>
+                        <label for="file-upload" class="upload-btn">
+                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"/></svg>
+                            Select File(s)
+                        </label>
+                        <p class="drop-text" style="margin-top: 12px; color: var(--text-secondary-color);">or drop files here</p>
+                    </div>
+                    <div id="file-info" class="file-info-area"></div>
+                    <div class="converter-tool">
+                        <span>convert to</span>
+                        <div class="select-wrapper">
+                            <select name="convert-to" id="convert-to">
+                                <!-- This dropdown is locked to JPG -->
+                                <option value="jpg" selected="selected">JPG</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="options-panel" class="options-panel">
+                        <div class="options-row">
+                            <div id="quality-option" class="option-group">
+                                <label for="quality-slider">Quality: <span id="quality-value">92%</span></label>
+                                <input type="range" id="quality-slider" min="1" max="100" value="92"/>
+                            </div>
+                             <div id="resize-option" class="option-group">
+                                <label for="max-width">Resize (optional)</label>
+                                <div style="display: flex; gap: 10px;">
+                                    <input type="number" id="max-width" placeholder="Max Width"/>
+                                    <input type="number" id="max-height" placeholder="Max Height"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button id="convert-button" class="convert-btn" disabled="disabled">Convert to JPG</button>
+                    <div id="status-area" class="status-area"></div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <!-- Paste your entire <footer> section from index.html here -->
+    </footer>
+
+    <!-- Paste all your modals and script tags from the bottom of index.html here -->
+</body>
+</html>
