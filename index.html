@@ -44,7 +44,7 @@
         .main-header { background: var(--bg-color); padding: 20px 0; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px var(--shadow-color); transition: background-color 0.3s ease, box-shadow 0.3s ease; }
         .main-header .container { display: flex; justify-content: space-between; align-items: center; }
         .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--heading-color); font-size: 1.5rem; font-weight: 700; }
-        .main-nav { display: flex; align-items: center; gap: 30px; } .main-nav ul { display: flex; list-style: none; gap: 30px; align-items: center; } .main-nav a { text-decoration: none; color: var(--text-color); font-weight: 500; transition: color 0.3s ease; } .main-nav a:hover { color: var(--primary-color); }
+        .main-nav { display: flex; align-items: center; gap: 30px; } .main-nav ul { display: flex; list-style: none; gap: 30px; align-items: center; } .main-nav a { text-decoration: none; color: var(--text-color); font-weight: 500; transition: color 0.3s ease; cursor: pointer; } .main-nav a:hover { color: var(--primary-color); }
         .btn { display: inline-flex; align-items: center; justify-content: center; padding: 10px 24px; border-radius: 50px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; } .btn-primary { background-color: var(--primary-color); color: white; } .btn-primary:hover { background-color: #0041CC; transform: translateY(-2px); }
         .theme-toggle-btn { background: none; border: 2px solid var(--border-color); border-radius: 50%; width: 40px; height: 40px; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 5px; transition: background-color 0.3s ease, border-color 0.3s ease; } .theme-toggle-btn:hover { background-color: var(--bg-secondary-color); } .theme-toggle-btn svg { width: 22px; height: 22px; color: var(--text-secondary-color); } .moon-icon { display: none; } body.dark-mode .sun-icon { display: none; } body.dark-mode .moon-icon { display: block; }
         
@@ -131,7 +131,7 @@
             .footer-grid { grid-template-columns: repeat(2, 1fr); } .article-content h3 { font-size: 1.5rem; } .article-content h4 { font-size: 1.2rem; }
             .options-row { flex-direction: column; align-items: stretch; }
             .ad-placeholder { min-height: 60px; }
-            .mega-menu-grid { grid-template-columns: 1fr; }
+            .all-tools-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -246,7 +246,6 @@
         </div>
     </footer>
 
-    <!-- All Tools Popup -->
     <div id="all-tools-popup">
         <div class="all-tools-content">
             <span class="close-popup-btn" id="close-tools-popup">&times;</span>
@@ -291,8 +290,21 @@
             </div>
         </div>
     </div>
-    
-    <!-- Modals, Scripts, etc. -->
+
+    <div id="signup-modal" class="modal">
+        <!-- Your full signup modal HTML -->
+    </div>
+    <div id="payment-modal" class="modal">
+        <!-- Your full payment modal HTML -->
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    <script>
+        // Your Firebase config script
+    </script>
+    <script src="https://www.paypal.com/sdk/js?client-id=..."></script>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // Your existing main script here...
@@ -317,7 +329,10 @@
                     }
                 });
             }
+
+            // The rest of your main script (converter logic, modals, etc.)
         });
     </script>
+
 </body>
 </html>
