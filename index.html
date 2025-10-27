@@ -59,89 +59,6 @@
         .dropdown-menu a.disabled-link:hover { background-color: transparent; color: var(--text-secondary-color); }
         .nav-item-dropdown .dropdown-toggle svg { transition: transform 0.3s ease; }
         .nav-item-dropdown:hover .dropdown-toggle svg { transform: rotate(180deg); }
-        
-        /* --- NEW STYLES FOR TOOLS POPUP --- */
-        .tools-popup-menu {
-            display: none;
-            position: fixed;
-            top: 85px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 90%;
-            max-width: 920px;
-            background-color: var(--bg-color);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            box-shadow: 0 10px 30px var(--shadow-color);
-            padding: 25px 30px;
-            z-index: 1000;
-            animation: fadeInPopup 0.3s ease-out;
-        }
-        .tools-popup-menu.is-open {
-            display: block;
-        }
-        @keyframes fadeInPopup {
-            from { opacity: 0; transform: translateX(-50%) translateY(-10px); }
-            to { opacity: 1; transform: translateX(-50%) translateY(0); }
-        }
-        .popup-close-btn {
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            background: none;
-            border: none;
-            font-size: 2rem;
-            color: var(--text-secondary-color);
-            cursor: pointer;
-            line-height: 1;
-            padding: 5px;
-        }
-        .popup-close-btn:hover {
-            color: var(--text-color);
-        }
-        .popup-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 24px;
-        }
-        .popup-column h4 {
-            font-size: 0.85rem;
-            font-weight: 700;
-            color: var(--heading-color);
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .popup-column ul {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-        .popup-column li a {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 10px;
-            border-radius: 8px;
-            text-decoration: none;
-            color: var(--text-secondary-color);
-            font-weight: 500;
-            transition: all 0.2s ease;
-        }
-        .popup-column li a:hover {
-            background-color: var(--bg-secondary-color);
-            color: var(--primary-color);
-        }
-        .popup-column li a svg {
-            width: 22px;
-            height: 22px;
-            flex-shrink: 0;
-            color: var(--primary-color);
-            stroke-width: 1.5;
-        }
-        /* --- END NEW STYLES --- */
-        
         #signup-modal { display: none; position: fixed; z-index: 200; padding-top: 100px; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.5); -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px); }
         .modal-content { background-color: var(--bg-color); margin: auto; padding: 30px; border-radius: 12px; width: 90%; max-width: 400px; box-shadow: 0 10px 25px rgba(0,0,0,0.4); color: var(--text-color); animation: fadeIn 0.3s; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
@@ -241,9 +158,6 @@
         .mobile-nav-menu .nav-item-dropdown .dropdown-menu { position: static; display: block; transform: none; border: none; box-shadow: none; background: transparent; min-width: unset; opacity: 1; visibility: visible; padding-top: 15px; }
         .mobile-nav-menu .nav-item-dropdown .dropdown-menu a { font-size: 1.1rem; font-weight: 400; color: var(--text-secondary-color); }
         .mobile-nav-menu .nav-item-dropdown:hover .dropdown-toggle svg { transform: none; }
-        @media (max-width: 920px) {
-            .popup-grid { grid-template-columns: repeat(2, 1fr); }
-        }
         @media (max-width: 768px) {
             .main-nav ul { display: none; }
             .mobile-nav-toggle { display: block; }
@@ -252,9 +166,6 @@
             .footer-grid { grid-template-columns: repeat(2, 1fr); } .article-content h3 { font-size: 1.5rem; } .article-content h4 { font-size: 1.2rem; }
             .options-row { flex-direction: column; align-items: stretch; }
             .ad-placeholder { min-height: 60px; }
-        }
-        @media (max-width: 500px) {
-            .popup-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -269,53 +180,16 @@
             <nav class="main-nav">
                 <ul id="desktop-nav-list">
                     <li class="nav-item-dropdown">
-                        <a href="#" class="dropdown-toggle" id="tools-toggle">
+                        <a href="#" class="dropdown-toggle">
                             <span>Tools</span>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg>
                         </a>
-                        <!-- NEW TOOLS POPUP MENU -->
-                        <div id="tools-popup" class="tools-popup-menu">
-                            <button class="popup-close-btn" aria-label="Close menu">&times;</button>
-                            <div class="popup-grid">
-                                <div class="popup-column">
-                                    <h4>WEB & IMAGE</h4>
-                                    <ul>
-                                        <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" /></svg><span>JPG</span></a></li>
-                                        <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" /></svg><span>PNG</span></a></li>
-                                        <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z" /></svg><span>GIF</span></a></li>
-                                        <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 11.667 0l3.181-3.183m-4.991-2.691v4.992h-4.992m0 0-3.181-3.183a8.25 8.25 0 0 1 11.667 0l3.181 3.183" /></svg><span>WEBP</span></a></li>
-                                        <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 11.667 0l3.181-3.183m-4.991-2.691v4.992h-4.992m0 0-3.181-3.183a8.25 8.25 0 0 1 11.667 0l3.181 3.183" /></svg><span>AVIF</span></a></li>
-                                        <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Z" /></svg><span>JP2</span></a></li>
-                                    </ul>
-                                </div>
-                                <div class="popup-column">
-                                    <h4>DOCUMENT & TEXT</h4>
-                                    <ul>
-                                        <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" /></svg><span>Image to PDF</span></a></li>
-                                        <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" /></svg><span>Text to DOCX</span></a></li>
-                                        <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" /></svg><span>Text to TXT</span></a></li>
-                                        <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9.75h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5-15h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5M3.75 4.5v.007v-.007Zm0 4.5v.007v-.007Zm0 4.5v.007v-.007Z" /></svg><span>ICO Converter</span></a></li>
-                                    </ul>
-                                </div>
-                                <div class="popup-column">
-                                    <h4>LEGACY & VECTOR</h4>
-                                    <ul>
-                                        <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" /></svg><span>SVG Converter</span></a></li>
-                                        <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Z" /></svg><span>BMP Converter</span></a></li>
-                                        <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Z" /></svg><span>TIFF Converter</span></a></li>
-                                        <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Z" /></svg><span>TGA Converter</span></a></li>
-                                        <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Z" /></svg><span>PCX Converter</span></a></li>
-                                    </ul>
-                                </div>
-                                <div class="popup-column">
-                                    <h4>GAME & DEVELOPER</h4>
-                                    <ul>
-                                        <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" /></svg><span>Base64 Encoder</span></a></li>
-                                        <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25H12" /></svg><span>ASCII Art Generator</span></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+                        <ul class="dropdown-menu">
+                            <li><a href="/">All-in-One Converter</a></li>
+                            <li><a href="/image-compressor.html">Image Compressor</a></li>
+                            <li><a href="/pdf-tools.html">PDF Tools</a></li>
+                            <li><a href="#" class="disabled-link">Video Converter (Soon)</a></li>
+                        </ul>
                     </li>
                     <li class="nav-item-dropdown">
                         <a href="#" class="dropdown-toggle">
@@ -351,7 +225,6 @@
         </div>
     </header>
 
-    <!-- Page Content Continues... -->
     <div class="mobile-nav-menu" id="mobile-nav-menu"><ul id="mobile-nav-list"></ul></div>
 
     <div class="banner-ad-container">
@@ -412,7 +285,7 @@
                 </div>
             </section>
            <section class="supported-formats"><div class="container"><h2>Supports Over 20+ File Formats</h2><p class="section-subtitle">A powerful, all-in-one suite for all your conversion needs. Whether you're a developer, designer, or just need to convert a file, we've got you covered.</p><div class="formats-grid"></div></div></section>
-           <section id="pricing" class="pricing-section"><div class="container"><h2>Simple, Transparent Pricing</h2><p class="section-subtitle">Choose the plan that's right for you. Unlock powerful features and convert without limits.</p><div class="pricing-toggle-container"><span class="monthly-label">Monthly</span><div class="pricing-toggle" id="pricing-toggle"><span class="monthly active"></span><span class="yearly"></span></div><span class="yearly-label">Yearly</span><span class="save-badge">Save 20%</span></div><div class="pricing-grid"><div class="pricing-card"><h3 class="plan-name">Basic</h3><div class="plan-price" data-monthly="5" data-yearly="48"><sup>$</sup>5<sub>/mo</sub></div><p class="plan-description">For casual users who need quick and easy conversions.</p><ul class="features-list"><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.052-.143z" clip-rule="evenodd" /></svg>20 conversions per day</li><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.052-.143z" clip-rule="evenodd" /></svg>Batch processing up to 5 files</li><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.052-.143z" clip-rule="evenodd" /></svg>Standard support</li></ul><a href="#" class="btn btn-secondary pricing-button" data-plan="Basic" data-price="5.00">Choose Basic</a></div><div class="pricing-card recommended"><div class="badge">Best Value</div><h3 class="plan-name">Pro</h3><div class="plan-price" data-monthly="15" data-yearly="144"><sup>$</sup>15<sub>/mo</sub></div><p class="plan-description">For professionals who need more power and flexibility.</p><ul class="features-list"><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.052-.143z" clip-rule="evenodd" /></svg>Unlimited daily conversions</li><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.052-.143z" clip-rule="evenodd" /></svg>Batch processing up to 100 files</li><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.052-.143z" clip-rule="evenodd" /></svg>Advanced options &amp; quality control</li><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.052-.143z" clip-rule="evenodd" /></svg>Priority email support</li></ul><a href="#" class="btn btn-primary pricing-button" data-plan="Pro" data-price="15.00">Choose Pro</a></div><div class="pricing-card"><h3 class="plan-name">Premium</h3><div class="plan-price" data-monthly="49" data-yearly="470"><sup>$</sup>49<sub>/mo</sub></div><p class="plan-description">For teams and businesses that need developer access.</p<ul class="features-list"><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.052-.143z" clip-rule="evenodd" /></svg>All features from Pro plan</li><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.052-.143z" clip-rule="evenodd" /></svg>Full API Access</li><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.052-.143z" clip-rule="evenodd" /></svg>Team collaboration features</li><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.052-.143z" clip-rule="evenodd" /></svg>Dedicated account manager</li></ul><a href="#" class="btn btn-secondary pricing-button" data-plan="Premium" data-price="49.00">Choose Premium</a></div></div></div></section>
+           <section id="pricing" class="pricing-section"><div class="container"><h2>Simple, Transparent Pricing</h2><p class="section-subtitle">Choose the plan that's right for you. Unlock powerful features and convert without limits.</p><div class="pricing-toggle-container"><span class="monthly-label">Monthly</span><div class="pricing-toggle" id="pricing-toggle"><span class="monthly active"></span><span class="yearly"></span></div><span class="yearly-label">Yearly</span><span class="save-badge">Save 20%</span></div><div class="pricing-grid"><div class="pricing-card"><h3 class="plan-name">Basic</h3><div class="plan-price" data-monthly="5" data-yearly="48"><sup>$</sup>5<sub>/mo</sub></div><p class="plan-description">For casual users who need quick and easy conversions.</p><ul class="features-list"><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.052-.143z" clip-rule="evenodd" /></svg>20 conversions per day</li><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.052-.143z" clip-rule="evenodd" /></svg>Batch processing up to 5 files</li><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.052-.143z" clip-rule="evenodd" /></svg>Standard support</li></ul><a href="#" class="btn btn-secondary pricing-button" data-plan="Basic" data-price="5.00">Choose Basic</a></div><div class="pricing-card recommended"><div class="badge">Best Value</div><h3 class="plan-name">Pro</h3><div class="plan-price" data-monthly="15" data-yearly="144"><sup>$</sup>15<sub>/mo</sub></div><p class="plan-description">For professionals who need more power and flexibility.</p><ul class="features-list"><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.052-.143z" clip-rule="evenodd" /></svg>Unlimited daily conversions</li><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.052-.143z" clip-rule="evenodd" /></svg>Batch processing up to 100 files</li><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.052-.143z" clip-rule="evenodd" /></svg>Advanced options &amp; quality control</li><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.052-.143z" clip-rule="evenodd" /></svg>Priority email support</li></ul><a href="#" class="btn btn-primary pricing-button" data-plan="Pro" data-price="15.00">Choose Pro</a></div><div class="pricing-card"><h3 class="plan-name">Premium</h3><div class="plan-price" data-monthly="49" data-yearly="470"><sup>$</sup>49<sub>/mo</sub></div><p class="plan-description">For teams and businesses that need developer access.</p><ul class="features-list"><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.052-.143z" clip-rule="evenodd" /></svg>All features from Pro plan</li><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.052-.143z" clip-rule="evenodd" /></svg>Full API Access</li><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.052-.143z" clip-rule="evenodd" /></svg>Team collaboration features</li><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.052-.143z" clip-rule="evenodd" /></svg>Dedicated account manager</li></ul><a href="#" class="btn btn-secondary pricing-button" data-plan="Premium" data-price="49.00">Choose Premium</a></div></div></div></section>
            <section class="features"><div class="container"><h2>The Only Converter You'll Ever Need</h2><div class="features-grid"><div class="feature-card"><svg class="feature-icon" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="iconGrad" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="var(--primary-color)"/><stop offset="100%" stop-color="var(--secondary-color)"/></linearGradient></defs><path fill="url(#iconGrad)" d="M41.9,13.2l-19,16c-1,0.8-1,2.2,0,3l19,16c1.4,1.2,3.6,0.2,3.6-1.5V14.8C45.5,13,43.3,12,41.9,13.2z M18.5,14.8v34.5 c0,1.7,2.2,2.7,3.6,1.5l19-16c1-0.8,1-2.2,0-3l-19-16C20.7,12,18.5,13,18.5,14.8z" opacity="0.5"/><path fill="url(#iconGrad)" d="M33,4.1l-19,16c-1,0.8-1,2.2,0,3l19,16c1.4,1.2,3.6,0.2,3.6-1.5V5.6C36.5,3.9,34.4,2.9,33,4.1z"/></svg><h3>Blazing Fast Speed</h3><p>No uploads, no waiting. All conversions run directly in your browser, making the process incredibly fast and keeping your data private.</p></div><div class="feature-card"><svg class="feature-icon" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M14 20h20v20H14z" fill="#EBF5FF"/><path d="M20 14h20v20H20z" fill="#b3d4ff"/><path d="M26 8h20v20H26z" fill="var(--primary-color)"/></svg><h3>Batch Processing</h3><p>Save time by converting hundreds of files at once. Select multiple files and let our tool do the heavy lifting, bundling them in a ZIP for you.</p></div><div class="feature-card"><svg class="feature-icon" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 20h40v24H12z" rx="4" fill="#EBF5FF"/><path d="M32 32m-8 0a8 8 0 1016 0 8 8 0 10-16 0" fill="var(--primary-color)"/><path d="M18 50h28" stroke="var(--secondary-color)" stroke-width="4" stroke-linecap="round"/></svg><h3>Maximum Formats</h3><p>Go beyond the basics. Convert to next-gen formats like AVIF, create website favicons (ICO), or even generate creative ASCII art from your photos.</p></div><div class="feature-card"><svg class="feature-icon" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M18 10h28v44H18z" rx="4" fill="#E6F6FF"/><path d="M24 18h16m-16 8h16m-16 8h10" stroke="var(--primary-color)" stroke-width="3" stroke-linecap="round"/><path d="M46 10h-2v44h2z" fill="var(--secondary-color)"/></svg><h3>Full PDF Suite</h3><p>A true PDF workhorse. Convert multi-page PDFs to images, or compile multiple images into a single, professional PDF document.</p></div><div class="feature-card"><svg class="feature-icon" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="iconGrad2" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="var(--primary-color)"/><stop offset="100%" stop-color="var(--secondary-color)"/></linearGradient></defs><path fill="url(#iconGrad2)" d="M32,8 C21.5,8 13.2,16.3 13.2,26.8 L13.2,32 L18,32 L18,26.8 C18,19.1 24.1,13 32,13 C39.9,13 46,19.1 46,26.8 L46,32 L50.8,32 L50.8,26.8 C50.8,16.3 42.5,8 32,8 z M12,34 L52,34 L52,56 L12,56 L12,34 z"/></svg><h3>Privacy First</h3><p>Your files are never uploaded. All conversions happen on your device, guaranteeing that your sensitive data remains 100% private and secure.</p></div><div class="feature-card"><svg class="feature-icon" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="iconGrad3" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="var(--primary-color)"/><stop offset="100%" stop-color="var(--secondary-color)"/></linearGradient></defs><path fill="url(#iconGrad3)" d="M16 22 L48 22 M16 32 L48 32 M16 42 L32 42 M20 16 L12 22 L20 28 M44 26 L52 32 L44 38"/><rect x="10" y="14" width="8" height="8" rx="2" fill="var(--primary-color)"/><rect x="46" y="28" width="8" height="8" rx="2" fill="var(--primary-color)"/></svg><h3>Advanced Control</h3><p>Take full control of your output. Adjust quality, resize dimensions, and tweak other settings to get the perfect result for your needs.</p></div></div></div></section>
            <section class="article-content"><div class="container"><h2>The Definitive Guide to All-Format File Conversion</h2><p>Welcome to the final frontier of browser-based file conversion... (and the rest of your article)</p></div></section>
         </div>
@@ -533,38 +406,6 @@
             if (mobileNavMenu) {
                 mobileNavMenu.addEventListener('click', (e) => { if (e.target.tagName === 'A') { mobileNavToggle.classList.remove('is-active'); mobileNavToggle.setAttribute('aria-expanded', 'false'); mobileNavMenu.style.display = 'none'; } });
             }
-            
-            // --- NEW JAVASCRIPT FOR TOOLS POPUP ---
-            const toolsToggle = document.getElementById('tools-toggle');
-            const toolsPopup = document.getElementById('tools-popup');
-            if (toolsToggle && toolsPopup) {
-                const popupCloseBtn = toolsPopup.querySelector('.popup-close-btn');
-                
-                toolsToggle.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    toolsPopup.classList.toggle('is-open');
-                });
-
-                if (popupCloseBtn) {
-                    popupCloseBtn.addEventListener('click', () => {
-                        toolsPopup.classList.remove('is-open');
-                    });
-                }
-                
-                document.addEventListener('click', (e) => {
-                    if (toolsPopup.classList.contains('is-open') && !toolsPopup.contains(e.target) && !toolsToggle.contains(e.target)) {
-                        toolsPopup.classList.remove('is-open');
-                    }
-                });
-
-                document.addEventListener('keydown', (e) => {
-                    if (e.key === "Escape" && toolsPopup.classList.contains('is-open')) {
-                        toolsPopup.classList.remove('is-open');
-                    }
-                });
-            }
-            // --- END NEW JAVASCRIPT ---
 
             const pricingToggle = document.getElementById('pricing-toggle');
             if(pricingToggle) {
