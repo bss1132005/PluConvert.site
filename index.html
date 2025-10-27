@@ -68,9 +68,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0,0,0,0.5);
-            -webkit-backdrop-filter: blur(5px);
-            backdrop-filter: blur(5px);
+            background-color: rgba(0,0,0,0.5); /* MODIFIED: Removed blur */
             z-index: 998;
         }
         .tools-popup-overlay.is-open {
@@ -132,13 +130,13 @@
             align-items: center;
             gap: 12px;
             padding: 8px 0;
-            font-weight: 400; /* Regular font weight */
+            font-weight: 400;
             font-size: 1rem;
             color: var(--text-color);
         }
         .popup-column li a:hover span {
             color: var(--primary-color);
-            text-decoration: underline;
+            text-decoration: none; /* MODIFIED: Removed underline */
         }
         .popup-column li a svg {
             width: 22px;
@@ -276,7 +274,6 @@
             <nav class="main-nav">
                 <ul id="desktop-nav-list">
                     <li class="nav-item-dropdown">
-                        <!-- MODIFIED: Changed ID for clarity and removed old dropdown -->
                         <a href="#" class="dropdown-toggle" id="tools-menu-button">
                             <span>Tools</span>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg>
@@ -316,7 +313,6 @@
         </div>
     </header>
 
-    <!-- MODIFIED: Popup and overlay are added here, outside the header -->
     <div class="tools-popup-overlay" id="tools-popup-overlay"></div>
     <div id="tools-popup-menu" class="tools-popup-menu">
         <button class="popup-close-btn" id="popup-close-btn" aria-label="Close menu">&times;</button>
@@ -360,7 +356,6 @@
             </div>
         </div>
     </div>
-
 
     <div class="mobile-nav-menu" id="mobile-nav-menu"><ul id="mobile-nav-list"></ul></div>
 
