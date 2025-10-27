@@ -48,6 +48,7 @@
         .main-nav { display: flex; align-items: center; gap: 30px; } .main-nav ul { display: flex; list-style: none; gap: 30px; align-items: center; } .main-nav a { text-decoration: none; color: var(--text-color); font-weight: 500; transition: color 0.3s ease; } .main-nav a:hover { color: var(--primary-color); }
         .btn { display: inline-flex; align-items: center; justify-content: center; padding: 10px 24px; border-radius: 50px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; } .btn-primary { background-color: var(--primary-color); color: white; } .btn-primary:hover { background-color: #0041CC; transform: translateY(-2px); } .btn-secondary { background-color: transparent; color: var(--primary-color); border: 2px solid var(--primary-color); } .btn-secondary:hover { background-color: var(--primary-color); color: white; }
         .theme-toggle-btn { background: none; border: 2px solid var(--border-color); border-radius: 50%; width: 40px; height: 40px; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 5px; transition: background-color 0.3s ease, border-color 0.3s ease; } .theme-toggle-btn:hover { background-color: var(--bg-secondary-color); } .theme-toggle-btn svg { width: 22px; height: 22px; color: var(--text-secondary-color); } .moon-icon { display: none; } body.dark-mode .sun-icon { display: none; } body.dark-mode .moon-icon { display: block; }
+        
         .nav-item-dropdown { position: relative; }
         .nav-item-dropdown .dropdown-toggle { display: flex; align-items: center; gap: 8px; cursor: pointer; }
         .dropdown-menu { display: none; position: absolute; top: 150%; left: 50%; transform: translateX(-50%); background-color: var(--bg-color); border: 1px solid var(--border-color); border-radius: 12px; box-shadow: 0 8px 25px var(--shadow-color); min-width: 220px; z-index: 101; list-style: none; padding: 8px; flex-direction: column; opacity: 0; visibility: hidden; transition: opacity 0.2s ease, visibility 0.2s ease; }
@@ -60,41 +61,28 @@
         .nav-item-dropdown .dropdown-toggle svg { transition: transform 0.3s ease; }
         .nav-item-dropdown:hover .dropdown-toggle svg { transform: rotate(180deg); }
 
-        /* --- STYLES FOR TOOLS POPUP --- */
-        .tools-popup-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.5); /* MODIFIED: Removed blur */
-            z-index: 998;
-        }
-        .tools-popup-overlay.is-open {
-            display: block;
-        }
+        /* --- STYLES FOR TOOLS POPUP (MODIFIED) --- */
         .tools-popup-menu {
-            display: none;
-            position: fixed;
-            top: 50%;
+            display: none; /* Hidden by default */
+            position: absolute; /* Positioned relative to the parent li */
+            top: calc(100% + 20px); /* Positioned below the nav bar */
             left: 50%;
-            transform: translate(-50%, -50%);
-            width: 90%;
-            max-width: 960px;
+            transform: translateX(-50%);
+            width: 960px; /* Fixed width */
+            max-width: 90vw;
             background-color: var(--bg-color);
             border-radius: 16px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 40px var(--shadow-color);
             padding: 2rem 2.5rem;
             z-index: 999;
-            animation: fadeInPopup 0.3s ease-out;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s ease-out, visibility 0.2s ease-out;
         }
-        .tools-popup-menu.is-open {
-            display: block;
-        }
-        @keyframes fadeInPopup {
-            from { opacity: 0; transform: translate(-50%, -48%); }
-            to { opacity: 1; transform: translate(-50%, -50%); }
+        .nav-item-dropdown:hover .tools-popup-menu {
+            display: block; /* Show on hover */
+            opacity: 1;
+            visibility: visible;
         }
         .popup-close-btn {
             position: absolute;
@@ -133,10 +121,11 @@
             font-weight: 400;
             font-size: 1rem;
             color: var(--text-color);
+            text-decoration: none; /* Ensure no underline by default */
         }
         .popup-column li a:hover span {
             color: var(--primary-color);
-            text-decoration: none; /* MODIFIED: Removed underline */
+            text-decoration: none; /* REMOVED UNDERLINE ON HOVER */
         }
         .popup-column li a svg {
             width: 22px;
@@ -278,6 +267,49 @@
                             <span>Tools</span>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg>
                         </a>
+                        <!-- MODIFIED: Popup menu is now inside the LI and controlled by CSS hover -->
+                        <div id="tools-popup-menu" class="tools-popup-menu">
+                            <button class="popup-close-btn" id="popup-close-btn" aria-label="Close menu">&times;</button>
+                            <div class="popup-grid">
+                                <div class="popup-column">
+                                    <h4>WEB & IMAGE</h4>
+                                    <ul>
+                                        <li><a href="#"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2z" /><circle cx="8.5" cy="8.5" r="1.5" /><path d="M21 15l-5-5.01L11 15l-3-3-6 6" /></svg><span>JPG</span></a></li>
+                                        <li><a href="#"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2z" /><circle cx="8.5" cy="8.5" r="1.5" /><path d="M21 15l-5-5.01L11 15l-3-3-6 6" /></svg><span>PNG</span></a></li>
+                                        <li><a href="#"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9" /><path d="M8 10h8M8 12h8M8 14h5" /></svg><span>GIF</span></a></li>
+                                        <li><a href="#"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 11.667 0l3.181-3.183m-4.991-2.691v4.992h-4.992m0 0-3.181-3.183a8.25 8.25 0 0 1 11.667 0l3.181 3.183" /></svg><span>WEBP</span></a></li>
+                                        <li><a href="#"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 11.667 0l3.181-3.183m-4.991-2.691v4.992h-4.992m0 0-3.181-3.183a8.25 8.25 0 0 1 11.667 0l3.181 3.183" /></svg><span>AVIF</span></a></li>
+                                        <li><a href="#"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2z" /><circle cx="8.5" cy="8.5" r="1.5" /><path d="M21 15l-5-5.01L11 15l-3-3-6 6" /></svg><span>JP2</span></a></li>
+                                    </ul>
+                                </div>
+                                <div class="popup-column">
+                                    <h4>DOCUMENT & TEXT</h4>
+                                    <ul>
+                                        <li><a href="#"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" /><polyline points="14 2 14 8 20 8" /></svg><span>Image to PDF</span></a></li>
+                                        <li><a href="#"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" /><polyline points="14 2 14 8 20 8" /></svg><span>Text to DOCX</span></a></li>
+                                        <li><a href="#"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" /><path d="M8 12c2 0 2-2 4-2s2 2 4 2" /></svg><span>Text to TXT</span></a></li>
+                                        <li><a href="#"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z" /></svg><span>ICO Converter</span></a></li>
+                                    </ul>
+                                </div>
+                                <div class="popup-column">
+                                    <h4>LEGACY & VECTOR</h4>
+                                    <ul>
+                                        <li><a href="#"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9" /><path d="M15.49 15.49L7 21l-1.5-4.5L10 12l-1.5-1.5L4.5 9 1 7.5l6-4.5" /></svg><span>SVG Converter</span></a></li>
+                                        <li><a href="#"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2z" /><circle cx="8.5" cy="8.5" r="1.5" /><path d="M21 15l-5-5.01L11 15l-3-3-6 6" /></svg><span>BMP Converter</span></a></li>
+                                        <li><a href="#"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2z" /><circle cx="8.5" cy="8.5" r="1.5" /><path d="M21 15l-5-5.01L11 15l-3-3-6 6" /></svg><span>TIFF Converter</span></a></li>
+                                        <li><a href="#"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2z" /><circle cx="8.5" cy="8.5" r="1.5" /><path d="M21 15l-5-5.01L11 15l-3-3-6 6" /></svg><span>TGA Converter</span></a></li>
+                                        <li><a href="#"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2z" /><circle cx="8.5" cy="8.5" r="1.5" /><path d="M21 15l-5-5.01L11 15l-3-3-6 6" /></svg><span>PCX Converter</span></a></li>
+                                    </ul>
+                                </div>
+                                <div class="popup-column">
+                                    <h4>GAME & DEVELOPER</h4>
+                                    <ul>
+                                        <li><a href="#"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M16 18l6-6-6-6" /><path d="M8 6l-6 6 6 6" /></svg><span>Base64 Encoder</span></a></li>
+                                        <li><a href="#"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21v-7" /><path d="M4 10V3" /><path d="M12 21v-9" /><path d="M12 8V3" /><path d="M20 21v-5" /><path d="M20 12V3" /><path d="M1 14h6" /><path d="M9 8h6" /><path d="M17 16h6" /></svg><span>ASCII Art Generator</span></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </li>
                     <li class="nav-item-dropdown">
                         <a href="#" class="dropdown-toggle">
@@ -312,50 +344,6 @@
             </button>
         </div>
     </header>
-
-    <div class="tools-popup-overlay" id="tools-popup-overlay"></div>
-    <div id="tools-popup-menu" class="tools-popup-menu">
-        <button class="popup-close-btn" id="popup-close-btn" aria-label="Close menu">&times;</button>
-        <div class="popup-grid">
-            <div class="popup-column">
-                <h4>WEB & IMAGE</h4>
-                <ul>
-                    <li><a href="#"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2z" /><circle cx="8.5" cy="8.5" r="1.5" /><path d="M21 15l-5-5.01L11 15l-3-3-6 6" /></svg><span>JPG</span></a></li>
-                    <li><a href="#"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2z" /><circle cx="8.5" cy="8.5" r="1.5" /><path d="M21 15l-5-5.01L11 15l-3-3-6 6" /></svg><span>PNG</span></a></li>
-                    <li><a href="#"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9" /><path d="M8 10h8M8 12h8M8 14h5" /></svg><span>GIF</span></a></li>
-                    <li><a href="#"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 11.667 0l3.181-3.183m-4.991-2.691v4.992h-4.992m0 0-3.181-3.183a8.25 8.25 0 0 1 11.667 0l3.181 3.183" /></svg><span>WEBP</span></a></li>
-                    <li><a href="#"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 11.667 0l3.181-3.183m-4.991-2.691v4.992h-4.992m0 0-3.181-3.183a8.25 8.25 0 0 1 11.667 0l3.181 3.183" /></svg><span>AVIF</span></a></li>
-                    <li><a href="#"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2z" /><circle cx="8.5" cy="8.5" r="1.5" /><path d="M21 15l-5-5.01L11 15l-3-3-6 6" /></svg><span>JP2</span></a></li>
-                </ul>
-            </div>
-            <div class="popup-column">
-                <h4>DOCUMENT & TEXT</h4>
-                <ul>
-                    <li><a href="#"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" /><polyline points="14 2 14 8 20 8" /></svg><span>Image to PDF</span></a></li>
-                    <li><a href="#"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" /><polyline points="14 2 14 8 20 8" /></svg><span>Text to DOCX</span></a></li>
-                    <li><a href="#"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" /><path d="M8 12c2 0 2-2 4-2s2 2 4 2" /></svg><span>Text to TXT</span></a></li>
-                    <li><a href="#"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z" /></svg><span>ICO Converter</span></a></li>
-                </ul>
-            </div>
-            <div class="popup-column">
-                <h4>LEGACY & VECTOR</h4>
-                <ul>
-                    <li><a href="#"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9" /><path d="M15.49 15.49L7 21l-1.5-4.5L10 12l-1.5-1.5L4.5 9 1 7.5l6-4.5" /></svg><span>SVG Converter</span></a></li>
-                    <li><a href="#"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2z" /><circle cx="8.5" cy="8.5" r="1.5" /><path d="M21 15l-5-5.01L11 15l-3-3-6 6" /></svg><span>BMP Converter</span></a></li>
-                    <li><a href="#"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2z" /><circle cx="8.5" cy="8.5" r="1.5" /><path d="M21 15l-5-5.01L11 15l-3-3-6 6" /></svg><span>TIFF Converter</span></a></li>
-                    <li><a href="#"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2z" /><circle cx="8.5" cy="8.5" r="1.5" /><path d="M21 15l-5-5.01L11 15l-3-3-6 6" /></svg><span>TGA Converter</span></a></li>
-                    <li><a href="#"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2z" /><circle cx="8.5" cy="8.5" r="1.5" /><path d="M21 15l-5-5.01L11 15l-3-3-6 6" /></svg><span>PCX Converter</span></a></li>
-                </ul>
-            </div>
-            <div class="popup-column">
-                <h4>GAME & DEVELOPER</h4>
-                <ul>
-                    <li><a href="#"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M16 18l6-6-6-6" /><path d="M8 6l-6 6 6 6" /></svg><span>Base64 Encoder</span></a></li>
-                    <li><a href="#"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21v-7" /><path d="M4 10V3" /><path d="M12 21v-9" /><path d="M12 8V3" /><path d="M20 21v-5" /><path d="M20 12V3" /><path d="M1 14h6" /><path d="M9 8h6" /><path d="M17 16h6" /></svg><span>ASCII Art Generator</span></a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
 
     <div class="mobile-nav-menu" id="mobile-nav-menu"><ul id="mobile-nav-list"></ul></div>
 
@@ -538,40 +526,9 @@
             if (mobileNavMenu) {
                 mobileNavMenu.addEventListener('click', (e) => { if (e.target.tagName === 'A') { mobileNavToggle.classList.remove('is-active'); mobileNavToggle.setAttribute('aria-expanded', 'false'); mobileNavMenu.style.display = 'none'; } });
             }
-
-            // --- JAVASCRIPT FOR TOOLS POPUP ---
-            const toolsMenuButton = document.getElementById('tools-menu-button');
-            const toolsPopupMenu = document.getElementById('tools-popup-menu');
-            const toolsPopupOverlay = document.getElementById('tools-popup-overlay');
-            const popupCloseBtn = document.getElementById('popup-close-btn');
-
-            const openPopup = () => {
-                toolsPopupMenu.classList.add('is-open');
-                toolsPopupOverlay.classList.add('is-open');
-            };
-
-            const closePopup = () => {
-                toolsPopupMenu.classList.remove('is-open');
-                toolsPopupOverlay.classList.remove('is-open');
-            };
-
-            if (toolsMenuButton && toolsPopupMenu) {
-                toolsMenuButton.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    openPopup();
-                });
-
-                popupCloseBtn.addEventListener('click', closePopup);
-                toolsPopupOverlay.addEventListener('click', closePopup);
-
-                document.addEventListener('keydown', (e) => {
-                    if (e.key === "Escape" && toolsPopupMenu.classList.contains('is-open')) {
-                        closePopup();
-                    }
-                });
-            }
-            // --- END JAVASCRIPT FOR TOOLS POPUP ---
+            
+            // --- JAVASCRIPT FOR TOOLS POPUP (REMOVED, NOW HANDLED BY CSS) ---
+            // No JavaScript is needed for a CSS hover effect.
 
             const pricingToggle = document.getElementById('pricing-toggle');
             if(pricingToggle) {
