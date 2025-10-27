@@ -51,16 +51,10 @@
         
         .nav-item-dropdown { position: relative; }
         .nav-item-dropdown .dropdown-toggle { display: flex; align-items: center; gap: 8px; cursor: pointer; }
-        .dropdown-menu { display: none; position: absolute; top: 150%; left: 50%; transform: translateX(-50%); background-color: var(--bg-color); border: 1px solid var(--border-color); border-radius: 12px; box-shadow: 0 8px 25px var(--shadow-color); min-width: 220px; z-index: 101; list-style: none; padding: 8px; flex-direction: column; opacity: 0; visibility: hidden; transition: opacity 0.2s ease, visibility 0.2s ease; }
-        .nav-item-dropdown:hover .dropdown-menu:not(.tools-popup-menu) { display: flex; opacity: 1; visibility: visible; }
-        .dropdown-menu li { width: 100%; }
-        .dropdown-menu a { display: block; padding: 12px 18px; border-radius: 8px; transition: background-color 0.2s ease, color 0.2s ease; }
-        .dropdown-menu a:hover { background-color: var(--bg-secondary-color); color: var(--primary-color); }
-        .dropdown-menu a.disabled-link { color: var(--text-secondary-color); cursor: not-allowed; pointer-events: none; }
-        .dropdown-menu a.disabled-link:hover { background-color: transparent; color: var(--text-secondary-color); }
         .nav-item-dropdown .dropdown-toggle svg { transition: transform 0.3s ease; }
         .nav-item-dropdown:hover .dropdown-toggle svg { transform: rotate(180deg); }
 
+        /* --- STYLES FOR TOOLS POPUP --- */
         .tools-popup-menu {
             display: none;
             position: fixed;
@@ -136,7 +130,8 @@
             flex-shrink: 0;
             color: var(--primary-color);
         }
-
+        /* --- END STYLES FOR TOOLS POPUP --- */
+        
         #signup-modal { display: none; position: fixed; z-index: 200; padding-top: 100px; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.5); -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px); }
         .modal-content { background-color: var(--bg-color); margin: auto; padding: 30px; border-radius: 12px; width: 90%; max-width: 400px; box-shadow: 0 10px 25px rgba(0,0,0,0.4); color: var(--text-color); animation: fadeIn 0.3s; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
@@ -270,7 +265,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg>
                         </a>
                     </li>
-                    <!-- API Dropdown is REMOVED from this page's header -->
+                    <!-- API LINK REMOVED -->
                     <li>
                         <a href="#pricing">Pricing</a>
                     </li>
@@ -361,9 +356,11 @@
                         </label>
                         <p class="drop-text" style="margin-top: 12px; color: var(--text-secondary-color);">or drop files here</p>
                     </div>
+                    <div id="text-input-area" style="display:none;"> <!-- Hidden on this page -->
+                        <textarea id="text-doc-input" placeholder="Paste your text here to create a DOCX or TXT file..."></textarea>
+                    </div>
                     <div id="file-info" class="file-info-area"></div>
                     
-                    <!-- Options Panel - It will be hidden until a file is selected -->
                     <div id="options-panel" class="options-panel">
                         <div class="options-row">
                             <div id="quality-option" class="option-group">
@@ -384,9 +381,8 @@
                     <div id="status-area" class="status-area"></div>
                 </div>
             </section>
-           
-            <!-- You can add other sections like "Features" or "How To" here if you wish -->
 
+            <section id="pricing" class="pricing-section"><div class="container"><h2>Simple, Transparent Pricing</h2><p class="section-subtitle">Choose the plan that's right for you. Unlock powerful features and convert without limits.</p><div class="pricing-toggle-container"><span class="monthly-label">Monthly</span><div class="pricing-toggle" id="pricing-toggle"><span class="monthly active"></span><span class="yearly"></span></div><span class="yearly-label">Yearly</span><span class="save-badge">Save 20%</span></div><div class="pricing-grid"><div class="pricing-card"><h3 class="plan-name">Basic</h3><div class="plan-price" data-monthly="5" data-yearly="48"><sup>$</sup>5<sub>/mo</sub></div><p class="plan-description">For casual users who need quick and easy conversions.</p><ul class="features-list"><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.052-.143z" clip-rule="evenodd" /></svg>20 conversions per day</li><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.052-.143z" clip-rule="evenodd" /></svg>Batch processing up to 5 files</li><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.052-.143z" clip-rule="evenodd" /></svg>Standard support</li></ul><a href="#" class="btn btn-secondary pricing-button" data-plan="Basic" data-price="5.00">Choose Basic</a></div><div class="pricing-card recommended"><div class="badge">Best Value</div><h3 class="plan-name">Pro</h3><div class="plan-price" data-monthly="15" data-yearly="144"><sup>$</sup>15<sub>/mo</sub></div><p class="plan-description">For professionals who need more power and flexibility.</p><ul class="features-list"><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.052-.143z" clip-rule="evenodd" /></svg>Unlimited daily conversions</li><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.052-.143z" clip-rule="evenodd" /></svg>Batch processing up to 100 files</li><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.052-.143z" clip-rule="evenodd" /></svg>Advanced options &amp; quality control</li><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.052-.143z" clip-rule="evenodd" /></svg>Priority email support</li></ul><a href="#" class="btn btn-primary pricing-button" data-plan="Pro" data-price="15.00">Choose Pro</a></div><div class="pricing-card"><h3 class="plan-name">Premium</h3><div class="plan-price" data-monthly="49" data-yearly="470"><sup>$</sup>49<sub>/mo</sub></div><p class="plan-description">For teams and businesses that need developer access.</p><ul class="features-list"><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.052-.143z" clip-rule="evenodd" /></svg>All features from Pro plan</li><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.052-.143z" clip-rule="evenodd" /></svg>Full API Access</li><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.052-.143z" clip-rule="evenodd" /></svg>Team collaboration features</li><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.052-.143z" clip-rule="evenodd" /></svg>Dedicated account manager</li></ul><a href="#" class="btn btn-secondary pricing-button" data-plan="Premium" data-price="49.00">Choose Premium</a></div></div></div></section>
         </div>
     </main>
 
@@ -426,34 +422,225 @@
     <script src="https://www.paypal.com/sdk/js?client-id=AQffuGYIsVpveL0ihfhEYyGMYHLk3Y3WP6sbJwXLoJTFKUi_FIpN7o_Cz1bNM0F70cAUkAQjlzP6mL_d&amp;currency=USD&amp;locale=en_US"></script>
 
     <script>
-        // SCRIPT IS THE SAME AS MAIN PAGE, WITH TWO SMALL CHANGES
         document.addEventListener('DOMContentLoaded', () => {
-            // ... (All your existing script code from the main page)
+            // ALL SCRIPT CODE IS COPIED FROM THE MAIN PAGE
+            // With small modifications for this specific page's functionality
+
+            const pricingLink = document.querySelector('a[href="#pricing"]');
+            const header = document.querySelector('.main-header');
             
-            // --- MODIFICATION FOR THIS PAGE ---
-            // Find the handleConversion function and change one line
-            async function handleConversion() { 
-                const toFormat = 'jpg'; // HARDCODED TO JPG
-                // ... the rest of the function remains the same
+            if (pricingLink) {
+                pricingLink.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetElement = document.getElementById('pricing');
+                    if (targetElement) {
+                        const headerOffset = header.offsetHeight;
+                        const elementPosition = targetElement.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                        window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+                    }
+                });
             }
 
-            // Find the updateOptionsUI function and simplify it for this page
-            function updateOptionsUI() {
-                const toFormat = 'jpg'; // HARDCODED TO JPG
-                const qualityFormats = ['jpg', 'jpeg', 'webp', 'avif'];
-                const resizeApplicable = selectedFiles.length > 0 && selectedFiles.every(f => f.type.startsWith('image/'));
-                
-                qualityOption.style.display = qualityFormats.includes(toFormat) ? 'block' : 'none';
-                resizeOption.style.display = resizeApplicable ? 'flex' : 'none';
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            if(themeToggleBtn) themeToggleBtn.addEventListener('click', () => { document.body.classList.toggle('dark-mode'); localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light'); });
 
-                if(selectedFiles.length > 0) {
-                    optionsPanel.style.display = 'flex';
+            const modal = document.getElementById('signup-modal');
+            if(modal) {
+                const closeModalBtn = document.getElementById('close-modal');
+                const signupForm = document.getElementById('signup-form');
+                const modalTitle = document.getElementById('modal-title');
+                const modalSubmitButton = document.getElementById('modal-submit-button');
+                const confirmPasswordGroup = document.getElementById('confirm-password-group');
+                const emailInput = document.getElementById('email');
+                const passwordInput = document.getElementById('password');
+                const confirmPasswordInput = document.getElementById('confirm-password');
+                const modalToggleLink = document.getElementById('modal-toggle-link');
+                const googleSignUpBtn = document.getElementById('google-signup');
+                const facebookSignUpBtn = document.getElementById('facebook-signup');
+                let isLoginMode = false;
+                
+                function setModalMode(isLogin) {
+                    isLoginMode = isLogin;
+                    modalTitle.textContent = isLogin ? 'Log In to Your Account' : 'Create Your Free Account';
+                    confirmPasswordGroup.style.display = isLogin ? 'none' : 'block';
+                    confirmPasswordInput.required = !isLogin;
+                    modalSubmitButton.textContent = isLogin ? 'Log In' : 'Create Account';
+                    document.getElementById('toggle-prompt').textContent = isLogin ? "Don't have an account? " : 'Already have an account? ';
+                    modalToggleLink.textContent = isLogin ? 'Sign Up' : 'Log In';
                 }
 
-                checkConversionReady();
+                modalToggleLink.addEventListener('click', (e) => { e.preventDefault(); setModalMode(!isLoginMode); });
+                document.getElementById('signup-button').addEventListener('click', (e) => { e.preventDefault(); setModalMode(false); modal.style.display = 'block'; });
+                closeModalBtn.addEventListener('click', () => { modal.style.display = 'none'; });
+                window.addEventListener('click', (e) => { if (e.target == modal) modal.style.display = 'none'; });
+                signupForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const email = emailInput.value;
+                    const password = passwordInput.value;
+                    if (isLoginMode) {
+                        auth.signInWithEmailAndPassword(email, password).then(() => { alert("Login Successful!"); modal.style.display = 'none'; signupForm.reset(); }).catch(error => alert("Error: " + error.message));
+                    } else {
+                        if (password !== confirmPasswordInput.value) { alert("Passwords do not match."); return; }
+                        auth.createUserWithEmailAndPassword(email, password).then(() => { alert("Sign Up Successful! Welcome."); modal.style.display = 'none'; signupForm.reset(); }).catch(error => alert("Error: " + error.message));
+                    }
+                });
+                googleSignUpBtn.addEventListener('click', () => { auth.signInWithPopup(googleProvider).then(result => { alert("Welcome, " + result.user.displayName); modal.style.display = 'none'; }).catch(error => alert("Google Sign-In Error: " + error.message)); });
+                facebookSignUpBtn.addEventListener('click', () => { auth.signInWithPopup(facebookProvider).then(result => { alert("Welcome, " + result.user.displayName); modal.style.display = 'none'; }).catch(error => { if (error.code === 'auth/account-exists-with-different-credential') { alert("An account already exists with the same email address."); } else { alert("Facebook Sign-In Error: " + error.message); } }); });
             }
 
-            // ... (All the rest of your script code from the main page)
+            const mobileNavToggle = document.getElementById('mobile-nav-toggle');
+            const mobileNavMenu = document.getElementById('mobile-nav-menu');
+            const mobileNavList = document.getElementById('mobile-nav-list');
+            const desktopNavList = document.getElementById('desktop-nav-list');
+            if (desktopNavList && mobileNavList) { mobileNavList.innerHTML = desktopNavList.innerHTML; }
+            if (mobileNavToggle) {
+                mobileNavToggle.addEventListener('click', () => {
+                    const isActive = mobileNavToggle.classList.toggle('is-active');
+                    mobileNavToggle.setAttribute('aria-expanded', isActive);
+                    mobileNavMenu.style.display = isActive ? 'block' : 'none';
+                });
+            }
+            if (mobileNavMenu) {
+                mobileNavMenu.addEventListener('click', (e) => { if (e.target.tagName === 'A') { mobileNavToggle.classList.remove('is-active'); mobileNavToggle.setAttribute('aria-expanded', 'false'); mobileNavMenu.style.display = 'none'; } });
+            }
+
+            // --- JAVASCRIPT FOR HOVER-ACTIVATED TOOLS POPUP ---
+            const toolsDropdown = document.querySelector('#tools-menu-button').parentElement;
+            const toolsPopupMenu = document.getElementById('tools-popup-menu');
+            let hoverTimeout;
+
+            if (toolsDropdown && toolsPopupMenu) {
+                const showMenu = () => {
+                    clearTimeout(hoverTimeout);
+                    toolsPopupMenu.classList.add('is-open');
+                };
+
+                const hideMenu = () => {
+                    hoverTimeout = setTimeout(() => {
+                        toolsPopupMenu.classList.remove('is-open');
+                    }, 100);
+                };
+
+                toolsDropdown.addEventListener('mouseenter', showMenu);
+                toolsDropdown.addEventListener('mouseleave', hideMenu);
+                toolsPopupMenu.addEventListener('mouseenter', showMenu);
+                toolsPopupMenu.addEventListener('mouseleave', hideMenu);
+
+                const popupCloseBtn = document.getElementById('popup-close-btn');
+                if (popupCloseBtn) {
+                    popupCloseBtn.addEventListener('click', () => {
+                        toolsPopupMenu.classList.remove('is-open');
+                    });
+                }
+            }
+
+            const pricingToggle = document.getElementById('pricing-toggle');
+            if(pricingToggle) {
+                const priceElements = document.querySelectorAll('.plan-price');
+                const pricingButtons = document.querySelectorAll('.pricing-button');
+                const paymentModal = document.getElementById('payment-modal');
+                const closePaymentModalBtn = document.getElementById('close-payment-modal');
+                const paymentModalTitle = document.getElementById('payment-modal-title');
+                const paymentMessage = document.getElementById('payment-message');
+                const paypalButtonContainer = document.getElementById('paypal-button-container');
+
+                function updateAllPrices(isYearly) {
+                    priceElements.forEach(priceEl => {
+                        const monthlyPrice = parseFloat(priceEl.dataset.monthly).toFixed(2);
+                        const yearlyPrice = parseFloat(priceEl.dataset.yearly).toFixed(2);
+                        const button = priceEl.closest('.pricing-card').querySelector('.pricing-button');
+                        if (isYearly) { priceEl.innerHTML = `<sup>$</sup>${(yearlyPrice / 12).toFixed(2)}<sub>/mo</sub>`; if (button) button.dataset.price = yearlyPrice; }
+                        else { priceEl.innerHTML = `<sup>$</sup>${monthlyPrice}<sub>/mo</sub>`; if (button) button.dataset.price = monthlyPrice; }
+                    });
+                    pricingToggle.querySelector('.monthly').classList.toggle('active', !isYearly);
+                    pricingToggle.querySelector('.yearly').classList.toggle('active', isYearly);
+                }
+
+                pricingToggle.addEventListener('click', () => { updateAllPrices(!pricingToggle.querySelector('.yearly').classList.contains('active')); });
+                updateAllPrices(false);
+
+                let selectedPlan = {};
+                const RENDER_SERVER_URL = 'https://paypalserver-enz3.onrender.com';
+                pricingButtons.forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        selectedPlan = { name: button.dataset.plan, price: button.dataset.price };
+                        paymentModalTitle.textContent = `Complete Your ${selectedPlan.name} Plan Purchase`;
+                        paymentMessage.innerHTML = '';
+                        paymentModal.style.display = 'block';
+                        renderPayPalButton();
+                    });
+                });
+
+                function renderPayPalButton() {
+                    paypalButtonContainer.innerHTML = '';
+                    paypal.Buttons({
+                        createOrder: () => fetch(`${RENDER_SERVER_URL}/api/orders`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ plan: selectedPlan }) }).then(res => res.json()).then(order => order.id),
+                        onApprove: (data) => fetch(`${RENDER_SERVER_URL}/api/orders/${data.orderID}/capture`, { method: 'POST' }).then(res => res.json()).then(details => { paypalButtonContainer.innerHTML = ''; paymentMessage.innerHTML = `<div class="success-message">✅ Thank you, ${details.payer.name.given_name}! Payment complete.</div>`; }),
+                        onError: (err) => { paymentMessage.innerHTML = `<div class="error-message">❌ A payment error occurred.</div>`; console.error('PayPal Error:', err); }
+                    }).render('#paypal-button-container');
+                }
+                closePaymentModalBtn.addEventListener('click', () => paymentModal.style.display = 'none');
+                window.addEventListener('click', (e) => { if (e.target == paymentModal) paymentModal.style.display = 'none'; });
+            }
+
+            // --- CONVERTER SCRIPT (MODIFIED FOR THIS PAGE) ---
+            const fileUpload = document.getElementById('file-upload'), fileInfo = document.getElementById('file-info'), convertButton = document.getElementById('convert-button'), statusArea = document.getElementById('status-area'), dropZone = document.querySelector('.drop-zone'), optionsPanel = document.getElementById('options-panel'), qualityOption = document.getElementById('quality-option'), qualitySlider = document.getElementById('quality-slider'), qualityValue = document.getElementById('quality-value'), resizeOption = document.getElementById('resize-option'), maxWidthInput = document.getElementById('max-width'), maxHeightInput = document.getElementById('max-height'), fileUploadArea = document.getElementById('file-upload-area'), textInputArea = document.getElementById('text-input-area'), textDocInput = document.getElementById('text-doc-input');
+            if(fileUpload) {
+                let selectedFiles = [];
+                function checkConversionReady() {
+                    convertButton.disabled = selectedFiles.length === 0;
+                }
+                function handleFileSelection(files) { if (!files || files.length === 0) return; selectedFiles = Array.from(files); statusArea.innerHTML = ''; fileInfo.innerHTML = selectedFiles.length === 1 ? `Selected: <span class="file-name">${selectedFiles[0].name}</span>` : `Selected <span class="file-name">${selectedFiles.length} files</span>`; updateOptionsUI(); checkConversionReady(); }
+                
+                function updateOptionsUI() {
+                    const toFormat = 'jpg';
+                    const qualityFormats = ['jpg', 'jpeg', 'webp', 'avif'];
+                    const resizeApplicable = selectedFiles.length > 0 && selectedFiles.every(f => f.type.startsWith('image/'));
+                    
+                    qualityOption.style.display = qualityFormats.includes(toFormat) ? 'block' : 'none';
+                    resizeOption.style.display = resizeApplicable ? 'flex' : 'none';
+
+                    if (selectedFiles.length > 0) {
+                       optionsPanel.style.display = 'flex';
+                    } else {
+                       optionsPanel.style.display = 'none';
+                    }
+                }
+
+                fileUpload.addEventListener('change', (e) => handleFileSelection(e.target.files));
+                dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+                dropZone.addEventListener('dragenter', (e) => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+                dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+                dropZone.addEventListener('drop', (e) => { e.preventDefault(); dropZone.classList.remove('drag-over'); if (e.dataTransfer.files.length) handleFileSelection(e.dataTransfer.files); });
+                qualitySlider.addEventListener('input', (e) => { qualityValue.textContent = `${e.target.value}%`; });
+                convertButton.addEventListener('click', () => { startProgress("Initializing..."); handleConversion(); });
+                
+                async function handleConversion() {
+                    const toFormat = 'jpg'; // HARDCODED for this page
+                    if (!isFormatSupported(toFormat)) { showError(`Conversion to ${toFormat.toUpperCase()} is not supported by your browser.`); return; } const isSinglePdfInput = selectedFiles.length === 1 && selectedFiles[0].type === 'application/pdf'; const areImageInputs = selectedFiles.length > 0 && selectedFiles.every(f => f.type.startsWith('image/'));
+                    try {
+                        if (isSinglePdfInput) await convertPdfToImages(selectedFiles[0], toFormat);
+                        else if (areImageInputs) await batchConvertImages(selectedFiles, toFormat);
+                        else showError("Unsupported file type for this converter.");
+                    } catch (error) { showError("An unexpected error occurred during conversion.", error); }
+                }
+
+                async function convertPdfToImages(file, toFormat) { const pdf = await pdfjsLib.getDocument({ data: await file.arrayBuffer() }).promise; const zip = new JSZip(); for (let i = 1; i <= pdf.numPages; i++) { updateProgress(i / pdf.numPages, `Processing page ${i} of ${pdf.numPages}...`); const page = await pdf.getPage(i); const viewport = page.getViewport({ scale: 2.0 }); const canvas = document.createElement('canvas'); canvas.width = viewport.width; canvas.height = viewport.height; await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise; const { data: blob, ext } = await canvasToBlob(canvas, toFormat, getOptions()); zip.file(`${file.name.replace(/\.pdf$/i, '')}_page_${i}.${ext}`, blob); } const zipBlob = await zip.generateAsync({ type: "blob" }); showSuccessUI(URL.createObjectURL(zipBlob), `${file.name.replace(/\.pdf$/i, '')}.zip`, "ZIP Archive"); }
+                async function batchConvertImages(files, toFormat) { const results = []; for (let i = 0; i < files.length; i++) { updateProgress(i / files.length, `Converting file ${i + 1}...`); const { data: blob, ext } = await processSingleImage(files[i], toFormat, getOptions()); results.push({ name: `${files[i].name.split('.').slice(0, -1).join('.')}.${ext}`, blob }); } if (results.length === 1) { showSuccessUI(URL.createObjectURL(results[0].blob), results[0].name, toFormat.toUpperCase()); } else if (results.length > 1) { const zip = new JSZip(); results.forEach(r => zip.file(r.name, r.blob)); const zipBlob = await zip.generateAsync({ type: "blob" }); showSuccessUI(URL.createObjectURL(zipBlob), "plusconvert_batch.zip", "ZIP Archive"); } }
+                async function processSingleImage(file, toFormat, options) { let img = await loadImage(await fileToDataURL(file)); const canvas = document.createElement('canvas'); const ratio = img.width / img.height; let { width, height } = img; if (options.maxWidth && width > options.maxWidth) { width = options.maxWidth; height = width / ratio; } if (options.maxHeight && height > options.maxHeight) { height = options.maxHeight; width = height * ratio; } canvas.width = width; canvas.height = height; canvas.getContext('2d').drawImage(img, 0, 0, width, height); return await canvasToBlob(canvas, toFormat, options); }
+                const fileToDataURL = file => new Promise((resolve, reject) => { const reader = new FileReader(); reader.onload = () => resolve(reader.result); reader.onerror = reject; reader.readAsDataURL(file); });
+                const loadImage = src => new Promise((resolve, reject) => { const img = new Image(); img.onload = () => resolve(img); img.onerror = reject; img.src = src; });
+                const getOptions = () => ({ quality: parseInt(qualitySlider.value) / 100, maxWidth: parseInt(maxWidthInput.value) || null, maxHeight: parseInt(maxHeightInput.value) || null });
+                function startProgress(message) { convertButton.disabled = true; statusArea.innerHTML = `<div class="progress-bar-container"><div class="progress-bar" id="progress-bar"></div></div><p id="progress-text">${message}</p>`; }
+                function updateProgress(percentage, message) { const bar = document.getElementById('progress-bar'), text = document.getElementById('progress-text'); if (bar) bar.style.width = `${percentage * 100}%`; if (text) text.textContent = message; }
+                function showError(message, error = null) { let detailedMessage = message; if (error) { console.error("A conversion error occurred:", error); detailedMessage += `<br><small style="color: var(--text-secondary-color);">Details: ${error.message}</small>`; } statusArea.innerHTML = `<div class="error-message">❌ Conversion Failed</div><p style="text-align:center;max-width:500px;margin:15px auto;">${detailedMessage}</p>`; checkConversionReady(); }
+                function showSuccessUI(downloadUrl, fileName, fileType) { updateProgress(1, "Done!"); let downloadButtonHTML = ''; if (downloadUrl) { downloadButtonHTML = `<a href="${downloadUrl}" download="${fileName}" id="download-link" class="download-btn"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>Download</a>`; } setTimeout(() => { statusArea.innerHTML = `<div class="success-message">✅ Conversion Successful!</div><div style="display:flex; gap: 15px; justify-content: center;">${downloadButtonHTML}<button id="reset-button" class="reset-btn">Convert More Files</button></div>`; document.getElementById('reset-button').addEventListener('click', resetUI); }, 500); }
+                function resetUI() { selectedFiles = []; fileUpload.value = ''; fileInfo.innerHTML = ''; statusArea.innerHTML = ''; optionsPanel.style.display = 'none'; checkConversionReady(); }
+                const _formatSupport = {}; function isFormatSupported(format) { if (format in _formatSupport) return _formatSupport[format]; if (format === 'avif' || format === 'webp') { try { const canvas = document.createElement('canvas'); canvas.width = canvas.height = 1; canvas.toDataURL(`image/${format}`); _formatSupport[format] = true; } catch { _formatSupport[format] = false; } return _formatSupport[format]; } return true; }
+                async function canvasToBlob(canvas, format, options) { return new Promise(async (resolve, reject) => { const mime = 'image/jpeg'; const ext = 'jpg'; canvas.toBlob(blob => { if (!blob) return reject(new Error(`Conversion to ${format.toUpperCase()} failed.`)); resolve({ data: blob, ext: ext }); }, mime, options.quality); }); }
+            }
         });
     </script>
 
