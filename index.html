@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,96 +49,115 @@
         .main-nav { display: flex; align-items: center; gap: 30px; } .main-nav ul { display: flex; list-style: none; gap: 30px; align-items: center; } .main-nav a { text-decoration: none; color: var(--text-color); font-weight: 500; transition: color 0.3s ease; } .main-nav a:hover { color: var(--primary-color); }
         .btn { display: inline-flex; align-items: center; justify-content: center; padding: 10px 24px; border-radius: 50px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; } .btn-primary { background-color: var(--primary-color); color: white; } .btn-primary:hover { background-color: #0041CC; transform: translateY(-2px); } .btn-secondary { background-color: transparent; color: var(--primary-color); border: 2px solid var(--primary-color); } .btn-secondary:hover { background-color: var(--primary-color); color: white; }
         .theme-toggle-btn { background: none; border: 2px solid var(--border-color); border-radius: 50%; width: 40px; height: 40px; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 5px; transition: background-color 0.3s ease, border-color 0.3s ease; } .theme-toggle-btn:hover { background-color: var(--bg-secondary-color); } .theme-toggle-btn svg { width: 22px; height: 22px; color: var(--text-secondary-color); } .moon-icon { display: none; } body.dark-mode .sun-icon { display: none; } body.dark-mode .moon-icon { display: block; }
-        .nav-item-dropdown { position: relative; }
+        
+        /* --- MODIFICATION STARTS HERE --- */
+        
+        .nav-item-dropdown { position: static; } /* Change position for popup context */
         .nav-item-dropdown .dropdown-toggle { display: flex; align-items: center; gap: 8px; cursor: pointer; }
+        .nav-item-dropdown .dropdown-toggle .arrow-down { transition: transform 0.3s ease; }
+        .nav-item-dropdown .dropdown-toggle.is-open .arrow-down { transform: rotate(180deg); }
+        
+        /* Hide old dropdown menu if it exists for other items, but we won't use it for Tools */
         .dropdown-menu { display: none; position: absolute; top: 150%; left: 50%; transform: translateX(-50%); background-color: var(--bg-color); border: 1px solid var(--border-color); border-radius: 12px; box-shadow: 0 8px 25px var(--shadow-color); min-width: 220px; z-index: 101; list-style: none; padding: 8px; flex-direction: column; opacity: 0; visibility: hidden; transition: opacity 0.2s ease, visibility 0.2s ease; }
         .nav-item-dropdown:hover .dropdown-menu { display: flex; opacity: 1; visibility: visible; }
         .dropdown-menu li { width: 100%; }
         .dropdown-menu a { display: block; padding: 12px 18px; border-radius: 8px; transition: background-color 0.2s ease, color 0.2s ease; }
         .dropdown-menu a:hover { background-color: var(--bg-secondary-color); color: var(--primary-color); }
         .dropdown-menu a.disabled-link { color: var(--text-secondary-color); cursor: not-allowed; pointer-events: none; }
-        .dropdown-menu a.disabled-link:hover { background-color: transparent; color: var(--text-secondary-color); }
-        .nav-item-dropdown .dropdown-toggle svg { transition: transform 0.3s ease; }
-        .nav-item-dropdown:hover .dropdown-toggle svg { transform: rotate(180deg); }
-
-        /* --- MODIFIED STYLES FOR TOOLS POPUP --- */
-        .tools-popup-menu {
-            display: none; /* Hidden by default */
+        
+        .tools-popup-overlay {
+            display: none;
             position: fixed;
-            top: 85px; /* Position below the header */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.1);
+            -webkit-backdrop-filter: blur(2px);
+            backdrop-filter: blur(2px);
+            z-index: 998;
+        }
+        .tools-popup-overlay.is-open { display: block; }
+
+        .tools-popup-menu {
+            display: none;
+            position: fixed;
+            top: 50%;
             left: 50%;
-            transform: translateX(-50%);
+            transform: translate(-50%, -50%);
             width: 90%;
-            max-width: 920px; /* Max width as per image */
+            max-width: 920px;
             background-color: var(--bg-color);
             border-radius: 16px;
-            box-shadow: 0 10px 30px var(--shadow-color);
-            padding: 25px 30px;
-            z-index: 1000;
-            animation: fadeInPopup 0.3s ease-out;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            padding: 30px 40px;
+            z-index: 999;
+            animation: fadeInPopup 0.2s ease-out;
         }
-        .tools-popup-menu.is-open {
-            display: block; /* Show when active */
-        }
+        .tools-popup-menu.is-open { display: block; }
+
         @keyframes fadeInPopup {
-            from { opacity: 0; transform: translateX(-50%) translateY(-10px); }
-            to { opacity: 1; transform: translateX(-50%) translateY(0); }
+            from { opacity: 0; transform: translate(-50%, -48%); }
+            to { opacity: 1; transform: translate(-50%, -50%); }
         }
+
         .popup-close-btn {
             position: absolute;
-            top: 10px;
+            top: 15px;
             right: 15px;
             background: none;
             border: none;
-            font-size: 2rem;
+            font-size: 2.2rem;
             color: var(--text-secondary-color);
             cursor: pointer;
             line-height: 1;
             padding: 5px;
+            font-weight: 300;
         }
         .popup-close-btn:hover { color: var(--text-color); }
+        
         .popup-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 24px;
+            gap: 20px 30px;
         }
         .popup-column h4 {
-            font-size: 0.85rem;
-            font-weight: 700;
+            font-size: 0.8rem;
+            font-weight: 600;
             color: var(--heading-color);
-            margin-bottom: 15px;
+            margin-bottom: 16px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.8px;
         }
         .popup-column ul {
             list-style: none;
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 8px;
         }
         .popup-column li a {
             display: flex;
             align-items: center;
             gap: 12px;
-            padding: 10px;
-            border-radius: 8px;
+            padding: 8px;
+            border-radius: 6px;
             font-weight: 500;
+            font-size: 0.95rem;
             transition: all 0.2s ease;
-            color: var(--text-color); /* Adjusted for better visibility */
         }
         .popup-column li a:hover {
             background-color: var(--bg-secondary-color);
             color: var(--primary-color);
         }
         .popup-column li a svg {
-            width: 20px; /* Icon size */
+            width: 20px;
             height: 20px;
             flex-shrink: 0;
             color: var(--primary-color);
-            stroke-width: 1.5;
         }
-        /* --- END MODIFIED STYLES --- */
 
+        /* --- MODIFICATION ENDS HERE --- */
+        
         #signup-modal { display: none; position: fixed; z-index: 200; padding-top: 100px; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.5); -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px); }
         .modal-content { background-color: var(--bg-color); margin: auto; padding: 30px; border-radius: 12px; width: 90%; max-width: 400px; box-shadow: 0 10px 25px rgba(0,0,0,0.4); color: var(--text-color); animation: fadeIn 0.3s; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
@@ -238,7 +258,6 @@
         .mobile-nav-menu .nav-item-dropdown .dropdown-menu a { font-size: 1.1rem; font-weight: 400; color: var(--text-secondary-color); }
         .mobile-nav-menu .nav-item-dropdown:hover .dropdown-toggle svg { transform: none; }
         
-        /* --- RESPONSIVE STYLES FOR POPUP --- */
         @media (max-width: 920px) {
             .popup-grid { grid-template-columns: repeat(2, 1fr); }
         }
@@ -258,6 +277,9 @@
 </head>
 <body>
     
+    <!-- MODIFICATION: A new overlay div for the background blur effect -->
+    <div id="tools-popup-overlay" class="tools-popup-overlay"></div>
+
     <header class="main-header">
         <div class="container">
             <a href="/" class="logo" aria-label="PlusConvert Home">
@@ -266,55 +288,12 @@
             </a>
             <nav class="main-nav">
                 <ul id="desktop-nav-list">
-                    <!-- MODIFIED: This is the tools menu item -->
+                    <!-- MODIFICATION: The Tools list item is now a button that controls the popup -->
                     <li class="nav-item-dropdown">
                         <a href="#" class="dropdown-toggle" id="tools-toggle-btn">
                             <span>Tools</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="arrow-down"><path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg>
+                            <svg class="arrow-down" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="20" height="20"><path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg>
                         </a>
-                        <!-- MODIFIED: The old dropdown is replaced by this popup menu -->
-                        <div id="tools-popup-menu" class="tools-popup-menu">
-                            <button class="popup-close-btn" aria-label="Close menu">&times;</button>
-                            <div class="popup-grid">
-                                <div class="popup-column">
-                                    <h4>WEB & IMAGE</h4>
-                                    <ul>
-                                        <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" /></svg><span>JPG</span></a></li>
-                                        <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" /></svg><span>PNG</span></a></li>
-                                        <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z" /></svg><span>GIF</span></a></li>
-                                        <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 11.667 0l3.181-3.183m-4.991-2.691v4.992h-4.992m0 0-3.181-3.183a8.25 8.25 0 0 1 11.667 0l3.181 3.183" /></svg><span>WEBP</span></a></li>
-                                        <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 11.667 0l3.181-3.183m-4.991-2.691v4.992h-4.992m0 0-3.181-3.183a8.25 8.25 0 0 1 11.667 0l3.181 3.183" /></svg><span>AVIF</span></a></li>
-                                        <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Z" /></svg><span>JP2</span></a></li>
-                                    </ul>
-                                </div>
-                                <div class="popup-column">
-                                    <h4>DOCUMENT & TEXT</h4>
-                                    <ul>
-                                        <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" /></svg><span>Image to PDF</span></a></li>
-                                        <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" /></svg><span>Text to DOCX</span></a></li>
-                                        <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" /></svg><span>Text to TXT</span></a></li>
-                                        <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9.75h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5-15h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5M3.75 4.5v.007v-.007Zm0 4.5v.007v-.007Zm0 4.5v.007v-.007Z" /></svg><span>ICO Converter</span></a></li>
-                                    </ul>
-                                </div>
-                                <div class="popup-column">
-                                    <h4>LEGACY & VECTOR</h4>
-                                    <ul>
-                                        <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" /></svg><span>SVG Converter</span></a></li>
-                                        <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Z" /></svg><span>BMP Converter</span></a></li>
-                                        <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Z" /></svg><span>TIFF Converter</span></a></li>
-                                        <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Z" /></svg><span>TGA Converter</span></a></li>
-                                        <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Z" /></svg><span>PCX Converter</span></a></li>
-                                    </ul>
-                                </div>
-                                <div class="popup-column">
-                                    <h4>GAME & DEVELOPER</h4>
-                                    <ul>
-                                        <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" /></svg><span>Base64 Encoder</span></a></li>
-                                        <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25H12" /></svg><span>ASCII Art Generator</span></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
                     </li>
                     <li class="nav-item-dropdown">
                         <a href="#" class="dropdown-toggle">
@@ -350,6 +329,50 @@
         </div>
     </header>
 
+    <!-- MODIFICATION: This is the new popup menu HTML. It's placed here for stacking context. -->
+    <div id="tools-popup-menu" class="tools-popup-menu">
+        <button id="popup-close-btn" class="popup-close-btn" aria-label="Close menu">&times;</button>
+        <div class="popup-grid">
+            <div class="popup-column">
+                <h4>WEB & IMAGE</h4>
+                <ul>
+                    <li><a href="#"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 12.16V8.83C21 7.15 19.85 6 18.17 6H5.83C4.15 6 3 7.15 3 8.83V15.17C3 16.85 4.15 18 5.83 18H10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M3 12.16L5.43 10.39C6.23 9.8 7.26 9.82 8.04 10.43L9.08 11.23C9.84 11.83 10.84 11.85 11.62 11.28L14.43 9.28C15.24 8.7 16.27 8.72 17.05 9.33L21 12.16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M6.5 9.5C7.32843 9.5 8 8.82843 8 8C8 7.17157 7.32843 6.5 6.5 6.5C5.67157 6.5 5 7.17157 5 8C5 8.82843 5.67157 9.5 6.5 9.5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>JPG</span></a></li>
+                    <li><a href="#"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 12.16V8.83C21 7.15 19.85 6 18.17 6H5.83C4.15 6 3 7.15 3 8.83V15.17C3 16.85 4.15 18 5.83 18H10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M3 12.16L5.43 10.39C6.23 9.8 7.26 9.82 8.04 10.43L9.08 11.23C9.84 11.83 10.84 11.85 11.62 11.28L14.43 9.28C15.24 8.7 16.27 8.72 17.05 9.33L21 12.16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M6.5 9.5C7.32843 9.5 8 8.82843 8 8C8 7.17157 7.32843 6.5 6.5 6.5C5.67157 6.5 5 7.17157 5 8C5 8.82843 5.67157 9.5 6.5 9.5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>PNG</span></a></li>
+                    <li><a href="#"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M8 10H16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M8 12H16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M8 14H16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>GIF</span></a></li>
+                    <li><a href="#"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M19.3801 13.4L21.0001 12L19.3801 10.6C18.8201 10.15 18.0601 10.23 17.6201 10.8L16.5001 12.28C16.1401 12.74 16.1401 13.38 16.5001 13.84L17.6201 15.32C18.0601 15.89 18.8201 15.97 19.3801 15.52L21.0001 14.12" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path><path d="M10.5 12.14V11.39C10.5 9.4 8.9 7.8 6.9 7.8H5.4C3.4 7.8 1.8 9.4 1.8 11.39V12.61C1.8 14.6 3.4 16.2 5.4 16.2H6.9C8.9 16.2 10.5 14.6 10.5 12.61V12.14Z" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>WEBP</span></a></li>
+                    <li><a href="#"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M19.3801 13.4L21.0001 12L19.3801 10.6C18.8201 10.15 18.0601 10.23 17.6201 10.8L16.5001 12.28C16.1401 12.74 16.1401 13.38 16.5001 13.84L17.6201 15.32C18.0601 15.89 18.8201 15.97 19.3801 15.52L21.0001 14.12" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path><path d="M10.5 12.14V11.39C10.5 9.4 8.9 7.8 6.9 7.8H5.4C3.4 7.8 1.8 9.4 1.8 11.39V12.61C1.8 14.6 3.4 16.2 5.4 16.2H6.9C8.9 16.2 10.5 14.6 10.5 12.61V12.14Z" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>AVIF</span></a></li>
+                    <li><a href="#"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 12.16V8.83C21 7.15 19.85 6 18.17 6H5.83C4.15 6 3 7.15 3 8.83V15.17C3 16.85 4.15 18 5.83 18H10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M3 12.16L5.43 10.39C6.23 9.8 7.26 9.82 8.04 10.43L9.08 11.23C9.84 11.83 10.84 11.85 11.62 11.28L14.43 9.28C15.24 8.7 16.27 8.72 17.05 9.33L21 12.16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M6.5 9.5C7.32843 9.5 8 8.82843 8 8C8 7.17157 7.32843 6.5 6.5 6.5C5.67157 6.5 5 7.17157 5 8C5 8.82843 5.67157 9.5 6.5 9.5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>JP2</span></a></li>
+                </ul>
+            </div>
+            <div class="popup-column">
+                <h4>DOCUMENT & TEXT</h4>
+                <ul>
+                    <li><a href="#"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21.99 12.02V8.29C21.99 7.03 21.01 6.05 19.75 6.05H17.72C16.89 6.05 16.12 5.51 15.79 4.77L15.02 3.01C14.36 1.48 12.87 0.5 11.22 0.5H8C4 0.5 2 2.5 2 6.5V17.5C2 21.5 4 23.5 8 23.5H16C20 23.5 22 21.5 22 17.5V12.02H21.99Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M15.5 17.5H22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M18.75 20.75V14.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Image to PDF</span></a></li>
+                    <li><a href="#"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 13V9C22 4 20 2 15 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22H13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M15.5 17.5H22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M18.75 20.75V14.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Text to DOCX</span></a></li>
+                    <li><a href="#"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 2H6C3 2 2 3 2 6V20C2 21.66 3.34 23 5 23H19C20.66 23 22 21.66 22 20V12" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path><path d="M10 2L10.03 5.02C10.05 6.13 10.94 7.02 12.05 7.02H15.99" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path><path d="M7 13H15" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path><path d="M7 17H12" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Text to TXT</span></a></li>
+                    <li><a href="#"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 10V15C22 20 20 22 15 22H9C4 22 2 20 2 15V9C2 4 4 2 9 2H14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M22 10H18C15 10 14 9 14 6V2L22 10Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>ICO Converter</span></a></li>
+                </ul>
+            </div>
+            <div class="popup-column">
+                <h4>LEGACY & VECTOR</h4>
+                <ul>
+                    <li><a href="#"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16.2 21.6H7.8C3.6 21.6 2.4 20.4 2.4 16.2V7.8C2.4 3.6 3.6 2.4 7.8 2.4H16.2C20.4 2.4 21.6 3.6 21.6 7.8V16.2C21.6 20.4 20.4 21.6 16.2 21.6Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M15.6 8.40039H8.4V15.6004H15.6V8.40039Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>SVG Converter</span></a></li>
+                    <li><a href="#"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 12.16V8.83C21 7.15 19.85 6 18.17 6H5.83C4.15 6 3 7.15 3 8.83V15.17C3 16.85 4.15 18 5.83 18H10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M3 12.16L5.43 10.39C6.23 9.8 7.26 9.82 8.04 10.43L9.08 11.23C9.84 11.83 10.84 11.85 11.62 11.28L14.43 9.28C15.24 8.7 16.27 8.72 17.05 9.33L21 12.16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M6.5 9.5C7.32843 9.5 8 8.82843 8 8C8 7.17157 7.32843 6.5 6.5 6.5C5.67157 6.5 5 7.17157 5 8C5 8.82843 5.67157 9.5 6.5 9.5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>BMP Converter</span></a></li>
+                    <li><a href="#"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 12.16V8.83C21 7.15 19.85 6 18.17 6H5.83C4.15 6 3 7.15 3 8.83V15.17C3 16.85 4.15 18 5.83 18H10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M3 12.16L5.43 10.39C6.23 9.8 7.26 9.82 8.04 10.43L9.08 11.23C9.84 11.83 10.84 11.85 11.62 11.28L14.43 9.28C15.24 8.7 16.27 8.72 17.05 9.33L21 12.16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M6.5 9.5C7.32843 9.5 8 8.82843 8 8C8 7.17157 7.32843 6.5 6.5 6.5C5.67157 6.5 5 7.17157 5 8C5 8.82843 5.67157 9.5 6.5 9.5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>TIFF Converter</span></a></li>
+                    <li><a href="#"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 12.16V8.83C21 7.15 19.85 6 18.17 6H5.83C4.15 6 3 7.15 3 8.83V15.17C3 16.85 4.15 18 5.83 18H10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M3 12.16L5.43 10.39C6.23 9.8 7.26 9.82 8.04 10.43L9.08 11.23C9.84 11.83 10.84 11.85 11.62 11.28L14.43 9.28C15.24 8.7 16.27 8.72 17.05 9.33L21 12.16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M6.5 9.5C7.32843 9.5 8 8.82843 8 8C8 7.17157 7.32843 6.5 6.5 6.5C5.67157 6.5 5 7.17157 5 8C5 8.82843 5.67157 9.5 6.5 9.5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>TGA Converter</span></a></li>
+                    <li><a href="#"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 12.16V8.83C21 7.15 19.85 6 18.17 6H5.83C4.15 6 3 7.15 3 8.83V15.17C3 16.85 4.15 18 5.83 18H10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M3 12.16L5.43 10.39C6.23 9.8 7.26 9.82 8.04 10.43L9.08 11.23C9.84 11.83 10.84 11.85 11.62 11.28L14.43 9.28C15.24 8.7 16.27 8.72 17.05 9.33L21 12.16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M6.5 9.5C7.32843 9.5 8 8.82843 8 8C8 7.17157 7.32843 6.5 6.5 6.5C5.67157 6.5 5 7.17157 5 8C5 8.82843 5.67157 9.5 6.5 9.5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>PCX Converter</span></a></li>
+                </ul>
+            </div>
+            <div class="popup-column">
+                <h4>GAME & DEVELOPER</h4>
+                <ul>
+                    <li><a href="#"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.45 2H17.55C21.1 2 22 2.9 22 6.45V17.55C22 21.1 21.1 22 17.55 22H6.45C2.9 22 2 21.1 2 17.55V6.45C2 2.9 2.9 2 6.45 2Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M8.5 12L12 15.5L15.5 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M12 8.5V15.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Base64 Encoder</span></a></li>
+                    <li><a href="#"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 4.5H21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M7.26 9.5H16.74" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M3 14.5H21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M7.26 19.5H16.74" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>ASCII Art Generator</span></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
     <div class="mobile-nav-menu" id="mobile-nav-menu"><ul id="mobile-nav-list"></ul></div>
 
     <div class="banner-ad-container">
@@ -453,6 +476,48 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- MODIFICATION STARTS HERE ---
+            
+            const toolsToggleBtn = document.getElementById('tools-toggle-btn');
+            const toolsPopupMenu = document.getElementById('tools-popup-menu');
+            const popupCloseBtn = document.getElementById('popup-close-btn');
+            const popupOverlay = document.getElementById('tools-popup-overlay');
+
+            function openToolsPopup() {
+                toolsPopupMenu.classList.add('is-open');
+                popupOverlay.classList.add('is-open');
+                toolsToggleBtn.classList.add('is-open');
+            }
+
+            function closeToolsPopup() {
+                toolsPopupMenu.classList.remove('is-open');
+                popupOverlay.classList.remove('is-open');
+                toolsToggleBtn.classList.remove('is-open');
+            }
+
+            if (toolsToggleBtn && toolsPopupMenu && popupCloseBtn && popupOverlay) {
+                toolsToggleBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    if (toolsPopupMenu.classList.contains('is-open')) {
+                        closeToolsPopup();
+                    } else {
+                        openToolsPopup();
+                    }
+                });
+                
+                popupCloseBtn.addEventListener('click', closeToolsPopup);
+                popupOverlay.addEventListener('click', closeToolsPopup);
+
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === "Escape" && toolsPopupMenu.classList.contains('is-open')) {
+                        closeToolsPopup();
+                    }
+                });
+            }
+            
+            // --- MODIFICATION ENDS HERE ---
+            
             const pricingLink = document.querySelector('a[href="#pricing"]');
             const header = document.querySelector('.main-header');
             
@@ -531,38 +596,6 @@
             if (mobileNavMenu) {
                 mobileNavMenu.addEventListener('click', (e) => { if (e.target.tagName === 'A') { mobileNavToggle.classList.remove('is-active'); mobileNavToggle.setAttribute('aria-expanded', 'false'); mobileNavMenu.style.display = 'none'; } });
             }
-            
-            // --- MODIFIED JAVASCRIPT FOR TOOLS POPUP ---
-            const toolsToggleBtn = document.getElementById('tools-toggle-btn');
-            const toolsPopupMenu = document.getElementById('tools-popup-menu');
-            if (toolsToggleBtn && toolsPopupMenu) {
-                const popupCloseBtn = toolsPopupMenu.querySelector('.popup-close-btn');
-
-                toolsToggleBtn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    e.stopPropagation(); // Prevents the document click listener from firing immediately
-                    toolsPopupMenu.classList.toggle('is-open');
-                });
-
-                popupCloseBtn.addEventListener('click', () => {
-                    toolsPopupMenu.classList.remove('is-open');
-                });
-                
-                // Close menu if clicking outside of it
-                document.addEventListener('click', (e) => {
-                    if (toolsPopupMenu.classList.contains('is-open') && !toolsPopupMenu.contains(e.target) && !toolsToggleBtn.contains(e.target)) {
-                        toolsPopupMenu.classList.remove('is-open');
-                    }
-                });
-
-                // Close menu with the Escape key
-                document.addEventListener('keydown', (e) => {
-                    if (e.key === "Escape" && toolsPopupMenu.classList.contains('is-open')) {
-                        toolsPopupMenu.classList.remove('is-open');
-                    }
-                });
-            }
-            // --- END MODIFIED JAVASCRIPT ---
 
             const pricingToggle = document.getElementById('pricing-toggle');
             if(pricingToggle) {
