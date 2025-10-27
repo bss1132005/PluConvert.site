@@ -8,8 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>PlusConvert - The Definitive All-Format Converter</title>
 
-    <link rel="icon" href="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;defs&gt;&lt;linearGradient id=%22g%22 x1=%220%25%22 y1=%22100%25%22 x2=%22100%25%22 y2=%220%25%22&gt;&lt;stop offset=%220%25%22 stop-color=%22%230052FF%22/&gt;&lt;stop offset=%22100%25%22 stop-color=%22%2300A9FF%22/&gt;&lt;/defs&gt;&lt;text y=%22.9em%22 font-size=%2290%22 fill=%22url(%23g)%22&gt;P&lt;/text&gt;&lt;/svg&gt;"/>
-    <link rel="apple-touch-icon" href="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;defs&gt;&lt;linearGradient id=%22g%22 x1=%220%25%22 y1=%22100%25%22 x2=%22100%25%22 y2=%220%25%22&gt;&lt;stop offset=%220%25%22 stop-color=%22%230052FF%22/&gt;&lt;stop offset=%22100%25%22 stop-color=%22%2300A9FF%22/&gt;&lt;/defs&gt;&lt;text y=%22.9em%22 font-size=%2290%22 fill=%22url(%23g)%22&gt;P&lt;/text&gt;&lt;/svg&gt;"/>
+    <link rel="icon" href="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;defs&gt;&lt;linearGradient id=%22g%22 x1=%220%25%22 y1=%22100%25%22 x2=%22100%25%22 y2=%220%25%22&gt;&lt;stop offset=%220%25%22 stop-color=%22%230052FF%22/&gt;&lt;stop offset=%22100%25%22 stop-color=%22%2300A9FF%22/&gt;&lt;/linearGradient&gt;&lt;/defs&gt;&lt;text y=%22.9em%22 font-size=%2290%22 fill=%22url(%23g)%22&gt;P&lt;/text&gt;&lt;/svg&gt;"/>
+    <link rel="apple-touch-icon" href="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;defs&gt;&lt;linearGradient id=%22g%22 x1=%220%25%22 y1=%22100%25%22 x2=%22100%25%22 y2=%220%25%22&gt;&lt;stop offset=%220%25%22 stop-color=%22%230052FF%22/&gt;&lt;stop offset=%22100%25%22 stop-color=%22%2300A9FF%22/&gt;&lt;/linearGradient&gt;&lt;/defs&gt;&lt;text y=%22.9em%22 font-size=%2290%22 fill=%22url(%23g)%22&gt;P&lt;/text&gt;&lt;/svg&gt;"/>
 
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="true"/>
@@ -21,7 +21,7 @@
     <script src="https://cdn.jsdelivr.net/npm/gifshot/dist/gifshot.min.js"></script>
     <script src="https://unpkg.com/docx@7.1.0/build/index.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/utif@3.1.0/UTIF.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/utif/3.1.0/UTIF.js"></script>
     
     <script>
         pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js`;
@@ -52,6 +52,7 @@
         .nav-item-dropdown { position: relative; }
         .nav-item-dropdown .dropdown-toggle { display: flex; align-items: center; gap: 8px; cursor: pointer; }
         .dropdown-menu { display: none; position: absolute; top: 150%; left: 50%; transform: translateX(-50%); background-color: var(--bg-color); border: 1px solid var(--border-color); border-radius: 12px; box-shadow: 0 8px 25px var(--shadow-color); min-width: 220px; z-index: 101; list-style: none; padding: 8px; flex-direction: column; opacity: 0; visibility: hidden; transition: opacity 0.2s ease, visibility 0.2s ease; }
+        /* Keep hover for other simple dropdowns, but exclude the one for tools */
         .nav-item-dropdown:hover .dropdown-menu:not(.tools-popup-menu) { display: flex; opacity: 1; visibility: visible; }
         .dropdown-menu li { width: 100%; }
         .dropdown-menu a { display: block; padding: 12px 18px; border-radius: 8px; transition: background-color 0.2s ease, color 0.2s ease; }
@@ -64,8 +65,8 @@
         /* --- FINAL STYLES FOR TOOLS POPUP --- */
         .tools-popup-menu {
             display: none;
-            position: fixed;
-            top: 100px;
+            position: fixed; /* Detached from header */
+            top: 100px; /* Position from top of viewport */
             left: 50%;
             transform: translateX(-50%);
             width: 960px;
@@ -231,6 +232,7 @@
         .mobile-nav-toggle.is-active .hamburger-icon span:nth-child(1) { transform: translateY(10px) rotate(45deg); }
         .mobile-nav-toggle.is-active .hamburger-icon span:nth-child(2) { opacity: 0; }
         .mobile-nav-toggle.is-active .hamburger-icon span:nth-child(3) { transform: translateY(-11px) rotate(-45deg); }
+        .mobile-nav-toggle.is-active .hamburger-icon span:nth-child(3) { transform: translateY(-11px) rotate(-45deg); }
         .mobile-nav-menu { display: none; position: fixed; top: 85px; left: 0; width: 100%; height: calc(100vh - 85px); background-color: var(--bg-color); z-index: 999; padding: 30px; text-align: center; overflow-y: auto; }
         .mobile-nav-menu ul { list-style: none; display: flex; flex-direction: column; gap: 20px; }
         .mobile-nav-menu ul li a { font-size: 1.5rem; font-weight: 600; color: var(--heading-color); text-decoration: none; padding: 10px; display: block; }
@@ -313,43 +315,42 @@
             <div class="popup-column">
                 <h4>WEB & IMAGE</h4>
                 <ul>
-                    <li><a href="jpg-converter.html"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 8h.01"></path><rect x="4" y="4" width="16" height="16" rx="3"></rect><path d="m4 15.5 4-4a3 3 0 0 1 4 0l5 5"></path><path d="m14 14 1-1a3 3 0 0 1 4 0l2 2"></path></svg><span>JPG</span></a></li>
-                    <li><a href="png-converter.html"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 8h.01"></path><rect x="4" y="4" width="16" height="16" rx="3"></rect><path d="m4 15.5 4-4a3 3 0 0 1 4 0l5 5"></path><path d="m14 14 1-1a3 3 0 0 1 4 0l2 2"></path></svg><span>PNG</span></a></li>
-                    <li><a href="gif-converter.html"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="9" y1="10" x2="15" y2="10"></line><line x1="9" y1="14" x2="15" y2="14"></line><line x1="9" y1="12" x2="13" y2="12"></line></svg><span>GIF</span></a></li>
-                    <li><a href="webp-converter.html"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.75 2.75"></path><path d="M3 12a9 9 0 0 1 9 9 9.75 9.75 0 0 1 6.75-2.75"></path><path d="m15 6 3-3 3 3"></path><path d="m9 18-3 3-3-3"></path></svg><span>WEBP</span></a></li>
-                    <li><a href="avif-converter.html"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.75 2.75"></path><path d="M3 12a9 9 0 0 1 9 9 9.75 9.75 0 0 1 6.75-2.75"></path><path d="m15 6 3-3 3 3"></path><path d="m9 18-3 3-3-3"></path></svg><span>AVIF</span></a></li>
-                    <li><a href="jp2-converter.html"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 8h.01"></path><rect x="4" y="4" width="16" height="16" rx="3"></rect><path d="m4 15.5 4-4a3 3 0 0 1 4 0l5 5"></path><path d="m14 14 1-1a3 3 0 0 1 4 0l2 2"></path></svg><span>JP2</span></a></li>
+                    <li><a href="#"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 8h.01"></path><rect x="4" y="4" width="16" height="16" rx="3"></rect><path d="m4 15.5 4-4a3 3 0 0 1 4 0l5 5"></path><path d="m14 14 1-1a3 3 0 0 1 4 0l2 2"></path></svg><span>JPG</span></a></li>
+                    <li><a href="#"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 8h.01"></path><rect x="4" y="4" width="16" height="16" rx="3"></rect><path d="m4 15.5 4-4a3 3 0 0 1 4 0l5 5"></path><path d="m14 14 1-1a3 3 0 0 1 4 0l2 2"></path></svg><span>PNG</span></a></li>
+                    <li><a href="#"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="9" y1="10" x2="15" y2="10"></line><line x1="9" y1="14" x2="15" y2="14"></line><line x1="9" y1="12" x2="13" y2="12"></line></svg><span>GIF</span></a></li>
+                    <li><a href="#"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.75 2.75"></path><path d="M3 12a9 9 0 0 1 9 9 9.75 9.75 0 0 1 6.75-2.75"></path><path d="m15 6 3-3 3 3"></path><path d="m9 18-3 3-3-3"></path></svg><span>WEBP</span></a></li>
+                    <li><a href="#"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.75 2.75"></path><path d="M3 12a9 9 0 0 1 9 9 9.75 9.75 0 0 1 6.75-2.75"></path><path d="m15 6 3-3 3 3"></path><path d="m9 18-3 3-3-3"></path></svg><span>AVIF</span></a></li>
+                    <li><a href="#"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 8h.01"></path><rect x="4" y="4" width="16" height="16" rx="3"></rect><path d="m4 15.5 4-4a3 3 0 0 1 4 0l5 5"></path><path d="m14 14 1-1a3 3 0 0 1 4 0l2 2"></path></svg><span>JP2</span></a></li>
                 </ul>
             </div>
             <div class="popup-column">
                 <h4>DOCUMENT & TEXT</h4>
                 <ul>
-                    <li><a href="image-to-pdf.html"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"></path><path d="M17 21h-10a2 2 0 0 1-2-2v-14a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2z"></path></svg><span>Image to PDF</span></a></li>
-                    <li><a href="text-to-docx.html"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"></path><path d="M17 21h-10a2 2 0 0 1-2-2v-14a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2z"></path></svg><span>Text to DOCX</span></a></li>
-                    <li><a href="text-to-txt.html"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="m3 15 4-4c.9-.9 2.1-.9 3 0l4 4"></path><path d="m14 11 1-1c.9-.9 2.1-.9 3 0l2 2"></path></svg><span>Text to TXT</span></a></li>
-                    <li><a href="ico-converter.html"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-14a2 2 0 0 1-2-2v-12a2 2 0 0 1 2-2"></path></svg><span>ICO Converter</span></a></li>
+                    <li><a href="#"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"></path><path d="M17 21h-10a2 2 0 0 1-2-2v-14a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2z"></path></svg><span>Image to PDF</span></a></li>
+                    <li><a href="#"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"></path><path d="M17 21h-10a2 2 0 0 1-2-2v-14a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2z"></path></svg><span>Text to DOCX</span></a></li>
+                    <li><a href="#"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="m3 15 4-4c.9-.9 2.1-.9 3 0l4 4"></path><path d="m14 11 1-1c.9-.9 2.1-.9 3 0l2 2"></path></svg><span>Text to TXT</span></a></li>
+                    <li><a href="#"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-14a2 2 0 0 1-2-2v-12a2 2 0 0 1 2-2"></path></svg><span>ICO Converter</span></a></li>
                 </ul>
             </div>
             <div class="popup-column">
                 <h4>LEGACY & VECTOR</h4>
                 <ul>
-                    <li><a href="svg-converter.html"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9" /><path d="M15.49 15.49L7 21l-1.5-4.5L10 12l-1.5-1.5L4.5 9 1 7.5l6-4.5" /></svg><span>SVG Converter</span></a></li>
-                    <li><a href="bmp-converter.html"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 8h.01"></path><rect x="4" y="4" width="16" height="16" rx="3"></rect><path d="m4 15.5 4-4a3 3 0 0 1 4 0l5 5"></path><path d="m14 14 1-1a3 3 0 0 1 4 0l2 2"></path></svg><span>BMP Converter</span></a></li>
-                    <li><a href="tiff-converter.html"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 8h.01"></path><rect x="4" y="4" width="16" height="16" rx="3"></rect><path d="m4 15.5 4-4a3 3 0 0 1 4 0l5 5"></path><path d="m14 14 1-1a3 3 0 0 1 4 0l2 2"></path></svg><span>TIFF Converter</span></a></li>
-                    <li><a href="tga-converter.html"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 8h.01"></path><rect x="4" y="4" width="16" height="16" rx="3"></rect><path d="m4 15.5 4-4a3 3 0 0 1 4 0l5 5"></path><path d="m14 14 1-1a3 3 0 0 1 4 0l2 2"></path></svg><span>TGA Converter</span></a></li>
-                    <li><a href="pcx-converter.html"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 8h.01"></path><rect x="4" y="4" width="16" height="16" rx="3"></rect><path d="m4 15.5 4-4a3 3 0 0 1 4 0l5 5"></path><path d="m14 14 1-1a3 3 0 0 1 4 0l2 2"></path></svg><span>PCX Converter</span></a></li>
+                    <li><a href="#"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9" /><path d="M15.49 15.49L7 21l-1.5-4.5L10 12l-1.5-1.5L4.5 9 1 7.5l6-4.5" /></svg><span>SVG Converter</span></a></li>
+                    <li><a href="#"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 8h.01"></path><rect x="4" y="4" width="16" height="16" rx="3"></rect><path d="m4 15.5 4-4a3 3 0 0 1 4 0l5 5"></path><path d="m14 14 1-1a3 3 0 0 1 4 0l2 2"></path></svg><span>BMP Converter</span></a></li>
+                    <li><a href="#"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 8h.01"></path><rect x="4" y="4" width="16" height="16" rx="3"></rect><path d="m4 15.5 4-4a3 3 0 0 1 4 0l5 5"></path><path d="m14 14 1-1a3 3 0 0 1 4 0l2 2"></path></svg><span>TIFF Converter</span></a></li>
+                    <li><a href="#"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 8h.01"></path><rect x="4" y="4" width="16" height="16" rx="3"></rect><path d="m4 15.5 4-4a3 3 0 0 1 4 0l5 5"></path><path d="m14 14 1-1a3 3 0 0 1 4 0l2 2"></path></svg><span>TGA Converter</span></a></li>
+                    <li><a href="#"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 8h.01"></path><rect x="4" y="4" width="16" height="16" rx="3"></rect><path d="m4 15.5 4-4a3 3 0 0 1 4 0l5 5"></path><path d="m14 14 1-1a3 3 0 0 1 4 0l2 2"></path></svg><span>PCX Converter</span></a></li>
                 </ul>
             </div>
             <div class="popup-column">
                 <h4>GAME & DEVELOPER</h4>
                 <ul>
-                    <li><a href="base64-encoder.html"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 8 3 12 7 16"></polyline><polyline points="17 8 21 12 17 16"></polyline><line x1="14" y1="4" x2="10" y2="20"></line></svg><span>Base64 Encoder</span></a></li>
-                    <li><a href="ascii-art-generator.html"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"></line><line x1="4" y1="12" x2="20" y2="12"></line><line x1="4" y1="18" x2="20" y2="18"></line></svg><span>ASCII Art Generator</span></a></li>
+                    <li><a href="#"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 8 3 12 7 16"></polyline><polyline points="17 8 21 12 17 16"></polyline><line x1="14" y1="4" x2="10" y2="20"></line></svg><span>Base64 Encoder</span></a></li>
+                    <li><a href="#"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"></line><line x1="4" y1="12" x2="20" y2="12"></line><line x1="4" y1="18" x2="20" y2="18"></line></svg><span>ASCII Art Generator</span></a></li>
                 </ul>
             </div>
         </div>
     </div>
-
 
     <div class="mobile-nav-menu" id="mobile-nav-menu"><ul id="mobile-nav-list"></ul></div>
 
@@ -532,9 +533,111 @@
             if (mobileNavMenu) {
                 mobileNavMenu.addEventListener('click', (e) => { if (e.target.tagName === 'A') { mobileNavToggle.classList.remove('is-active'); mobileNavToggle.setAttribute('aria-expanded', 'false'); mobileNavMenu.style.display = 'none'; } });
             }
-            
-            // --- JAVASCRIPT FOR HOVER-ACTIVATED TOOLS POPUP (NO LONGER NEEDED) ---
-            // The hover logic is now handled purely by CSS for simplicity and performance.
+
+            // --- JAVASCRIPT FOR HOVER-ACTIVATED TOOLS POPUP ---
+            const toolsDropdown = document.querySelector('#tools-menu-button').parentElement;
+            const toolsPopupMenu = document.getElementById('tools-popup-menu');
+            let hoverTimeout;
+
+            if (toolsDropdown && toolsPopupMenu) {
+                const showMenu = () => {
+                    clearTimeout(hoverTimeout);
+                    toolsPopupMenu.classList.add('is-open');
+                };
+
+                const hideMenu = () => {
+                    hoverTimeout = setTimeout(() => {
+                        toolsPopupMenu.classList.remove('is-open');
+                    }, 100); // A small delay to allow moving the mouse to the menu
+                };
+
+                toolsDropdown.addEventListener('mouseenter', showMenu);
+                toolsDropdown.addEventListener('mouseleave', hideMenu);
+                toolsPopupMenu.addEventListener('mouseenter', showMenu);
+                toolsPopupMenu.addEventListener('mouseleave', hideMenu);
+
+                const popupCloseBtn = document.getElementById('popup-close-btn');
+                if (popupCloseBtn) {
+                    popupCloseBtn.addEventListener('click', () => {
+                        toolsPopupMenu.classList.remove('is-open');
+                    });
+                }
+
+                // Add click handlers for all format links in the tools popup
+                const formatLinks = toolsPopupMenu.querySelectorAll('a[href="#"]');
+                formatLinks.forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const formatName = link.querySelector('span').textContent;
+                        
+                        // Close the popup menu
+                        toolsPopupMenu.classList.remove('is-open');
+                        
+                        // Scroll to the converter section
+                        const heroSection = document.querySelector('.hero');
+                        if (heroSection) {
+                            const headerOffset = header.offsetHeight;
+                            const elementPosition = heroSection.getBoundingClientRect().top;
+                            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                            window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+                        }
+                        
+                        // Auto-select the corresponding format in the dropdown
+                        const convertToSelect = document.getElementById('convert-to');
+                        if (convertToSelect) {
+                            // Map format names to option values
+                            const formatMap = {
+                                'JPG': 'jpg',
+                                'PNG': 'png',
+                                'GIF': 'gif',
+                                'WEBP': 'webp',
+                                'AVIF': 'avif',
+                                'JP2': 'jp2',
+                                'Image to PDF': 'pdf',
+                                'Text to DOCX': 'docx',
+                                'Text to TXT': 'txt',
+                                'ICO Converter': 'ico',
+                                'SVG Converter': 'svg',
+                                'BMP Converter': 'bmp',
+                                'TIFF Converter': 'tiff',
+                                'TGA Converter': 'tga',
+                                'PCX Converter': 'pcx',
+                                'Base64 Encoder': 'base64',
+                                'ASCII Art Generator': 'ascii'
+                            };
+                            
+                            const formatValue = formatMap[formatName];
+                            if (formatValue) {
+                                convertToSelect.value = formatValue;
+                                
+                                // Trigger the change event to update the UI
+                                const event = new Event('change');
+                                convertToSelect.dispatchEvent(event);
+                                
+                                // Show appropriate input area based on format
+                                if (formatValue === 'docx' || formatValue === 'txt') {
+                                    // Focus on text input for text-based formats
+                                    const textInput = document.getElementById('text-doc-input');
+                                    if (textInput) {
+                                        setTimeout(() => {
+                                            textInput.focus();
+                                        }, 500);
+                                    }
+                                } else {
+                                    // Focus on file upload for other formats
+                                    const fileUpload = document.getElementById('file-upload');
+                                    if (fileUpload) {
+                                        setTimeout(() => {
+                                            fileUpload.focus();
+                                        }, 500);
+                                    }
+                                }
+                            }
+                        }
+                    });
+                });
+            }
+            // --- END JAVASCRIPT FOR TOOLS POPUP ---
 
             const pricingToggle = document.getElementById('pricing-toggle');
             if(pricingToggle) {
