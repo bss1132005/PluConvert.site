@@ -52,8 +52,7 @@
         .nav-item-dropdown { position: relative; }
         .nav-item-dropdown .dropdown-toggle { display: flex; align-items: center; gap: 8px; cursor: pointer; }
         .dropdown-menu { display: none; position: absolute; top: 150%; left: 50%; transform: translateX(-50%); background-color: var(--bg-color); border: 1px solid var(--border-color); border-radius: 12px; box-shadow: 0 8px 25px var(--shadow-color); min-width: 220px; z-index: 101; list-style: none; padding: 8px; flex-direction: column; opacity: 0; visibility: hidden; transition: opacity 0.2s ease, visibility 0.2s ease; }
-        /* Keep hover for other simple dropdowns, but exclude the one for tools */
-        .nav-item-dropdown:hover .dropdown-menu:not(.tools-popup-menu) { display: flex; opacity: 1; visibility: visible; }
+        .nav-item-dropdown:not(.tools-dropdown):hover .dropdown-menu { display: flex; opacity: 1; visibility: visible; }
         .dropdown-menu li { width: 100%; }
         .dropdown-menu a { display: block; padding: 12px 18px; border-radius: 8px; transition: background-color 0.2s ease, color 0.2s ease; }
         .dropdown-menu a:hover { background-color: var(--bg-secondary-color); color: var(--primary-color); }
@@ -65,8 +64,8 @@
         /* --- FINAL STYLES FOR TOOLS POPUP --- */
         .tools-popup-menu {
             display: none;
-            position: fixed; /* Detached from header */
-            top: 100px; /* Position from top of viewport */
+            position: fixed;
+            top: 100px;
             left: 50%;
             transform: translateX(-50%);
             width: 960px;
@@ -76,7 +75,7 @@
             border-radius: 16px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.1);
             padding: 2rem 2.5rem;
-            z-index: 999;
+            z-index: 101; /* Above header */
             opacity: 0;
             visibility: hidden;
             transition: opacity 0.2s ease-out, visibility 0.2s ease-out;
@@ -267,12 +266,11 @@
             </a>
             <nav class="main-nav">
                 <ul id="desktop-nav-list">
-                    <li class="nav-item-dropdown">
+                    <li class="nav-item-dropdown tools-dropdown"> <!-- Added class for specificity -->
                         <a href="#" class="dropdown-toggle" id="tools-menu-button">
                             <span>Tools</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg>
+                            <!-- SVG removed for simplicity as it was inside the old dropdown-menu -->
                         </a>
-                        <!-- The popup is now placed outside the header, right after this element -->
                     </li>
                     <li class="nav-item-dropdown">
                         <a href="#" class="dropdown-toggle">
@@ -307,7 +305,7 @@
             </button>
         </div>
     </header>
-
+    
     <div id="tools-popup-menu" class="tools-popup-menu">
         <button class="popup-close-btn" id="popup-close-btn" aria-label="Close menu">&times;</button>
         <div class="popup-grid">
@@ -532,37 +530,41 @@
             if (mobileNavMenu) {
                 mobileNavMenu.addEventListener('click', (e) => { if (e.target.tagName === 'A') { mobileNavToggle.classList.remove('is-active'); mobileNavToggle.setAttribute('aria-expanded', 'false'); mobileNavMenu.style.display = 'none'; } });
             }
-
-            // --- JAVASCRIPT FOR HOVER-ACTIVATED TOOLS POPUP ---
-            const toolsDropdown = document.querySelector('#tools-menu-button').parentElement;
+            
+            // --- FINAL JAVASCRIPT FOR CLICKABLE TOOLS POPUP ---
+            const toolsMenuButton = document.getElementById('tools-menu-button');
             const toolsPopupMenu = document.getElementById('tools-popup-menu');
-            let hoverTimeout;
+            const popupCloseBtn = document.getElementById('popup-close-btn');
 
-            if (toolsDropdown && toolsPopupMenu) {
-                const showMenu = () => {
-                    clearTimeout(hoverTimeout);
-                    toolsPopupMenu.classList.add('is-open');
+            if (toolsMenuButton && toolsPopupMenu) {
+                const toggleMenu = (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    toolsPopupMenu.classList.toggle('is-open');
                 };
 
-                const hideMenu = () => {
-                    hoverTimeout = setTimeout(() => {
-                        toolsPopupMenu.classList.remove('is-open');
-                    }, 100); // A small delay to allow moving the mouse to the menu
+                const closeMenu = () => {
+                    toolsPopupMenu.classList.remove('is-open');
                 };
 
-                toolsDropdown.addEventListener('mouseenter', showMenu);
-                toolsDropdown.addEventListener('mouseleave', hideMenu);
-                toolsPopupMenu.addEventListener('mouseenter', showMenu);
-                toolsPopupMenu.addEventListener('mouseleave', hideMenu);
+                toolsMenuButton.addEventListener('click', toggleMenu);
+                popupCloseBtn.addEventListener('click', closeMenu);
 
-                const popupCloseBtn = document.getElementById('popup-close-btn');
-                if (popupCloseBtn) {
-                    popupCloseBtn.addEventListener('click', () => {
-                        toolsPopupMenu.classList.remove('is-open');
-                    });
-                }
+                document.addEventListener('click', (e) => {
+                    if (!toolsPopupMenu.contains(e.target) && !toolsMenuButton.contains(e.target)) {
+                        if (toolsPopupMenu.classList.contains('is-open')) {
+                            closeMenu();
+                        }
+                    }
+                });
+                
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === "Escape" && toolsPopupMenu.classList.contains('is-open')) {
+                        closeMenu();
+                    }
+                });
             }
-            // --- END JAVASCRIPT FOR TOOLS POPUP ---
+            // --- END FINAL JAVASCRIPT ---
 
             const pricingToggle = document.getElementById('pricing-toggle');
             if(pricingToggle) {
