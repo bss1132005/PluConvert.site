@@ -44,12 +44,13 @@
         .main-header { background: var(--bg-color); padding: 20px 0; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px var(--shadow-color); transition: background-color 0.3s ease, box-shadow 0.3s ease; }
         .main-header .container { display: flex; justify-content: space-between; align-items: center; }
         .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--heading-color); font-size: 1.5rem; font-weight: 700; }
-        .main-nav { display: flex; align-items: center; gap: 30px; } .main-nav ul { display: flex; list-style: none; gap: 30px; align-items: center; } .main-nav a { text-decoration: none; color: var(--text-color); font-weight: 500; transition: color 0.3s ease; cursor: pointer; } .main-nav a:hover { color: var(--primary-color); }
-        .btn { display: inline-flex; align-items: center; justify-content: center; padding: 10px 24px; border-radius: 50px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; } .btn-primary { background-color: var(--primary-color); color: white; } .btn-primary:hover { background-color: #0041CC; transform: translateY(-2px); }
+        .main-nav { display: flex; align-items: center; gap: 30px; } .main-nav ul { display: flex; list-style: none; gap: 30px; align-items: center; } .main-nav a { text-decoration: none; color: var(--text-color); font-weight: 500; transition: color 0.3s ease; } .main-nav a:hover { color: var(--primary-color); }
+        .btn { display: inline-flex; align-items: center; justify-content: center; padding: 10px 24px; border-radius: 50px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; } .btn-primary { background-color: var(--primary-color); color: white; } .btn-primary:hover { background-color: #0041CC; transform: translateY(-2px); } .btn-secondary { background-color: transparent; color: var(--primary-color); border: 2px solid var(--primary-color); } .btn-secondary:hover { background-color: var(--primary-color); color: white; }
         .theme-toggle-btn { background: none; border: 2px solid var(--border-color); border-radius: 50%; width: 40px; height: 40px; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 5px; transition: background-color 0.3s ease, border-color 0.3s ease; } .theme-toggle-btn:hover { background-color: var(--bg-secondary-color); } .theme-toggle-btn svg { width: 22px; height: 22px; color: var(--text-secondary-color); } .moon-icon { display: none; } body.dark-mode .sun-icon { display: none; } body.dark-mode .moon-icon { display: block; }
         
         #all-tools-popup { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px); z-index: 200; justify-content: center; align-items: flex-start; padding-top: 120px; overflow-y: auto; }
         .all-tools-content { background-color: var(--bg-color); border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); width: 90%; max-width: 1000px; padding: 40px; position: relative; animation: fadeIn 0.3s; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
         .close-popup-btn { position: absolute; top: 20px; right: 20px; font-size: 28px; font-weight: bold; color: var(--text-secondary-color); cursor: pointer; transition: color 0.2s; }
         .close-popup-btn:hover { color: var(--error-color); }
         .all-tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; }
@@ -60,10 +61,27 @@
         .tool-link:hover { color: var(--primary-color); }
         .tool-link svg { width: 20px; height: 20px; flex-shrink: 0; color: var(--primary-color); }
         
-        #signup-modal { display: none; /* ... other modal styles ... */ }
-        .modal-content { /* ... other modal styles ... */ }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
-
+        #signup-modal { display: none; position: fixed; z-index: 300; padding-top: 100px; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.5); -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px); }
+        .modal-content { background-color: var(--bg-color); margin: auto; padding: 30px; border-radius: 12px; width: 90%; max-width: 400px; box-shadow: 0 10px 25px rgba(0,0,0,0.4); color: var(--text-color); }
+        .modal-content h2 { text-align: left; margin-bottom: 25px; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; font-size: 0.9rem; }
+        .form-group input { width: 100%; padding: 12px 15px; border: 1px solid var(--border-color); border-radius: 8px; background-color: var(--bg-secondary-color); color: var(--text-color); font-size: 1rem; font-family: var(--font-family); }
+        .modal-content button.btn-primary { width: 100%; font-weight: 700; font-size: 1.1rem; padding: 14px 0; cursor: pointer; border: none; border-radius: 8px; background-color: var(--primary-color); color: white; transition: all 0.3s ease; }
+        .modal-content button.btn-primary:hover { background-color: #0041CC; transform: translateY(-2px); }
+        .social-signup .divider { display: flex; align-items: center; text-align: center; color: var(--text-secondary-color); margin: 25px 0; font-size: 0.9rem; }
+        .social-signup .divider::before, .social-signup .divider::after { content: ''; flex: 1; border-bottom: 1px solid var(--border-color); }
+        .social-signup .divider:not(:empty)::before { margin-right: .5em; }
+        .social-signup .divider:not(:empty)::after { margin-left: .5em; }
+        .social-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .social-button { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 12px; border: 1px solid var(--border-color); border-radius: 8px; background-color: var(--bg-secondary-color); color: var(--text-color); font-weight: 600; cursor: pointer; transition: all 0.2s ease; }
+        .social-button:hover { border-color: var(--primary-color); color: var(--primary-color); }
+        .social-button svg { width: 20px; height: 20px; }
+        .modal-toggle-text { text-align: center; margin-top: 20px; font-size: 0.9rem; color: var(--text-secondary-color); }
+        .modal-toggle-text a { color: var(--primary-color); font-weight: 600; text-decoration: none; cursor: pointer; }
+        .modal-toggle-text a:hover { text-decoration: underline; }
+        .banner-ad-container { padding: 20px 0; background-color: var(--bg-color); transition: background-color 0.3s ease; }
+        .ad-placeholder { display: flex; align-items: center; justify-content: center; width: 100%; min-height: 90px; background-color: var(--bg-secondary-color); border: 1px dashed var(--border-color); border-radius: 8px; color: var(--text-secondary-color); font-size: 0.9rem; font-weight: 500; }
         .hero { text-align: center; padding: 60px 0 80px 0; background-color: var(--bg-color); transition: background-color 0.3s ease; position: relative; }
         .hero h1 { font-size: 3.5rem; color: var(--heading-color); margin-bottom: 20px; font-weight: 700; } 
         .hero p { font-size: 1.1rem; max-width: 600px; margin: 0 auto 30px auto; color: var(--text-secondary-color); }
@@ -119,10 +137,26 @@
         .footer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; margin-bottom: 40px; } .footer-col h4 { color: var(--heading-color); margin-bottom: 15px; font-size: 1.1rem; } .footer-col ul { list-style: none; } .footer-col ul li { margin-bottom: 10px; } .footer-col a { text-decoration: none; color: var(--text-secondary-color); transition: color 0.3s ease; } .footer-col a:hover { color: var(--primary-color); }
         .footer-col a.footer-link { cursor: pointer; }
         .footer-bottom { text-align: center; padding-top: 20px; border-top: 1px solid var(--border-color); font-size: 0.9rem; }
-        #payment-modal { display: none; /* ... */ }
-        .payment-modal-content { /* ... */ }
-        .mobile-nav-toggle { display: none; /* ... */ }
-        .mobile-nav-menu { display: none; /* ... */ }
+        #payment-modal { display: none; position: fixed; z-index: 300; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.6); -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px); padding-top: 80px; }
+        .payment-modal-content { background-color: var(--bg-color); margin: auto; padding: 30px; border-radius: 12px; width: 90%; max-width: 450px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); color: var(--text-color); animation: fadeIn 0.3s; position: relative; }
+        .payment-modal-content h2 { text-align: center; font-size: 1.5rem; margin-bottom: 15px; }
+        .payment-modal-subtitle { text-align: center; color: var(--text-secondary-color); margin-bottom: 25px; display: flex; justify-content: center; align-items: center; gap: 12px; font-size: 0.95rem; }
+        .payment-modal-subtitle img { height: 22px; }
+        #paypal-button-container { margin: 0 auto; max-width: 350px; min-height: 120px; }
+        #payment-message { margin-top: 20px; text-align: center; font-weight: 600; font-size: 1.1rem; }
+        .mobile-nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 5px; z-index: 1001; }
+        .mobile-nav-toggle .hamburger-icon { width: 28px; height: 24px; display: flex; flex-direction: column; justify-content: space-between; }
+        .mobile-nav-toggle .hamburger-icon span { display: block; width: 100%; height: 3px; background-color: var(--heading-color); border-radius: 2px; transition: all 0.3s ease-in-out; }
+        .mobile-nav-toggle.is-active .hamburger-icon span:nth-child(1) { transform: translateY(10px) rotate(45deg); }
+        .mobile-nav-toggle.is-active .hamburger-icon span:nth-child(2) { opacity: 0; }
+        .mobile-nav-toggle.is-active .hamburger-icon span:nth-child(3) { transform: translateY(-11px) rotate(-45deg); }
+        .mobile-nav-menu { display: none; position: fixed; top: 85px; left: 0; width: 100%; height: calc(100vh - 85px); background-color: var(--bg-color); z-index: 999; padding: 30px; text-align: center; overflow-y: auto; }
+        .mobile-nav-menu ul { list-style: none; display: flex; flex-direction: column; gap: 20px; }
+        .mobile-nav-menu ul li a { font-size: 1.5rem; font-weight: 600; color: var(--heading-color); text-decoration: none; padding: 10px; display: block; }
+        .mobile-nav-menu ul li .btn { font-size: 1.2rem; margin-top: 20px; }
+        .mobile-nav-menu .nav-item-dropdown .dropdown-menu { position: static; display: block; transform: none; border: none; box-shadow: none; background: transparent; min-width: unset; opacity: 1; visibility: visible; padding-top: 15px; }
+        .mobile-nav-menu .nav-item-dropdown .dropdown-menu a { font-size: 1.1rem; font-weight: 400; color: var(--text-secondary-color); }
+        .mobile-nav-menu .nav-item-dropdown:hover .dropdown-toggle svg { transform: none; }
         @media (max-width: 768px) {
             .main-nav ul { display: none; }
             .mobile-nav-toggle { display: block; }
@@ -131,7 +165,6 @@
             .footer-grid { grid-template-columns: repeat(2, 1fr); } .article-content h3 { font-size: 1.5rem; } .article-content h4 { font-size: 1.2rem; }
             .options-row { flex-direction: column; align-items: stretch; }
             .ad-placeholder { min-height: 60px; }
-            .all-tools-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -240,97 +273,208 @@
                 <div class="footer-col"><h4>Company</h4><ul><li><a href="/about.html">About Us</a></li><li><a href="/contact.html">Contact</a></li><li><a href="/careers.html">Careers</a></li></ul></div>
                 <div class="footer-col"><h4>Resources</h4><ul><li><a href="/api-docs.html">API Documentation</a></li><li><a href="/blog.html">Blog</a></li><li><a href="/help-center.html">Help Center</a></li></ul></div>
                 <div class="footer-col"><h4>Legal</h4><ul><li><a href="/terms.html">Terms of Service</a></li><li><a href="/privacy.html">Privacy Policy</a></li><li><a href="/security.html">Security</a></li></ul></div>
-                <div class="footer-col"><h4>Follow Us</h4><ul><li><a href="/twitter.html">Twitter</a></li><li><a href="/linkedin.html">LinkedIn</a></li><li><a href="/github.html">GitHub</a></li></ul></div>
+                <div class="footer-col"><h4>Follow Us</h4><ul><li><a href="https://twitter.com/plusconvert" target="_blank" rel="noopener noreferrer">Twitter</a></li><li><a href="https://linkedin.com/company/plusconvert" target="_blank" rel="noopener noreferrer">LinkedIn</a></li></ul></div>
             </div>
             <div class="footer-bottom"><p>&copy; 2025 PlusConvert. All rights reserved.</p></div>
         </div>
     </footer>
 
-    <div id="all-tools-popup">
-        <div class="all-tools-content">
-            <span class="close-popup-btn" id="close-tools-popup">&times;</span>
-            <div class="all-tools-grid">
-                <div class="tools-category">
-                    <h4>Web &amp; Image</h4>
-                    <ul>
-                        <li><a href="/converter/jpg.html" class="tool-link"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg> <span>JPG</span></a></li>
-                        <li><a href="/converter/png.html" class="tool-link"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg> <span>PNG</span></a></li>
-                        <li><a href="/converter/gif.html" class="tool-link"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-2.25 3h5.25M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg> <span>GIF</span></a></li>
-                        <li><a href="/converter/webp.html" class="tool-link"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c1.356 0 2.673-.11 3.955-.322M12 21c-1.356 0-2.673-.11-3.955-.322m7.91-11.41a9.004 9.004 0 00-7.91-11.41M12 3c1.356 0 2.673.11 3.955.322M12 3c-1.356 0-2.673.11-3.955.322m0 11.41a9.004 9.004 0 000 11.41M12 3a9.004 9.004 0 000 11.41" /></svg> <span>WEBP</span></a></li>
-                        <li><a href="/converter/avif.html" class="tool-link"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c1.356 0 2.673-.11 3.955-.322M12 21c-1.356 0-2.673-.11-3.955-.322m7.91-11.41a9.004 9.004 0 00-7.91-11.41M12 3c1.356 0 2.673.11 3.955.322M12 3c-1.356 0-2.673.11-3.955.322m0 11.41a9.004 9.004 0 000 11.41M12 3a9.004 9.004 0 000 11.41" /></svg> <span>AVIF</span></a></li>
-                        <li><a href="/converter/jp2.html" class="tool-link"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg> <span>JP2</span></a></li>
-                    </ul>
-                </div>
-                <div class="tools-category">
-                    <h4>Document &amp; Text</h4>
-                    <ul>
-                        <li><a href="/converter/image-to-pdf.html" class="tool-link"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg> <span>Image to PDF</span></a></li>
-                        <li><a href="/converter/text-to-docx.html" class="tool-link"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg> <span>Text to DOCX</span></a></li>
-                        <li><a href="/converter/text-to-txt.html" class="tool-link"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25M9 16.5h.008v.008H9v-.008z" /></svg> <span>Text to TXT</span></a></li>
-                        <li><a href="/converter/ico.html" class="tool-link"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.75V12A2.25 2.25 0 014.5 9.75h15A2.25 2.25 0 0121.75 12v.75m-8.69-6.44l-2.12-2.12a1.5 1.5 0 00-1.061-.44H4.5A2.25 2.25 0 002.25 6v12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9a2.25 2.25 0 00-2.25-2.25h-5.379a1.5 1.5 0 01-1.06-.44z" /></svg> <span>ICO Converter</span></a></li>
-                    </ul>
-                </div>
-                <div class="tools-category">
-                    <h4>Legacy &amp; Vector</h4>
-                    <ul>
-                        <li><a href="/converter/svg.html" class="tool-link"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.042 21.672L13.684 16.6m0 0l-2.51 2.225.569-9.47 5.227 7.917-3.286-.672zm-7.518-.267A8.25 8.25 0 1120.25 10.5M8.288 14.212A5.25 5.25 0 1117.25 10.5" /></svg> <span>SVG Converter</span></a></li>
-                        <li><a href="/converter/bmp.html" class="tool-link"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5z" /></svg> <span>BMP Converter</span></a></li>
-                        <li><a href="/converter/tiff.html" class="tool-link"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5z" /></svg> <span>TIFF Converter</span></a></li>
-                        <li><a href="/converter/tga.html" class="tool-link"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5z" /></svg> <span>TGA Converter</span></a></li>
-                        <li><a href="/converter/pcx.html" class="tool-link"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5z" /></svg> <span>PCX Converter</span></a></li>
-                    </ul>
-                </div>
-                <div class="tools-category">
-                    <h4>Game &amp; Developer</h4>
-                    <ul>
-                        <li><a href="/converter/base64.html" class="tool-link"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5" /></svg> <span>Base64 Encoder</span></a></li>
-                        <li><a href="/converter/ascii.html" class="tool-link"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75" /></svg> <span>ASCII Art Generator</span></a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="signup-modal" class="modal">
-        <!-- Your full signup modal HTML -->
-    </div>
-    <div id="payment-modal" class="modal">
-        <!-- Your full payment modal HTML -->
-    </div>
+    <div id="signup-modal" class="modal"><div class="modal-content"><span class="close-button" id="close-modal">&times;</span><h2 id="modal-title">Create Your Free Account</h2><form id="signup-form"><div class="form-group"><label for="email">Email Address</label><input type="email" id="email" name="email" required="required" placeholder="you@example.com" oninvalid="this.setCustomValidity('Please fill out this field.')" oninput="this.setCustomValidity('')"/></div><div class="form-group"><label for="password">Password</label><input type="password" id="password" name="password" required="required" placeholder="••••••••" oninvalid="this.setCustomValidity('Please fill out this field.')" oninput="this.setCustomValidity('')"/></div><div class="form-group" id="confirm-password-group"><label for="confirm-password">Confirm Password</label><input type="password" id="confirm-password" name="confirm-password" required="required" placeholder="••••••••" oninvalid="this.setCustomValidity('Please fill out this field.')" oninput="this.setCustomValidity('')"/></div><button type="submit" class="btn btn-primary" id="modal-submit-button">Create Account</button></form><p class="modal-toggle-text"><span id="toggle-prompt">Already have an account?</span> <a href="#" id="modal-toggle-link">Log In</a></p><div class="social-signup"><div class="divider">OR</div><div class="social-buttons"><button type="button" class="social-button" id="google-signup"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8c-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4C12.955 4 4 12.955 4 24s8.955 20 20 20s20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/><path fill="#FF3D00" d="m6.306 14.691l6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4C16.318 4 9.656 8.337 6.306 14.691z"/><path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238C29.211 35.091 26.715 36 24 36c-5.222 0-9.657-3.356-11.303-7.962l-6.571 4.819C9.656 40.663 16.318 44 24 44z"/><path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303c-.792 2.237-2.231 4.166-4.087 5.571l6.19 5.238C39.601 36.453 44 30.817 44 24c0-1.341-.138-2.65-.389-3.917z"/></svg> Google</button><button type="button" class="social-button" id="facebook-signup"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" aria-hidden="true"><path fill="#039be5" d="M24 5A19 19 0 1 0 24 43A19 19 0 1 0 24 5Z"/><path fill="#fff" d="M26.572 15.116c0-1.486.956-2.583 2.871-2.583h2.534V5.129H27.22c-5.061 0-8.156 3.093-8.156 7.828v3.498H14.07v5.528h4.994v15.021h6.054V21.954h5.272l.83-5.528h-6.102v-3.31z"/></svg> Facebook</button></div></div></div></div>
+    <div id="payment-modal" class="modal"><div class="payment-modal-content"><span class="close-button" id="close-payment-modal">&times;</span><h2 id="payment-modal-title">Complete Your Purchase</h2><div class="payment-modal-subtitle"><span>Pay securely with</span> <img src="https://www.paypalobjects.com/images/shared/momgram@2x.png" alt="PayPal Logo"/> <img src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Old_Visa_Logo.svg" alt="Visa Logo"/></div><div id="paypal-button-container"></div><div id="payment-message"></div></div></div>
 
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
     <script>
-        // Your Firebase config script
+        const firebaseConfig = {
+            apiKey: "AIzaSyBbmUxk8E2-8YoixX9oJvytjf5Ui0hDi1A",
+            authDomain: "plusconvert-151c0.firebaseapp.com",
+            projectId: "plusconvert-151c0",
+            storageBucket: "plusconvert-151c0.firebasestorage.app",
+            messagingSenderId: "436503666639",
+            appId: "1:436503666639:web:78e1d892b023079f787cba",
+            measurementId: "G-Z162R99KPP"
+        };
+        const app = firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const googleProvider = new firebase.auth.GoogleAuthProvider();
+        const facebookProvider = new firebase.auth.FacebookAuthProvider();
     </script>
-    <script src="https://www.paypal.com/sdk/js?client-id=..."></script>
+    
+    <script src="https://www.paypal.com/sdk/js?client-id=AQffuGYIsVpveL0ihfhEYyGMYHLk3Y3WP6sbJwXLoJTFKUi_FIpN7o_Cz1bNM0F70cAUkAQjlzP6mL_d&amp;currency=USD&amp;locale=en_US"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Your existing main script here...
+            const pricingLink = document.querySelector('a[href="#pricing"]');
+            const header = document.querySelector('.main-header');
             
-            const allToolsBtn = document.getElementById('all-tools-btn');
-            const allToolsPopup = document.getElementById('all-tools-popup');
-            const closeToolsPopupBtn = document.getElementById('close-tools-popup');
-
-            if (allToolsBtn && allToolsPopup) {
-                allToolsBtn.addEventListener('click', (e) => {
+            if (pricingLink) {
+                pricingLink.addEventListener('click', function (e) {
                     e.preventDefault();
-                    allToolsPopup.style.display = 'flex';
-                });
-
-                closeToolsPopupBtn.addEventListener('click', () => {
-                    allToolsPopup.style.display = 'none';
-                });
-
-                allToolsPopup.addEventListener('click', (e) => {
-                    if (e.target === allToolsPopup) {
-                        allToolsPopup.style.display = 'none';
+                    const targetElement = document.getElementById('pricing');
+                    if (targetElement) {
+                        const headerOffset = header.offsetHeight;
+                        const elementPosition = targetElement.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                        window.scrollTo({ top: offsetPosition, behavior: "smooth" });
                     }
                 });
             }
 
-            // The rest of your main script (converter logic, modals, etc.)
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            if(themeToggleBtn) themeToggleBtn.addEventListener('click', () => { document.body.classList.toggle('dark-mode'); localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light'); });
+
+            const modal = document.getElementById('signup-modal');
+            if(modal) {
+                const closeModalBtn = document.getElementById('close-modal');
+                const signupForm = document.getElementById('signup-form');
+                const modalTitle = document.getElementById('modal-title');
+                const modalSubmitButton = document.getElementById('modal-submit-button');
+                const confirmPasswordGroup = document.getElementById('confirm-password-group');
+                const emailInput = document.getElementById('email');
+                const passwordInput = document.getElementById('password');
+                const confirmPasswordInput = document.getElementById('confirm-password');
+                const modalToggleLink = document.getElementById('modal-toggle-link');
+                const googleSignUpBtn = document.getElementById('google-signup');
+                const facebookSignUpBtn = document.getElementById('facebook-signup');
+                let isLoginMode = false;
+                
+                function setModalMode(isLogin) {
+                    isLoginMode = isLogin;
+                    modalTitle.textContent = isLogin ? 'Log In to Your Account' : 'Create Your Free Account';
+                    confirmPasswordGroup.style.display = isLogin ? 'none' : 'block';
+                    confirmPasswordInput.required = !isLogin;
+                    modalSubmitButton.textContent = isLogin ? 'Log In' : 'Create Account';
+                    document.getElementById('toggle-prompt').textContent = isLogin ? "Don't have an account? " : 'Already have an account? ';
+                    modalToggleLink.textContent = isLogin ? 'Sign Up' : 'Log In';
+                }
+
+                modalToggleLink.addEventListener('click', (e) => { e.preventDefault(); setModalMode(!isLoginMode); });
+                document.getElementById('signup-button').addEventListener('click', (e) => { e.preventDefault(); setModalMode(false); modal.style.display = 'block'; });
+                closeModalBtn.addEventListener('click', () => { modal.style.display = 'none'; });
+                window.addEventListener('click', (e) => { if (e.target == modal) modal.style.display = 'none'; });
+                signupForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const email = emailInput.value;
+                    const password = passwordInput.value;
+                    if (isLoginMode) {
+                        auth.signInWithEmailAndPassword(email, password).then(() => { alert("Login Successful!"); modal.style.display = 'none'; signupForm.reset(); }).catch(error => alert("Error: " + error.message));
+                    } else {
+                        if (password !== confirmPasswordInput.value) { alert("Passwords do not match."); return; }
+                        auth.createUserWithEmailAndPassword(email, password).then(() => { alert("Sign Up Successful! Welcome."); modal.style.display = 'none'; signupForm.reset(); }).catch(error => alert("Error: " + error.message));
+                    }
+                });
+                googleSignUpBtn.addEventListener('click', () => { auth.signInWithPopup(googleProvider).then(result => { alert("Welcome, " + result.user.displayName); modal.style.display = 'none'; }).catch(error => alert("Google Sign-In Error: " + error.message)); });
+                facebookSignUpBtn.addEventListener('click', () => { auth.signInWithPopup(facebookProvider).then(result => { alert("Welcome, " + result.user.displayName); modal.style.display = 'none'; }).catch(error => { if (error.code === 'auth/account-exists-with-different-credential') { alert("An account already exists with the same email address."); } else { alert("Facebook Sign-In Error: " + error.message); } }); });
+            }
+
+            const mobileNavToggle = document.getElementById('mobile-nav-toggle');
+            const mobileNavMenu = document.getElementById('mobile-nav-menu');
+            const mobileNavList = document.getElementById('mobile-nav-list');
+            const desktopNavList = document.getElementById('desktop-nav-list');
+            if (desktopNavList && mobileNavList) { mobileNavList.innerHTML = desktopNavList.innerHTML; }
+            if (mobileNavToggle) {
+                mobileNavToggle.addEventListener('click', () => {
+                    const isActive = mobileNavToggle.classList.toggle('is-active');
+                    mobileNavToggle.setAttribute('aria-expanded', isActive);
+                    mobileNavMenu.style.display = isActive ? 'block' : 'none';
+                });
+            }
+            if (mobileNavMenu) {
+                mobileNavMenu.addEventListener('click', (e) => { if (e.target.tagName === 'A') { mobileNavToggle.classList.remove('is-active'); mobileNavToggle.setAttribute('aria-expanded', 'false'); mobileNavMenu.style.display = 'none'; } });
+            }
+
+            const pricingToggle = document.getElementById('pricing-toggle');
+            if(pricingToggle) {
+                const priceElements = document.querySelectorAll('.plan-price');
+                const pricingButtons = document.querySelectorAll('.pricing-button');
+                const paymentModal = document.getElementById('payment-modal');
+                const closePaymentModalBtn = document.getElementById('close-payment-modal');
+                const paymentModalTitle = document.getElementById('payment-modal-title');
+                const paymentMessage = document.getElementById('payment-message');
+                const paypalButtonContainer = document.getElementById('paypal-button-container');
+
+                function updateAllPrices(isYearly) {
+                    priceElements.forEach(priceEl => {
+                        const monthlyPrice = parseFloat(priceEl.dataset.monthly).toFixed(2);
+                        const yearlyPrice = parseFloat(priceEl.dataset.yearly).toFixed(2);
+                        const button = priceEl.closest('.pricing-card').querySelector('.pricing-button');
+                        if (isYearly) { priceEl.innerHTML = `<sup>$</sup>${(yearlyPrice / 12).toFixed(2)}<sub>/mo</sub>`; if (button) button.dataset.price = yearlyPrice; }
+                        else { priceEl.innerHTML = `<sup>$</sup>${monthlyPrice}<sub>/mo</sub>`; if (button) button.dataset.price = monthlyPrice; }
+                    });
+                    pricingToggle.querySelector('.monthly').classList.toggle('active', !isYearly);
+                    pricingToggle.querySelector('.yearly').classList.toggle('active', isYearly);
+                }
+
+                pricingToggle.addEventListener('click', () => { updateAllPrices(!pricingToggle.querySelector('.yearly').classList.contains('active')); });
+                updateAllPrices(false);
+
+                let selectedPlan = {};
+                const RENDER_SERVER_URL = 'https://paypalserver-enz3.onrender.com';
+                pricingButtons.forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        selectedPlan = { name: button.dataset.plan, price: button.dataset.price };
+                        paymentModalTitle.textContent = `Complete Your ${selectedPlan.name} Plan Purchase`;
+                        paymentMessage.innerHTML = '';
+                        paymentModal.style.display = 'block';
+                        renderPayPalButton();
+                    });
+                });
+
+                function renderPayPalButton() {
+                    paypalButtonContainer.innerHTML = '';
+                    paypal.Buttons({
+                        createOrder: () => fetch(`${RENDER_SERVER_URL}/api/orders`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ plan: selectedPlan }) }).then(res => res.json()).then(order => order.id),
+                        onApprove: (data) => fetch(`${RENDER_SERVER_URL}/api/orders/${data.orderID}/capture`, { method: 'POST' }).then(res => res.json()).then(details => { paypalButtonContainer.innerHTML = ''; paymentMessage.innerHTML = `<div class="success-message">✅ Thank you, ${details.payer.name.given_name}! Payment complete.</div>`; }),
+                        onError: (err) => { paymentMessage.innerHTML = `<div class="error-message">❌ A payment error occurred.</div>`; console.error('PayPal Error:', err); }
+                    }).render('#paypal-button-container');
+                }
+                closePaymentModalBtn.addEventListener('click', () => paymentModal.style.display = 'none');
+                window.addEventListener('click', (e) => { if (e.target == paymentModal) paymentModal.style.display = 'none'; });
+            }
+
+            const fileUpload = document.getElementById('file-upload'), fileInfo = document.getElementById('file-info'), convertToSelect = document.getElementById('convert-to'), convertButton = document.getElementById('convert-button'), statusArea = document.getElementById('status-area'), dropZone = document.querySelector('.drop-zone'), optionsPanel = document.getElementById('options-panel'), qualityOption = document.getElementById('quality-option'), qualitySlider = document.getElementById('quality-slider'), qualityValue = document.getElementById('quality-value'), resizeOption = document.getElementById('resize-option'), maxWidthInput = document.getElementById('max-width'), maxHeightInput = document.getElementById('max-height'), fileUploadArea = document.getElementById('file-upload-area'), textInputArea = document.getElementById('text-input-area'), textDocInput = document.getElementById('text-doc-input');
+            if(fileUpload) {
+                let selectedFiles = [];
+                function checkConversionReady() { const toFormat = convertToSelect.value; const isTextFormat = toFormat === 'docx' || toFormat === 'txt'; if (isTextFormat) { convertButton.disabled = textDocInput.value.trim() === ''; } else { convertButton.disabled = !(selectedFiles.length > 0 && !toFormat.includes('...')); } }
+                function handleFileSelection(files) { if (!files || files.length === 0) return; selectedFiles = Array.from(files); statusArea.innerHTML = ''; fileInfo.innerHTML = selectedFiles.length === 1 ? `Selected: <span class="file-name">${selectedFiles[0].name}</span>` : `Selected <span class="file-name">${selectedFiles.length} files</span>`; optionsPanel.style.display = 'flex'; updateOptionsUI(); checkConversionReady(); }
+                function updateOptionsUI() { const toFormat = convertToSelect.value; const qualityFormats = ['jpg', 'jpeg', 'webp', 'avif']; const resizeApplicable = selectedFiles.length > 0 && selectedFiles.every(f => f.type.startsWith('image/')) && !['pdf', 'ico', 'docx', 'txt'].includes(toFormat); qualityOption.style.display = qualityFormats.includes(toFormat) ? 'block' : 'none'; resizeOption.style.display = resizeApplicable ? 'flex' : 'none'; const isTextFormat = toFormat === 'docx' || toFormat === 'txt'; fileUploadArea.style.display = isTextFormat ? 'none' : 'block'; textInputArea.style.display = isTextFormat ? 'flex' : 'none'; if (isTextFormat) { fileInfo.innerHTML = ''; selectedFiles = []; optionsPanel.style.display = 'none'; } checkConversionReady(); }
+                fileUpload.addEventListener('change', (e) => handleFileSelection(e.target.files));
+                dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+                dropZone.addEventListener('dragenter', (e) => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+                dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+                dropZone.addEventListener('drop', (e) => { e.preventDefault(); dropZone.classList.remove('drag-over'); if (e.dataTransfer.files.length) handleFileSelection(e.dataTransfer.files); });
+                convertToSelect.addEventListener('change', () => { updateOptionsUI(); });
+                qualitySlider.addEventListener('input', (e) => { qualityValue.textContent = `${e.target.value}%`; });
+                textDocInput.addEventListener('input', checkConversionReady);
+                convertButton.addEventListener('click', () => { startProgress("Initializing..."); handleConversion(); });
+                
+                async function handleConversion() { const toFormat = convertToSelect.value; if (!isFormatSupported(toFormat)) { showError(`Conversion to ${toFormat.toUpperCase()} is not supported by your browser.`); return; } const isSinglePdfInput = selectedFiles.length === 1 && selectedFiles[0].type === 'application/pdf'; const areImageInputs = selectedFiles.length > 0 && selectedFiles.every(f => f.type.startsWith('image/')); const isTextFormat = toFormat === 'docx' || toFormat === 'txt'; try { if (isTextFormat) await createDocFromText(toFormat, textDocInput.value); else if (toFormat === 'pdf' && areImageInputs) await convertImagesToSinglePdf(selectedFiles); else if (isSinglePdfInput && toFormat !== 'pdf') await convertPdfToImages(selectedFiles[0], toFormat); else if (areImageInputs) await batchConvertImages(selectedFiles, toFormat); else showError("Unsupported conversion combination."); } catch (error) { showError("An unexpected error occurred during conversion.", error); } }
+                async function createDocFromText(format, text) { updateProgress(0.5, `Generating ${format.toUpperCase()}...`); if (format === 'txt') { const blob = new Blob([text], { type: "text/plain;charset=utf-8" }); saveAs(blob, "document.txt"); showSuccessUI(null, "document.txt", "TXT Document"); } else if (format === 'docx') { const doc = new docx.Document({ sections: [{ children: text.split('\n').map(line => new docx.Paragraph({ children: [new docx.TextRun(line)] })) }] }); docx.Packer.toBlob(doc).then(blob => { saveAs(blob, "document.docx"); showSuccessUI(null, "document.docx", "DOCX Document"); }); } }
+                async function convertImagesToSinglePdf(files) { startProgress(`Processing ${files.length} images...`); const { jsPDF } = window.jspdf; const doc = new jsPDF(); for (let i = 0; i < files.length; i++) { updateProgress(i / files.length, `Adding image ${i + 1}...`); const img = await loadImage(await fileToDataURL(files[i])); if (i > 0) doc.addPage(); const pageW = doc.internal.pageSize.getWidth(), pageH = doc.internal.pageSize.getHeight(), ratio = img.width / img.height, pageRatio = pageW / pageH; const [w, h] = ratio > pageRatio ? [pageW, pageW / ratio] : [pageH * ratio, pageH]; doc.addImage(img, 'PNG', (pageW - w) / 2, (pageH - h) / 2, w, h); } showSuccessUI(URL.createObjectURL(doc.output('blob')), `plusconvert_compilation.pdf`, 'PDF Document'); }
+                async function convertPdfToImages(file, toFormat) { const pdf = await pdfjsLib.getDocument({ data: await file.arrayBuffer() }).promise; const zip = new JSZip(); for (let i = 1; i <= pdf.numPages; i++) { updateProgress(i / pdf.numPages, `Processing page ${i} of ${pdf.numPages}...`); const page = await pdf.getPage(i); const viewport = page.getViewport({ scale: 2.0 }); const canvas = document.createElement('canvas'); canvas.width = viewport.width; canvas.height = viewport.height; await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise; const { data: blob, ext } = await canvasToBlob(canvas, toFormat, getOptions()); zip.file(`${file.name.replace(/\.pdf$/i, '')}_page_${i}.${ext}`, blob); } const zipBlob = await zip.generateAsync({ type: "blob" }); showSuccessUI(URL.createObjectURL(zipBlob), `${file.name.replace(/\.pdf$/i, '')}.zip`, "ZIP Archive"); }
+                async function batchConvertImages(files, toFormat) { const results = []; for (let i = 0; i < files.length; i++) { updateProgress(i / files.length, `Converting file ${i + 1}...`); const { data: blob, ext } = await processSingleImage(files[i], toFormat, getOptions()); results.push({ name: `${files[i].name.split('.').slice(0, -1).join('.')}.${ext}`, blob }); } if (results.length === 1) { if (results[0].blob.type.startsWith('text/') || results[0].ext === 'svg') { const text = await results[0].blob.text(); showTextOutput(text, toFormat.toUpperCase()); } else { showSuccessUI(URL.createObjectURL(results[0].blob), results[0].name, toFormat.toUpperCase()); } } else if (results.length > 1) { const zip = new JSZip(); results.forEach(r => zip.file(r.name, r.blob)); const zipBlob = await zip.generateAsync({ type: "blob" }); showSuccessUI(URL.createObjectURL(zipBlob), "plusconvert_batch.zip", "ZIP Archive"); } }
+                async function processSingleImage(file, toFormat, options) { let img = await loadImage(await fileToDataURL(file)); const canvas = document.createElement('canvas'); const ratio = img.width / img.height; let { width, height } = img; if (options.maxWidth && width > options.maxWidth) { width = options.maxWidth; height = width / ratio; } if (options.maxHeight && height > options.maxHeight) { height = options.maxHeight; width = height * ratio; } canvas.width = width; canvas.height = height; canvas.getContext('2d').drawImage(img, 0, 0, width, height); return await canvasToBlob(canvas, toFormat, options); }
+                const fileToDataURL = file => new Promise((resolve, reject) => { const reader = new FileReader(); reader.onload = () => resolve(reader.result); reader.onerror = reject; reader.readAsDataURL(file); });
+                const loadImage = src => new Promise((resolve, reject) => { const img = new Image(); img.onload = () => resolve(img); img.onerror = reject; img.src = src; });
+                const getOptions = () => ({ quality: parseInt(qualitySlider.value) / 100, maxWidth: parseInt(maxWidthInput.value) || null, maxHeight: parseInt(maxHeightInput.value) || null });
+                function startProgress(message) { convertButton.disabled = true; statusArea.innerHTML = `<div class="progress-bar-container"><div class="progress-bar" id="progress-bar"></div></div><p id="progress-text">${message}</p>`; }
+                function updateProgress(percentage, message) { const bar = document.getElementById('progress-bar'), text = document.getElementById('progress-text'); if (bar) bar.style.width = `${percentage * 100}%`; if (text) text.textContent = message; }
+                function showError(message, error = null) { let detailedMessage = message; if (error) { console.error("A conversion error occurred:", error); detailedMessage += `<br><small style="color: var(--text-secondary-color);">Details: ${error.message}</small>`; } statusArea.innerHTML = `<div class="error-message">❌ Conversion Failed</div><p style="text-align:center;max-width:500px;margin:15px auto;">${detailedMessage}</p>`; checkConversionReady(); }
+                function showSuccessUI(downloadUrl, fileName, fileType) { updateProgress(1, "Done!"); let downloadButtonHTML = ''; if (downloadUrl) { downloadButtonHTML = `<a href="${downloadUrl}" download="${fileName}" id="download-link" class="download-btn"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>Download</a>`; } setTimeout(() => { statusArea.innerHTML = `<div class="success-message">✅ Conversion Successful!</div><div style="display:flex; gap: 15px; justify-content: center;">${downloadButtonHTML}<button id="reset-button" class="reset-btn">Convert More Files</button></div>`; document.getElementById('reset-button').addEventListener('click', resetUI); }, 500); }
+                function showTextOutput(text, formatName) { updateProgress(1, "Done!"); setTimeout(() => { statusArea.innerHTML = `<div class="success-message">✅ ${formatName} Generated!</div><div class="text-output-area"><textarea readonly>${text}</textarea><button class="copy-btn" id="copy-btn">Copy to Clipboard</button></div> <button id="reset-button" class="reset-btn" style="margin-top:20px;">Convert More Files</button>`; document.getElementById('copy-btn').addEventListener('click', (e) => { const textarea = e.target.previousElementSibling; navigator.clipboard.writeText(textarea.value).then(() => { e.target.textContent = "Copied!"; setTimeout(() => e.target.textContent = "Copy to Clipboard", 2000); }); }); document.getElementById('reset-button').addEventListener('click', resetUI); }, 500); }
+                function resetUI() { selectedFiles = []; fileUpload.value = ''; fileInfo.innerHTML = ''; statusArea.innerHTML = ''; textDocInput.value = ''; convertToSelect.value = convertToSelect.options[0].value; updateOptionsUI(); checkConversionReady(); }
+                const _formatSupport = {}; function isFormatSupported(format) { if (format in _formatSupport) return _formatSupport[format]; if (format === 'avif' || format === 'webp') { try { const canvas = document.createElement('canvas'); canvas.width = canvas.height = 1; canvas.toDataURL(`image/${format}`); _formatSupport[format] = true; } catch { _formatSupport[format] = false; } return _formatSupport[format]; } return true; }
+                function canvasToBMP(canvas) { const ctx = canvas.getContext('2d'); const { width, height, data } = ctx.getImageData(0, 0, canvas.width, canvas.height); const rowPadding = (4 - (width * 3) % 4) % 4; const pixelArraySize = (width * 3 + rowPadding) * height; const fileSize = 54 + pixelArraySize; const buffer = new ArrayBuffer(fileSize); const view = new DataView(buffer); view.setUint16(0, 0x4D42, true); view.setUint32(2, fileSize, true); view.setUint32(10, 54, true); view.setUint32(14, 40, true); view.setInt32(18, width, true); view.setInt32(22, -height, true); view.setUint16(26, 1, true); view.setUint16(28, 24, true); view.setUint32(30, 0, true); view.setUint32(34, pixelArraySize, true); view.setInt32(38, 2835, true); view.setInt32(42, 2835, true); view.setUint32(46, 0, true); view.setUint32(50, 0, true); let offset = 54; for (let y = 0; y < height; y++) { for (let x = 0; x < width; x++) { const i = (y * width + x) * 4; view.setUint8(offset++, data[i + 2]); view.setUint8(offset++, data[i + 1]); view.setUint8(offset++, data[i]); } for (let p = 0; p < rowPadding; p++) { view.setUint8(offset++, 0); } } return new Blob([buffer], { type: 'image/bmp' }); }
+                function canvasToTGA(canvas) { const ctx = canvas.getContext('2d'); const { width, height, data } = ctx.getImageData(0, 0, canvas.width, canvas.height); const pixelCount = width * height; const tgaData = new Uint8Array(pixelCount * 4); for (let y = 0; y < height; y++) { for (let x = 0; x < width; x++) { const srcIdx = (y * width + x) * 4; const destIdx = ((height - 1 - y) * width + x) * 4; tgaData[destIdx] = data[srcIdx + 2]; tgaData[destIdx + 1] = data[srcIdx + 1]; tgaData[destIdx + 2] = data[srcIdx]; tgaData[destIdx + 3] = data[srcIdx + 3]; } } const buffer = new ArrayBuffer(18 + tgaData.length); const view = new DataView(buffer); view.setUint8(0, 0); view.setUint8(1, 0); view.setUint8(2, 2); view.setUint16(8, 0, true); view.setUint16(10, 0, true); view.setUint16(12, width, true); view.setUint16(14, height, true); view.setUint8(16, 32); view.setUint8(17, 0x28); new Uint8Array(buffer, 18).set(tgaData); return new Blob([buffer], { type: 'image/tga' }); }
+                function canvasToSVG(canvas) { const dataURL = canvas.toDataURL('image/png'); const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${canvas.width}" height="${canvas.height}"><image href="${dataURL}" width="${canvas.width}" height="${canvas.height}" /></svg>`; return new Blob([svg], { type: 'image/svg+xml' }); }
+                function canvasToPPM(canvas) { const ctx = canvas.getContext('2d'); const { width, height, data } = ctx.getImageData(0, 0, canvas.width, canvas.height); let ppmData = `P3\n${width} ${height}\n255\n`; for (let i = 0; i < data.length; i += 4) { ppmData += `${data[i]} ${data[i + 1]} ${data[i + 2]} `; } return new Blob([ppmData], { type: 'image/x-portable-pixmap' }); }
+                function canvasToXBM(canvas) { const ctx = canvas.getContext('2d'); const { width, height, data } = ctx.getImageData(0, 0, canvas.width, canvas.height); const widthInBytes = Math.ceil(width / 8); const xbmData = new Uint8Array(widthInBytes * height); for (let y = 0; y < height; y++) { for (let x = 0; x < width; x++) { const i = (y * width + x) * 4; const avg = (data[i] + data[i + 1] + data[i + 2]) / 3; if (avg < 128) { xbmData[y * widthInBytes + Math.floor(x / 8)] |= (1 << (x % 8)); } } } let output = `#define image_width ${width}\n#define image_height ${height}\nstatic unsigned char image_bits[] = {\n  `; output += Array.from(xbmData).map(byte => `0x${byte.toString(16).padStart(2, '0')}`).join(', '); output += '\n};'; return new Blob([output], { type: 'text/plain' }); }
+                function canvasToPCX(canvas) { const ctx = canvas.getContext('2d'); const { width, height, data } = ctx.getImageData(0, 0, canvas.width, canvas.height); const buffer = new ArrayBuffer(128 + width * height * 3); const view = new DataView(buffer); view.setUint8(0, 10); view.setUint8(1, 5); view.setUint8(2, 1); view.setUint8(3, 8); view.setUint16(4, 0, true); view.setUint16(6, 0, true); view.setUint16(8, width - 1, true); view.setUint16(10, height - 1, true); view.setUint16(12, width, true); view.setUint16(14, height, true); view.setUint8(49, 0); view.setUint8(64, 0); view.setUint8(65, 3); view.setUint16(66, width, true); view.setUint16(68, 1, true); let offset = 128; for (let i = 0; i < data.length; i += 4) { view.setUint8(offset++, data[i]); view.setUint8(offset++, data[i + 1]); view.setUint8(offset++, data[i + 2]); } return new Blob([buffer], { type: 'image/pcx' }); }
+                async function canvasToBlob(canvas, format, options) { return new Promise(async (resolve, reject) => { const mime = (format === 'jpg' || format === 'jpeg') ? 'image/jpeg' : `image/${format}`; const ext = (format === 'jpeg') ? 'jpg' : format; if (format === 'bmp') resolve({ data: canvasToBMP(canvas), ext: 'bmp' }); else if (format === 'base64') resolve({ data: new Blob([canvas.toDataURL('image/png')], {type: 'text/plain'}), ext: 'txt' }); else if (format === 'ascii') resolve({ data: new Blob([canvasToAscii(canvas)], {type: 'text/plain'}), ext: 'txt' }); else if (format === 'gif') { if (!window.gifshot) { return reject(new Error("GIF library (gifshot.js) failed to load.")); } gifshot.createGIF({ 'images': [canvas.toDataURL('image/png')], 'gifWidth': canvas.width, 'gifHeight': canvas.height }, function(obj) { if (!obj.error) { fetch(obj.image).then(res => res.blob()).then(blob => { resolve({ data: blob, ext: 'gif' }); }).catch(err => reject(new Error("Failed to convert GIF from data URL to Blob."))); } else { reject(new Error(`gifshot error: ${obj.errorcode} - ${obj.message}`)); } }); } else if (format === 'ico') { try { const icoBlob = await canvasToIco(canvas); resolve({ data: icoBlob, ext: 'ico' }); } catch (e) { reject(e); } } else if (format === 'tiff') { if (!window.UTIF) return reject(new Error("TIFF library (UTIF.js) failed to load.")); const { buffer } = canvas.getContext('2d').getImageData(0, 0, canvas.width, canvas.height).data; const tiffBuffer = UTIF.encodeImage(buffer, canvas.width, canvas.height); resolve({ data: new Blob([tiffBuffer], { type: 'image/tiff' }), ext: 'tiff' }); } else if (format === 'tga') resolve({ data: canvasToTGA(canvas), ext: 'tga' }); else if (format === 'svg') resolve({ data: canvasToSVG(canvas), ext: 'svg' }); else if (format === 'ppm') resolve({ data: canvasToPPM(canvas), ext: 'ppm' }); else if (format === 'xbm') resolve({ data: canvasToXBM(canvas), ext: 'xbm' }); else if (format === 'pcx') resolve({ data: canvasToPCX(canvas), ext: 'pcx' }); else { canvas.toBlob(blob => { if (!blob) return reject(new Error(`Conversion to ${format.toUpperCase()} failed.`)); resolve({ data: blob, ext: ext }); }, mime, options.quality); } }); }
+                function canvasToAscii(canvas) { const MAX_WIDTH = 120; const tempCanvas = document.createElement('canvas'); const tempCtx = tempCanvas.getContext('2d'); const ratio = canvas.height / canvas.width; tempCanvas.width = Math.min(canvas.width, MAX_WIDTH); tempCanvas.height = Math.round(tempCanvas.width * ratio * 0.5); tempCtx.drawImage(canvas, 0, 0, tempCanvas.width, tempCanvas.height); const data = tempCtx.getImageData(0, 0, tempCanvas.width, tempCanvas.height).data; const density = ' .,:;irsXA253hMHGS#9B&@'; let ascii = ''; for (let y = 0; y < tempCanvas.height; y++) { for (let x = 0; x < tempCanvas.width; x++) { const i = (y * tempCanvas.width + x) * 4; const avg = (data[i] + data[i + 1] + data[i + 2]) / 3; ascii += density[Math.floor((avg / 255) * (density.length - 1))]; } ascii += '\n'; } return ascii; }
+                async function canvasToIco(canvas) { const sizes = [32, 16]; const pngs = await Promise.all(sizes.map(async size => { const offscreen = document.createElement('canvas'); offscreen.width = size; offscreen.height = size; offscreen.getContext('2d').drawImage(canvas, 0, 0, size, size); return await (await fetch(offscreen.toDataURL('image/png'))).arrayBuffer(); })); const buffer = new ArrayBuffer(6 + sizes.length * 16 + pngs.reduce((a, b) => a + b.byteLength, 0)); const view = new DataView(buffer); let offset = 6 + sizes.length * 16; view.setUint16(0, 0, true); view.setUint16(2, 1, true); view.setUint16(4, sizes.length, true); sizes.forEach((size, i) => { const entryOffset = 6 + i * 16; view.setUint8(entryOffset + 0, size); view.setUint8(entryOffset + 1, size); view.setUint16(entryOffset + 4, 1, true); view.setUint16(entryOffset + 6, 32, true); view.setUint32(entryOffset + 8, pngs[i].byteLength, true); view.setUint32(entryOffset + 12, offset, true); new Uint8Array(buffer, offset).set(new Uint8Array(pngs[i])); offset += pngs[i].byteLength; }); return new Blob([buffer], { type: 'image/x-icon' }); }
+            }
         });
     </script>
 
