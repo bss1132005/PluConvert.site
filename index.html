@@ -64,85 +64,91 @@
         .tools-popup-overlay {
             display: none;
             position: fixed;
-            top: 85px; /* Height of the header */
+            top: 0;
             left: 0;
             width: 100%;
-            height: calc(100vh - 85px);
-            background: rgba(0,0,0,0.1);
-            -webkit-backdrop-filter: blur(2px);
-            backdrop-filter: blur(2px);
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            -webkit-backdrop-filter: blur(5px);
+            backdrop-filter: blur(5px);
             z-index: 998;
         }
-        .tools-popup-overlay.is-open { display: block; }
+        .tools-popup-overlay.is-open {
+            display: block;
+        }
         .tools-popup-menu {
-            display: none; 
+            display: none;
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             width: 90%;
-            max-width: 920px;
+            max-width: 960px;
             background-color: var(--bg-color);
             border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            padding: 25px 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            padding: 2rem 2.5rem;
             z-index: 999;
-            animation: fadeInPopup 0.2s ease-out;
+            animation: fadeInPopup 0.3s ease-out;
         }
-        .tools-popup-menu.is-open { display: block; }
+        .tools-popup-menu.is-open {
+            display: block;
+        }
         @keyframes fadeInPopup {
             from { opacity: 0; transform: translate(-50%, -48%); }
             to { opacity: 1; transform: translate(-50%, -50%); }
         }
         .popup-close-btn {
             position: absolute;
-            top: 15px;
-            right: 15px;
+            top: 1rem;
+            right: 1.25rem;
             background: none;
             border: none;
-            font-size: 1.5rem;
+            font-size: 2rem;
+            font-weight: 300;
             color: var(--text-secondary-color);
             cursor: pointer;
             line-height: 1;
-            padding: 5px;
-            font-weight: 300;
         }
         .popup-close-btn:hover { color: var(--text-color); }
         .popup-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 20px 24px;
+            gap: 1rem 2rem;
         }
         .popup-column h4 {
             font-size: 0.9rem;
-            font-weight: 600;
+            font-weight: 700;
             color: var(--heading-color);
-            margin-bottom: 15px;
+            margin-bottom: 1rem;
             text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
         .popup-column ul {
             list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
         }
         .popup-column li a {
             display: flex;
             align-items: center;
             gap: 12px;
-            font-weight: 400; /* Normal font weight */
+            padding: 8px 0;
+            font-weight: 400; /* Regular font weight */
             font-size: 1rem;
             color: var(--text-color);
         }
-        .popup-column li a:hover span { color: var(--primary-color); }
+        .popup-column li a:hover span {
+            color: var(--primary-color);
+            text-decoration: underline;
+        }
         .popup-column li a svg {
             width: 22px;
             height: 22px;
             flex-shrink: 0;
             color: var(--primary-color);
         }
+        /* --- END STYLES FOR TOOLS POPUP --- */
 
-        #signup-modal { display: none; position: fixed; z-index: 1001; padding-top: 100px; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.5); -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px); }
+        #signup-modal { display: none; position: fixed; z-index: 200; padding-top: 100px; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.5); -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px); }
         .modal-content { background-color: var(--bg-color); margin: auto; padding: 30px; border-radius: 12px; width: 90%; max-width: 400px; box-shadow: 0 10px 25px rgba(0,0,0,0.4); color: var(--text-color); animation: fadeIn 0.3s; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
         .close-button { color: var(--text-secondary-color); float: right; font-size: 28px; font-weight: bold; cursor: pointer; transition: color 0.2s; }
@@ -221,7 +227,7 @@
         .footer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; margin-bottom: 40px; } .footer-col h4 { color: var(--heading-color); margin-bottom: 15px; font-size: 1.1rem; } .footer-col ul { list-style: none; } .footer-col ul li { margin-bottom: 10px; } .footer-col a { text-decoration: none; color: var(--text-secondary-color); transition: color 0.3s ease; } .footer-col a:hover { color: var(--primary-color); }
         .footer-col a.footer-link { cursor: pointer; }
         .footer-bottom { text-align: center; padding-top: 20px; border-top: 1px solid var(--border-color); font-size: 0.9rem; }
-        #payment-modal { display: none; position: fixed; z-index: 1002; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.6); -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px); padding-top: 80px; }
+        #payment-modal { display: none; position: fixed; z-index: 300; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.6); -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px); padding-top: 80px; }
         .payment-modal-content { background-color: var(--bg-color); margin: auto; padding: 30px; border-radius: 12px; width: 90%; max-width: 450px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); color: var(--text-color); animation: fadeIn 0.3s; position: relative; }
         .payment-modal-content h2 { text-align: center; font-size: 1.5rem; margin-bottom: 15px; }
         .payment-modal-subtitle { text-align: center; color: var(--text-secondary-color); margin-bottom: 25px; display: flex; justify-content: center; align-items: center; gap: 12px; font-size: 0.95rem; }
@@ -242,7 +248,7 @@
         .mobile-nav-menu .nav-item-dropdown .dropdown-menu a { font-size: 1.1rem; font-weight: 400; color: var(--text-secondary-color); }
         .mobile-nav-menu .nav-item-dropdown:hover .dropdown-toggle svg { transform: none; }
         
-        @media (max-width: 920px) {
+        @media (max-width: 960px) {
             .popup-grid { grid-template-columns: repeat(2, 1fr); }
         }
         @media (max-width: 768px) {
@@ -254,7 +260,7 @@
             .options-row { flex-direction: column; align-items: stretch; }
             .ad-placeholder { min-height: 60px; }
         }
-        @media (max-width: 500px) {
+         @media (max-width: 500px) {
             .popup-grid { grid-template-columns: 1fr; }
         }
     </style>
@@ -270,7 +276,8 @@
             <nav class="main-nav">
                 <ul id="desktop-nav-list">
                     <li class="nav-item-dropdown">
-                        <a href="#" class="dropdown-toggle" id="tools-toggle-btn">
+                        <!-- MODIFIED: Changed ID for clarity and removed old dropdown -->
+                        <a href="#" class="dropdown-toggle" id="tools-menu-button">
                             <span>Tools</span>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg>
                         </a>
@@ -308,51 +315,52 @@
             </button>
         </div>
     </header>
-    
-    <!-- MODIFIED: Popup HTML is now outside the header for better layering -->
-    <div id="tools-popup-overlay" class="tools-popup-overlay"></div>
+
+    <!-- MODIFIED: Popup and overlay are added here, outside the header -->
+    <div class="tools-popup-overlay" id="tools-popup-overlay"></div>
     <div id="tools-popup-menu" class="tools-popup-menu">
-        <button class="popup-close-btn" aria-label="Close menu">&times;</button>
+        <button class="popup-close-btn" id="popup-close-btn" aria-label="Close menu">&times;</button>
         <div class="popup-grid">
             <div class="popup-column">
                 <h4>WEB & IMAGE</h4>
                 <ul>
-                    <li><a href="#"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 3.75H3A1.75 1.75 0 0 0 1.25 5.5v13A1.75 1.75 0 0 0 3 20.25h18A1.75 1.75 0 0 0 22.75 18.5v-13A1.75 1.75 0 0 0 21 3.75ZM3 2.25A2.75 2.75 0 0 0 .25 5.5v13A2.75 2.75 0 0 0 3 21.75h18A2.75 2.75 0 0 0 23.75 18.5v-13A2.75 2.75 0 0 0 21 2.25H3Z" fill="currentColor"/><path d="m6.423 14.344 3.993-3.993a.75.75 0 0 1 1.06 0l4.242 4.243 1.91-1.91a.75.75 0 0 1 1.06 0l2.122 2.121V6.25a.5.5 0 0 0-.5-.5H3.75v9.844l2.673-2.672ZM8.5 8.25a1.25 1.25 0 1 1-2.5 0 1.25 1.25 0 0 1 2.5 0Z" fill="currentColor"/></svg><span>JPG</span></a></li>
-                    <li><a href="#"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 3.75H3A1.75 1.75 0 0 0 1.25 5.5v13A1.75 1.75 0 0 0 3 20.25h18A1.75 1.75 0 0 0 22.75 18.5v-13A1.75 1.75 0 0 0 21 3.75ZM3 2.25A2.75 2.75 0 0 0 .25 5.5v13A2.75 2.75 0 0 0 3 21.75h18A2.75 2.75 0 0 0 23.75 18.5v-13A2.75 2.75 0 0 0 21 2.25H3Z" fill="currentColor"/><path d="m6.423 14.344 3.993-3.993a.75.75 0 0 1 1.06 0l4.242 4.243 1.91-1.91a.75.75 0 0 1 1.06 0l2.122 2.121V6.25a.5.5 0 0 0-.5-.5H3.75v9.844l2.673-2.672ZM8.5 8.25a1.25 1.25 0 1 1-2.5 0 1.25 1.25 0 0 1 2.5 0Z" fill="currentColor"/></svg><span>PNG</span></a></li>
-                    <li><a href="#"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2.25C6.615 2.25 2.25 6.615 2.25 12S6.615 21.75 12 21.75 21.75 17.385 21.75 12 17.385 2.25 12 2.25ZM.75 12C.75 5.787 5.787.75 12 .75s11.25 5.037 11.25 11.25-5.037 11.25-11.25 11.25S.75 18.213.75 12ZM9.75 9a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5h-7.5A.75.75 0 0 1 9.75 9Zm-3 6a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5h-7.5a.75.75 0 0 1-.75-.75Zm3-3.75A.75.75 0 0 0 6 12a.75.75 0 0 0 .75.75h10.5a.75.75 0 0 0 0-1.5H6.75Z" fill="currentColor"/></svg><span>GIF</span></a></li>
-                    <li><a href="#"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#a)"><path d="M13.498 4.043a.75.75 0 0 0-1.06-.098l-3.235 2.94a.75.75 0 0 0 1.002 1.116l2.09-1.898v10.158a.75.75 0 0 0 1.5 0V8.29l2.277 1.898a.75.75 0 1 0 .97-1.155l-3.543-2.99Zm-2.89 15.908a.75.75 0 0 0 1.06.098l3.235-2.94a.75.75 0 0 0-1.002-1.116l-2.09 1.898V7.721a.75.75 0 0 0-1.5 0v10.158l-2.277-1.898a.75.75 0 1 0-.97 1.155l3.543 2.99Z" fill="currentColor"/></g><defs><clipPath id="a"><path fill="#fff" d="M0 0h24v24H0z"/></clipPath></defs></svg><span>WEBP</span></a></li>
-                    <li><a href="#"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#a)"><path d="M13.498 4.043a.75.75 0 0 0-1.06-.098l-3.235 2.94a.75.75 0 0 0 1.002 1.116l2.09-1.898v10.158a.75.75 0 0 0 1.5 0V8.29l2.277 1.898a.75.75 0 1 0 .97-1.155l-3.543-2.99Zm-2.89 15.908a.75.75 0 0 0 1.06.098l3.235-2.94a.75.75 0 0 0-1.002-1.116l-2.09 1.898V7.721a.75.75 0 0 0-1.5 0v10.158l-2.277-1.898a.75.75 0 1 0-.97 1.155l3.543 2.99Z" fill="currentColor"/></g><defs><clipPath id="a"><path fill="#fff" d="M0 0h24v24H0z"/></clipPath></defs></svg><span>AVIF</span></a></li>
-                    <li><a href="#"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 3.75H3A1.75 1.75 0 0 0 1.25 5.5v13A1.75 1.75 0 0 0 3 20.25h18A1.75 1.75 0 0 0 22.75 18.5v-13A1.75 1.75 0 0 0 21 3.75ZM3 2.25A2.75 2.75 0 0 0 .25 5.5v13A2.75 2.75 0 0 0 3 21.75h18A2.75 2.75 0 0 0 23.75 18.5v-13A2.75 2.75 0 0 0 21 2.25H3Z" fill="currentColor"/><path d="m6.423 14.344 3.993-3.993a.75.75 0 0 1 1.06 0l4.242 4.243 1.91-1.91a.75.75 0 0 1 1.06 0l2.122 2.121V6.25a.5.5 0 0 0-.5-.5H3.75v9.844l2.673-2.672ZM8.5 8.25a1.25 1.25 0 1 1-2.5 0 1.25 1.25 0 0 1 2.5 0Z" fill="currentColor"/></svg><span>JP2</span></a></li>
+                    <li><a href="#"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2z" /><circle cx="8.5" cy="8.5" r="1.5" /><path d="M21 15l-5-5.01L11 15l-3-3-6 6" /></svg><span>JPG</span></a></li>
+                    <li><a href="#"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2z" /><circle cx="8.5" cy="8.5" r="1.5" /><path d="M21 15l-5-5.01L11 15l-3-3-6 6" /></svg><span>PNG</span></a></li>
+                    <li><a href="#"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9" /><path d="M8 10h8M8 12h8M8 14h5" /></svg><span>GIF</span></a></li>
+                    <li><a href="#"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 11.667 0l3.181-3.183m-4.991-2.691v4.992h-4.992m0 0-3.181-3.183a8.25 8.25 0 0 1 11.667 0l3.181 3.183" /></svg><span>WEBP</span></a></li>
+                    <li><a href="#"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 11.667 0l3.181-3.183m-4.991-2.691v4.992h-4.992m0 0-3.181-3.183a8.25 8.25 0 0 1 11.667 0l3.181 3.183" /></svg><span>AVIF</span></a></li>
+                    <li><a href="#"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2z" /><circle cx="8.5" cy="8.5" r="1.5" /><path d="M21 15l-5-5.01L11 15l-3-3-6 6" /></svg><span>JP2</span></a></li>
                 </ul>
             </div>
             <div class="popup-column">
                 <h4>DOCUMENT & TEXT</h4>
                 <ul>
-                    <li><a href="#"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5.75 2.75a2 2 0 0 0-2 2v14.5a2 2 0 0 0 2 2h12.5a2 2 0 0 0 2-2V7.932a2 2 0 0 0-.586-1.414l-3.182-3.182A2 2 0 0 0 14.732 2.75H5.75Zm-2 2A3.5 3.5 0 0 1 5.75 1.25h8.982a3.5 3.5 0 0 1 2.475 1.025l3.182 3.182A3.5 3.5 0 0 1 21.75 7.932V19.25a3.5 3.5 0 0 1-3.5 3.5H5.75a3.5 3.5 0 0 1-3.5-3.5V4.75ZM8.5 13.25a.75.75 0 0 1 .75-.75h5a.75.75 0 0 1 0 1.5h-5a.75.75 0 0 1-.75-.75Zm.75 3.25a.75.75 0 0 0 0 1.5h3a.75.75 0 0 0 0-1.5h-3Z" fill="currentColor"/></svg><span>Image to PDF</span></a></li>
-                    <li><a href="#"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5.75 2.75a2 2 0 0 0-2 2v14.5a2 2 0 0 0 2 2h12.5a2 2 0 0 0 2-2V7.932a2 2 0 0 0-.586-1.414l-3.182-3.182A2 2 0 0 0 14.732 2.75H5.75Zm-2 2A3.5 3.5 0 0 1 5.75 1.25h8.982a3.5 3.5 0 0 1 2.475 1.025l3.182 3.182A3.5 3.5 0 0 1 21.75 7.932V19.25a3.5 3.5 0 0 1-3.5 3.5H5.75a3.5 3.5 0 0 1-3.5-3.5V4.75Z" fill="currentColor"/></svg><span>Text to DOCX</span></a></li>
-                    <li><a href="#"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5.568 9.227a.75.75 0 0 1 0 1.054C3.494 12.19 3.4 15.013 5.432 17.045c2.031 2.032 4.855 2.126 6.764.053a.75.75 0 0 1 1.054 1.06c-2.32 2.502-5.942 2.403-8.158.187C2.79 16.027 2.79 12.44 5.114 10.115a.75.75 0 0 1 .454-.888Z" fill="currentColor"/></svg><span>Text to TXT</span></a></li>
-                    <li><a href="#"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.75 4.75a2 2 0 0 1 2-2h5.25a.75.75 0 0 1 0 1.5H4.75a.5.5 0 0 0-.5.5v12.5a.5.5 0 0 0 .5.5h14.5a.5.5 0 0 0 .5-.5V14a.75.75 0 0 1 1.5 0v5.25a2 2 0 0 1-2 2H4.75a2 2 0 0 1-2-2V4.75Z" fill="currentColor"/><path d="M21.25 3.25a2 2 0 0 0-2 2v5.25a.75.75 0 0 0 1.5 0V5.25a.5.5 0 0 1 .5-.5h5.25a.5.5 0 0 1 .5.5v5.25a.5.5 0 0 1-.5.5h-.002a.75.75 0 0 0 0 1.5h.002a2 2 0 0 0 2-2V5.25a2 2 0 0 0-2-2h-5.25Z" fill="currentColor"/></svg><span>ICO Converter</span></a></li>
+                    <li><a href="#"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" /><polyline points="14 2 14 8 20 8" /></svg><span>Image to PDF</span></a></li>
+                    <li><a href="#"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" /><polyline points="14 2 14 8 20 8" /></svg><span>Text to DOCX</span></a></li>
+                    <li><a href="#"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" /><path d="M8 12c2 0 2-2 4-2s2 2 4 2" /></svg><span>Text to TXT</span></a></li>
+                    <li><a href="#"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z" /></svg><span>ICO Converter</span></a></li>
                 </ul>
             </div>
             <div class="popup-column">
                 <h4>LEGACY & VECTOR</h4>
                 <ul>
-                    <li><a href="#"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.238 2.478a.75.75 0 0 1 1.06 0l2.957 2.957-2.23 2.23a.75.75 0 0 1-1.06-1.06l1.17-1.17L12 4.375l-1.136 1.136a.75.75 0 0 1-1.06 0l-3-3a.75.75 0 0 1 0-1.06l3-3a.75.75 0 0 1 1.06 0l.375.375Zm7.234 16.968-3.042-3.043a.75.75 0 0 1 0-1.06l2.23-2.23-2.956-2.957a.75.75 0 0 1 0-1.06l3.682-3.682a.75.75 0 0 1 1.06 0l3.682 3.682a.75.75 0 0 1 0 1.06L19.5 13.78l-2.23 2.23a.75.75 0 0 1-1.06 1.06L17.27 16l3.043 3.043a.75.75 0 0 1-1.061 1.06Z" fill="currentColor"/><path d="M12.445 10.82a.75.75 0 0 1-.97-1.155l.8-.667a.75.75 0 0 1 .97 1.155l-.8.667ZM4 20.75a8.75 8.75 0 1 1 14.53-6.53.75.75 0 0 1-1.06 1.06A7.25 7.25 0 1 0 5.5 19.25a.75.75 0 0 1-1.5 0V12a.75.75 0 0 1 1.5 0v6.182A8.72 8.72 0 0 1 4 20.75Z" fill="currentColor"/></svg><span>SVG Converter</span></a></li>
-                    <li><a href="#"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 3.75H3A1.75 1.75 0 0 0 1.25 5.5v13A1.75 1.75 0 0 0 3 20.25h18A1.75 1.75 0 0 0 22.75 18.5v-13A1.75 1.75 0 0 0 21 3.75ZM3 2.25A2.75 2.75 0 0 0 .25 5.5v13A2.75 2.75 0 0 0 3 21.75h18A2.75 2.75 0 0 0 23.75 18.5v-13A2.75 2.75 0 0 0 21 2.25H3Z" fill="currentColor"/><path d="m6.423 14.344 3.993-3.993a.75.75 0 0 1 1.06 0l4.242 4.243 1.91-1.91a.75.75 0 0 1 1.06 0l2.122 2.121V6.25a.5.5 0 0 0-.5-.5H3.75v9.844l2.673-2.672ZM8.5 8.25a1.25 1.25 0 1 1-2.5 0 1.25 1.25 0 0 1 2.5 0Z" fill="currentColor"/></svg><span>BMP Converter</span></a></li>
-                    <li><a href="#"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 3.75H3A1.75 1.75 0 0 0 1.25 5.5v13A1.75 1.75 0 0 0 3 20.25h18A1.75 1.75 0 0 0 22.75 18.5v-13A1.75 1.75 0 0 0 21 3.75ZM3 2.25A2.75 2.75 0 0 0 .25 5.5v13A2.75 2.75 0 0 0 3 21.75h18A2.75 2.75 0 0 0 23.75 18.5v-13A2.75 2.75 0 0 0 21 2.25H3Z" fill="currentColor"/><path d="m6.423 14.344 3.993-3.993a.75.75 0 0 1 1.06 0l4.242 4.243 1.91-1.91a.75.75 0 0 1 1.06 0l2.122 2.121V6.25a.5.5 0 0 0-.5-.5H3.75v9.844l2.673-2.672ZM8.5 8.25a1.25 1.25 0 1 1-2.5 0 1.25 1.25 0 0 1 2.5 0Z" fill="currentColor"/></svg><span>TIFF Converter</span></a></li>
-                    <li><a href="#"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 3.75H3A1.75 1.75 0 0 0 1.25 5.5v13A1.75 1.75 0 0 0 3 20.25h18A1.75 1.75 0 0 0 22.75 18.5v-13A1.75 1.75 0 0 0 21 3.75ZM3 2.25A2.75 2.75 0 0 0 .25 5.5v13A2.75 2.75 0 0 0 3 21.75h18A2.75 2.75 0 0 0 23.75 18.5v-13A2.75 2.75 0 0 0 21 2.25H3Z" fill="currentColor"/><path d="m6.423 14.344 3.993-3.993a.75.75 0 0 1 1.06 0l4.242 4.243 1.91-1.91a.75.75 0 0 1 1.06 0l2.122 2.121V6.25a.5.5 0 0 0-.5-.5H3.75v9.844l2.673-2.672ZM8.5 8.25a1.25 1.25 0 1 1-2.5 0 1.25 1.25 0 0 1 2.5 0Z" fill="currentColor"/></svg><span>TGA Converter</span></a></li>
-                    <li><a href="#"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 3.75H3A1.75 1.75 0 0 0 1.25 5.5v13A1.75 1.75 0 0 0 3 20.25h18A1.75 1.75 0 0 0 22.75 18.5v-13A1.75 1.75 0 0 0 21 3.75ZM3 2.25A2.75 2.75 0 0 0 .25 5.5v13A2.75 2.75 0 0 0 3 21.75h18A2.75 2.75 0 0 0 23.75 18.5v-13A2.75 2.75 0 0 0 21 2.25H3Z" fill="currentColor"/><path d="m6.423 14.344 3.993-3.993a.75.75 0 0 1 1.06 0l4.242 4.243 1.91-1.91a.75.75 0 0 1 1.06 0l2.122 2.121V6.25a.5.5 0 0 0-.5-.5H3.75v9.844l2.673-2.672ZM8.5 8.25a1.25 1.25 0 1 1-2.5 0 1.25 1.25 0 0 1 2.5 0Z" fill="currentColor"/></svg><span>PCX Converter</span></a></li>
+                    <li><a href="#"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9" /><path d="M15.49 15.49L7 21l-1.5-4.5L10 12l-1.5-1.5L4.5 9 1 7.5l6-4.5" /></svg><span>SVG Converter</span></a></li>
+                    <li><a href="#"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2z" /><circle cx="8.5" cy="8.5" r="1.5" /><path d="M21 15l-5-5.01L11 15l-3-3-6 6" /></svg><span>BMP Converter</span></a></li>
+                    <li><a href="#"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2z" /><circle cx="8.5" cy="8.5" r="1.5" /><path d="M21 15l-5-5.01L11 15l-3-3-6 6" /></svg><span>TIFF Converter</span></a></li>
+                    <li><a href="#"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2z" /><circle cx="8.5" cy="8.5" r="1.5" /><path d="M21 15l-5-5.01L11 15l-3-3-6 6" /></svg><span>TGA Converter</span></a></li>
+                    <li><a href="#"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2z" /><circle cx="8.5" cy="8.5" r="1.5" /><path d="M21 15l-5-5.01L11 15l-3-3-6 6" /></svg><span>PCX Converter</span></a></li>
                 </ul>
             </div>
             <div class="popup-column">
                 <h4>GAME & DEVELOPER</h4>
                 <ul>
-                    <li><a href="#"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.47 4.113a.75.75 0 0 1 1.06 0l8.5 8.5a.75.75 0 0 1 0 1.06l-8.5 8.5a.75.75 0 0 1-1.06-1.06L17.38 13 8.41 4.03a.75.75 0 0 1 .12-1.037l.94-.94Zm-4 0a.75.75 0 0 1 1.06 0l8.5 8.5a.75.75 0 0 1 0 1.06l-8.5 8.5a.75.75 0 0 1-1.06-1.06L13.38 13 4.41 4.03a.75.75 0 0 1 .12-1.037l.94-.94Z" fill="currentColor" transform="translate(-4, 0) scale(0.8)"/></svg><span>Base64 Encoder</span></a></li>
-                    <li><a href="#"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.75 6a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-1.5 0V6.75A.75.75 0 0 1 3.75 6ZM20.25 6a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-1.5 0V6.75a.75.75 0 0 1 .75-.75ZM7.5 17.25a.75.75 0 0 1 0-1.5h9a.75.75 0 0 1 0 1.5h-9ZM7.5 8.25a.75.75 0 0 1 0-1.5h9a.75.75 0 0 1 0 1.5h-9ZM14.25 12.75a.75.75 0 0 1 0-1.5h4.5a.75.75 0 0 1 0 1.5h-4.5ZM5.25 12.75a.75.75 0 0 1 0-1.5h4.5a.75.75 0 0 1 0 1.5h-4.5Z" fill="currentColor"/></svg><span>ASCII Art Generator</span></a></li>
+                    <li><a href="#"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M16 18l6-6-6-6" /><path d="M8 6l-6 6 6 6" /></svg><span>Base64 Encoder</span></a></li>
+                    <li><a href="#"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21v-7" /><path d="M4 10V3" /><path d="M12 21v-9" /><path d="M12 8V3" /><path d="M20 21v-5" /><path d="M20 12V3" /><path d="M1 14h6" /><path d="M9 8h6" /><path d="M17 16h6" /></svg><span>ASCII Art Generator</span></a></li>
                 </ul>
             </div>
         </div>
     </div>
+
 
     <div class="mobile-nav-menu" id="mobile-nav-menu"><ul id="mobile-nav-list"></ul></div>
 
@@ -535,44 +543,40 @@
             if (mobileNavMenu) {
                 mobileNavMenu.addEventListener('click', (e) => { if (e.target.tagName === 'A') { mobileNavToggle.classList.remove('is-active'); mobileNavToggle.setAttribute('aria-expanded', 'false'); mobileNavMenu.style.display = 'none'; } });
             }
-            
+
             // --- JAVASCRIPT FOR TOOLS POPUP ---
-            const toolsToggleBtn = document.getElementById('tools-toggle-btn');
+            const toolsMenuButton = document.getElementById('tools-menu-button');
             const toolsPopupMenu = document.getElementById('tools-popup-menu');
             const toolsPopupOverlay = document.getElementById('tools-popup-overlay');
+            const popupCloseBtn = document.getElementById('popup-close-btn');
 
-            if (toolsToggleBtn && toolsPopupMenu && toolsPopupOverlay) {
-                const popupCloseBtn = toolsPopupMenu.querySelector('.popup-close-btn');
+            const openPopup = () => {
+                toolsPopupMenu.classList.add('is-open');
+                toolsPopupOverlay.classList.add('is-open');
+            };
 
-                function openPopup() {
-                    toolsPopupOverlay.classList.add('is-open');
-                    toolsPopupMenu.classList.add('is-open');
-                }
+            const closePopup = () => {
+                toolsPopupMenu.classList.remove('is-open');
+                toolsPopupOverlay.classList.remove('is-open');
+            };
 
-                function closePopup() {
-                    toolsPopupOverlay.classList.remove('is-open');
-                    toolsPopupMenu.classList.remove('is-open');
-                }
-
-                toolsToggleBtn.addEventListener('click', (e) => {
+            if (toolsMenuButton && toolsPopupMenu) {
+                toolsMenuButton.addEventListener('click', (e) => {
                     e.preventDefault();
                     e.stopPropagation();
-                    if (toolsPopupMenu.classList.contains('is-open')) {
-                        closePopup();
-                    } else {
-                        openPopup();
-                    }
+                    openPopup();
                 });
 
                 popupCloseBtn.addEventListener('click', closePopup);
                 toolsPopupOverlay.addEventListener('click', closePopup);
-                
+
                 document.addEventListener('keydown', (e) => {
                     if (e.key === "Escape" && toolsPopupMenu.classList.contains('is-open')) {
                         closePopup();
                     }
                 });
             }
+            // --- END JAVASCRIPT FOR TOOLS POPUP ---
 
             const pricingToggle = document.getElementById('pricing-toggle');
             if(pricingToggle) {
