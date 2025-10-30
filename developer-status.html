@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="description" content="Check the real-time operational status of the PlusConvert API and related services. Get updates on uptime, performance, and any ongoing maintenance."/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Developer Status - PlusConvert</title>
+
+    <link rel="icon" href="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;defs&gt;&lt;linearGradient id=%22g%22 x1=%220%25%22 y1=%22100%25%22 x2=%22100%25%22 y2=%220%25%22&gt;&lt;stop offset=%220%25%22 stop-color=%22%230052FF%22/&gt;&lt;stop offset=%22100%25%22 stop-color=%22%2300A9FF%22/&gt;&lt;/linearGradient&gt;&lt;/defs&gt;&lt;text y=%22.9em%22 font-size=%2290%22 fill=%22url(%23g)%22&gt;P&lt;/text&gt;&lt;/svg&gt;"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="true"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>  
+    
+    <style>
+        :root {
+            --primary-color: #0052FF; --secondary-color: #00A9FF; --light-theme-bg: #ffffff; --light-theme-bg-secondary: #f8f9fa; --light-theme-text-dark: #0B2D5B; --light-theme-text-primary: #333; --light-theme-text-secondary: #555; --light-theme-border: #e9ecef; --light-theme-shadow: rgba(0,0,0,0.05); --dark-theme-bg: #121212; --dark-theme-bg-secondary: #1E1E1E; --dark-theme-text-dark: #EAEAEA; --dark-theme-text-primary: #D1D1D1; --dark-theme-text-secondary: #AAAAAA; --dark-theme-border: #333333; --dark-theme-shadow: rgba(0, 82, 255, 0.1); --bg-color: var(--light-theme-bg); --bg-secondary-color: var(--light-theme-bg-secondary); --heading-color: var(--light-theme-text-dark); --text-color: var(--light-theme-text-primary); --text-secondary-color: var(--light-theme-text-secondary); --border-color: var(--light-theme-border); --shadow-color: var(--light-theme-shadow); --success-color: #28a745; --error-color: #dc3545; --warning-color: #ffc107; --maintenance-color: #6c757d; --font-family: 'Poppins', sans-serif;
+        }
+        body.dark-mode {
+            --bg-color: var(--dark-theme-bg); --bg-secondary-color: var(--dark-theme-bg-secondary); --heading-color: var(--dark-theme-text-dark); --text-color: var(--dark-theme-text-primary); --text-secondary-color: var(--dark-theme-text-secondary); --border-color: var(--dark-theme-border); --shadow-color: var(--dark-theme-shadow);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: var(--font-family); background-color: var(--bg-color); color: var(--text-color); line-height: 1.6; transition: background-color 0.3s ease, color 0.3s ease; }
+        .container { max-width: 960px; margin: 0 auto; padding: 0 20px; }
+        .main-header { background: var(--bg-color); padding: 20px 0; z-index: 100; box-shadow: 0 2px 10px var(--shadow-color); }
+        .main-header .container { display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--heading-color); font-size: 1.5rem; font-weight: 700; }
+        .main-nav a { text-decoration: none; color: var(--text-color); font-weight: 500; transition: color 0.3s ease; } .main-nav a:hover { color: var(--primary-color); }
+        .page-header { text-align: center; padding: 80px 0 60px; background-color: var(--bg-secondary-color); border-bottom: 1px solid var(--border-color); }
+        .page-header h1 { font-size: 3rem; color: var(--heading-color); margin-bottom: 15px; }
+        .page-header p { font-size: 1.1rem; max-width: 600px; margin: 0 auto; color: var(--text-secondary-color); }
+        .status-overview { padding: 40px 0; text-align: center; }
+        .overall-status { display: inline-flex; align-items: center; gap: 15px; padding: 20px 35px; border-radius: 12px; background-color: var(--bg-color); box-shadow: 0 8px 25px var(--shadow-color); border: 1px solid var(--border-color); }
+        .overall-status .status-icon { width: 40px; height: 40px; }
+        .overall-status .status-text { font-size: 1.8rem; font-weight: 700; color: var(--heading-color); }
+        .status-operational .status-text { color: var(--success-color); }
+        .services-list { padding: 60px 0; }
+        .service-status-item { display: flex; justify-content: space-between; align-items: center; background-color: var(--bg-color); border: 1px solid var(--border-color); border-radius: 12px; padding: 25px; margin-bottom: 20px; box-shadow: 0 5px 15px var(--shadow-color); transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .service-status-item:hover { transform: translateY(-3px); box-shadow: 0 8px 25px var(--shadow-color); }
+        .service-name { font-size: 1.2rem; font-weight: 600; color: var(--heading-color); }
+        .status-indicator { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 1rem; padding: 8px 16px; border-radius: 50px; }
+        .status-indicator.operational { background-color: #e9f7ef; color: #1d7b43; }
+        .status-indicator.degraded { background-color: #fff8e6; color: #b38600; }
+        .status-indicator.maintenance { background-color: #f0f2f5; color: #5a6470; }
+        .status-indicator.outage { background-color: #fdeeee; color: #c4262e; }
+        body.dark-mode .status-indicator.operational { background-color: rgba(40, 167, 69, 0.2); color: #5dd27c; }
+        body.dark-mode .status-indicator.degraded { background-color: rgba(255, 193, 7, 0.2); color: #ffd147; }
+        body.dark-mode .status-indicator.maintenance { background-color: rgba(108, 117, 125, 0.2); color: #adb5bd; }
+        body.dark-mode .status-indicator.outage { background-color: rgba(220, 53, 69, 0.2); color: #ff6b79; }
+        .status-indicator svg { width: 18px; height: 18px; }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <a href="/" class="logo" aria-label="PlusConvert Home">
+                <img src="https://raw.githubusercontent.com/bss1132005/PlusConvertLOGO/main/android-chrome-192x192-removebg-preview(1).png" alt="PlusConvert Logo" style="height: 40px;"/>
+                <span>PlusConvert</span>
+            </a>
+            <nav class="main-nav">
+                <a href="/">Back to Main Site</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <h1>System Status</h1>
+            <p>Welcome to the PlusConvert status page. Here you can find real-time updates on the performance and availability of our services.</p>
+        </section>
+
+        <section class="status-overview">
+            <div class="overall-status status-operational">
+                 <svg class="status-icon" style="color: var(--success-color);" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm13.36-1.814a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z" clip-rule="evenodd" /></svg>
+                <span class="status-text">All Systems Operational</span>
+            </div>
+        </section>
+
+        <div class="container">
+            <section class="services-list">
+                <div class="service-status-item">
+                    <span class="service-name">Main Website &amp; UI</span>
+                    <div class="status-indicator operational">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm3.857-9.809a.75.75 0 0 0-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 1 0-1.06 1.061l2.5 2.5a.75.75 0 0 0 1.137-.089l4-5.5Z" clip-rule="evenodd" /></svg>
+                        <span>Operational</span>
+                    </div>
+                </div>
+                <div class="service-status-item">
+                    <span class="service-name">API Endpoints</span>
+                     <div class="status-indicator operational">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm3.857-9.809a.75.75 0 0 0-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 1 0-1.06 1.061l2.5 2.5a.75.75 0 0 0 1.137-.089l4-5.5Z" clip-rule="evenodd" /></svg>
+                        <span>Operational</span>
+                    </div>
+                </div>
+                 <div class="service-status-item">
+                    <span class="service-name">File Conversion Service</span>
+                    <div class="status-indicator degraded">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Zm-7-4a1 1 0 1 1-2 0 1 1 0 0 1 2 0ZM9 9a.75.75 0 0 0 0 1.5h.253a.25.25 0 0 1 .244.304l-.459 2.066A1.75 1.75 0 0 0 10.747 15h.506a1.75 1.75 0 0 0 1.747-1.444l-.459-2.066a.25.25 0 0 1 .244-.304H13a.75.75 0 0 0 0-1.5H9Z" clip-rule="evenodd" /></svg>
+                        <span>Degraded Performance</span>
+                    </div>
+                </div>
+                <div class="service-status-item">
+                    <span class="service-name">Authentication &amp; User Accounts</span>
+                    <div class="status-indicator operational">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm3.857-9.809a.75.75 0 0 0-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 1 0-1.06 1.061l2.5 2.5a.75.75 0 0 0 1.137-.089l4-5.5Z" clip-rule="evenodd" /></svg>
+                        <span>Operational</span>
+                    </div>
+                </div>
+                <div class="service-status-item">
+                    <span class="service-name">Payment &amp; Subscriptions</span>
+                    <div class="status-indicator maintenance">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Zm-5.5-2.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0ZM10 12a5.99 5.99 0 0 0-4.793 2.39A6.483 6.483 0 0 0 10 16.5a6.483 6.483 0 0 0 4.793-2.11A5.99 5.99 0 0 0 10 12Z" clip-rule="evenodd" /></svg>
+                        <span>Under Maintenance</span>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+</body>
+</html>
