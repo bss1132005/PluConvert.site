@@ -30,13 +30,56 @@
         .main-nav { display: flex; align-items: center; gap: 30px; } .main-nav ul { display: flex; list-style: none; gap: 30px; align-items: center; } .main-nav a { text-decoration: none; color: var(--text-color); font-weight: 500; transition: color 0.3s ease; } .main-nav a:hover { color: var(--primary-color); }
         .btn { display: inline-flex; align-items: center; justify-content: center; padding: 10px 24px; border-radius: 50px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; } .btn-primary { background-color: var(--primary-color); color: white; } .btn-primary:hover { background-color: #0041CC; transform: translateY(-2px); }
         .theme-toggle-btn { background: none; border: 2px solid var(--border-color); border-radius: 50%; width: 40px; height: 40px; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 5px; transition: background-color 0.3s ease, border-color 0.3s ease; } .theme-toggle-btn:hover { background-color: var(--bg-secondary-color); } .theme-toggle-btn svg { width: 22px; height: 22px; color: var(--text-secondary-color); } .moon-icon { display: none; } body.dark-mode .sun-icon { display: none; } body.dark-mode .moon-icon { display: block; }
+        
+        /* Modal Styles */
+        #signup-modal { display: none; position: fixed; z-index: 200; padding-top: 100px; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.5); -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px); }
+        .modal-content { background-color: var(--bg-color); margin: auto; padding: 30px; border-radius: 12px; width: 90%; max-width: 400px; box-shadow: 0 10px 25px rgba(0,0,0,0.4); color: var(--text-color); animation: fadeIn 0.3s; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+        .close-button { color: var(--text-secondary-color); float: right; font-size: 28px; font-weight: bold; cursor: pointer; transition: color 0.2s; }
+        .close-button:hover { color: var(--error-color); }
+        .modal-content h2 { text-align: left; margin-bottom: 25px; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; font-size: 0.9rem; }
+        .form-group input { width: 100%; padding: 12px 15px; border: 1px solid var(--border-color); border-radius: 8px; background-color: var(--bg-secondary-color); color: var(--text-color); font-size: 1rem; font-family: var(--font-family); }
+        .modal-content button.btn-primary { width: 100%; font-weight: 700; font-size: 1.1rem; padding: 14px 0; cursor: pointer; border: none; border-radius: 8px; background-color: var(--primary-color); color: white; transition: all 0.3s ease; }
+        .modal-content button.btn-primary:hover { background-color: #0041CC; transform: translateY(-2px); }
+        .social-signup .divider { display: flex; align-items: center; text-align: center; color: var(--text-secondary-color); margin: 25px 0; font-size: 0.9rem; }
+        .social-signup .divider::before, .social-signup .divider::after { content: ''; flex: 1; border-bottom: 1px solid var(--border-color); }
+        .social-signup .divider:not(:empty)::before { margin-right: .5em; }
+        .social-signup .divider:not(:empty)::after { margin-left: .5em; }
+        .social-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .social-button { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 12px; border: 1px solid var(--border-color); border-radius: 8px; background-color: var(--bg-secondary-color); color: var(--text-color); font-weight: 600; cursor: pointer; transition: all 0.2s ease; }
+        .social-button:hover { border-color: var(--primary-color); color: var(--primary-color); }
+        .social-button svg { width: 20px; height: 20px; }
+        .modal-toggle-text { text-align: center; margin-top: 20px; font-size: 0.9rem; color: var(--text-secondary-color); }
+        .modal-toggle-text a { color: var(--primary-color); font-weight: 600; text-decoration: none; cursor: pointer; }
+        .modal-toggle-text a:hover { text-decoration: underline; }
+
+        /* Page specific styles */
         .article-content { padding: 80px 0; background-color: var(--bg-secondary-color); } .article-content .container { max-width: 800px; } .article-content h2 { margin-bottom: 40px; text-align: left; font-size: 2.5rem; } .article-content h3 { font-size: 1.8rem; color: var(--heading-color); margin-top: 40px; margin-bottom: 20px; border-bottom: 2px solid var(--border-color); padding-bottom: 10px; text-align: left; } .article-content p, .article-content li { font-size: 1rem; line-height: 1.8; color: var(--text-secondary-color); margin-bottom: 15px; } .article-content strong { color: var(--text-color); font-weight: 600; } .article-content ul { list-style-position: inside; padding-left: 10px; }
         .back-to-main-btn { display: inline-block; margin-bottom: 40px; font-weight: 600; color: var(--primary-color); text-decoration: none; cursor: pointer; }
         .back-to-main-btn:hover { text-decoration: underline; }
         .footer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; margin-bottom: 40px; } .footer-col h4 { color: var(--heading-color); margin-bottom: 15px; font-size: 1.1rem; } .footer-col ul { list-style: none; } .footer-col ul li { margin-bottom: 10px; } .footer-col a { text-decoration: none; color: var(--text-secondary-color); transition: color 0.3s ease; } .footer-col a:hover { color: var(--primary-color); }
         .footer-bottom { text-align: center; padding-top: 20px; border-top: 1px solid var(--border-color); font-size: 0.9rem; }
         .main-footer { padding: 80px 0; background-color: var(--bg-secondary-color); border-top: 1px solid var(--border-color); }
-        .mobile-nav-toggle { display: none; } @media (max-width: 768px) { .main-nav ul { display: none; } .mobile-nav-toggle { display: block; } .footer-grid { grid-template-columns: repeat(2, 1fr); } }
+        
+        .mobile-nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 5px; z-index: 1001; }
+        .mobile-nav-toggle .hamburger-icon { width: 28px; height: 24px; display: flex; flex-direction: column; justify-content: space-between; }
+        .mobile-nav-toggle .hamburger-icon span { display: block; width: 100%; height: 3px; background-color: var(--heading-color); border-radius: 2px; transition: all 0.3s ease-in-out; }
+        .mobile-nav-toggle.is-active .hamburger-icon span:nth-child(1) { transform: translateY(10px) rotate(45deg); }
+        .mobile-nav-toggle.is-active .hamburger-icon span:nth-child(2) { opacity: 0; }
+        .mobile-nav-toggle.is-active .hamburger-icon span:nth-child(3) { transform: translateY(-11px) rotate(-45deg); }
+        .mobile-nav-menu { display: none; }
+        
+        @media (max-width: 768px) { 
+            .main-nav ul { display: none; } 
+            .mobile-nav-toggle { display: block; } 
+            .footer-grid { grid-template-columns: repeat(2, 1fr); } 
+            .mobile-nav-menu { display: none; position: fixed; top: 85px; left: 0; width: 100%; height: calc(100vh - 85px); background-color: var(--bg-color); z-index: 999; padding: 30px; text-align: center; overflow-y: auto; }
+            .mobile-nav-menu ul { list-style: none; display: flex; flex-direction: column; gap: 20px; }
+            .mobile-nav-menu ul li a { font-size: 1.5rem; font-weight: 600; color: var(--heading-color); text-decoration: none; padding: 10px; display: block; }
+            .mobile-nav-menu ul li .btn { font-size: 1.2rem; margin-top: 20px; }
+        }
     </style>
 </head>
 <body>
@@ -48,11 +91,17 @@
                 <span>PlusConvert</span>
             </a>
             <nav class="main-nav">
-                <ul>
-                    <li><a href="/tools.html">Tools</a></li>
+                <ul id="desktop-nav-list">
                     <li><a href="/api-docs.html">API</a></li>
                     <li><a href="/#pricing">Pricing</a></li>
-                    <li><a href="#" class="btn btn-primary" id="signup-button">Sign Up</a></li>
+                    <li>
+                        <a href="#" class="btn btn-primary" id="signup-button">
+                             <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24" width="20" height="20" style="margin-right: 8px; vertical-align: middle;" aria-hidden="true">
+                                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                            </svg>
+                            Sign Up
+                        </a>
+                    </li>
                 </ul>
             </nav>
             <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle theme">
@@ -62,6 +111,8 @@
             <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false"><div class="hamburger-icon"><span></span><span></span><span></span></div></button>
         </div>
     </header>
+
+    <div class="mobile-nav-menu" id="mobile-nav-menu"><ul id="mobile-nav-list"></ul></div>
 
     <main>
         <div class="article-content">
@@ -86,15 +137,110 @@
                 <div class="footer-col"><h4>Company</h4><ul><li><a href="/about.html">About Us</a></li><li><a href="/contact.html">Contact</a></li><li><a href="/careers.html">Careers</a></li></ul></div>
                 <div class="footer-col"><h4>Resources</h4><ul><li><a href="/api-docs.html">API Documentation</a></li><li><a href="/blog.html">Blog</a></li><li><a href="/help-center.html">Help Center</a></li></ul></div>
                 <div class="footer-col"><h4>Legal</h4><ul><li><a href="/terms.html">Terms of Service</a></li><li><a href="/privacy.html">Privacy Policy</a></li><li><a href="/security.html">Security</a></li></ul></div>
-                <div class="footer-col"><h4>Follow Us</h4><ul><li><a href="https://twitter.com/plusconvert" target="_blank" rel="noopener noreferrer">Twitter</a></li><li><a href="https://linkedin.com/company/plusconvert" target="_blank" rel="noopener noreferrer">LinkedIn</a></li><li><a href="https://github.com/your-repo" target="_blank" rel="noopener noreferrer">GitHub</a></li></ul></div>
+                <div class="footer-col"><h4>Follow Us</h4><ul><li><a href="https://twitter.com/plusconvert" target="_blank" rel="noopener noreferrer">Twitter</a></li><li><a href="https://linkedin.com/company/plusconvert" target="_blank" rel="noopener noreferrer">LinkedIn</a></li></ul></div>
             </div>
-            <div class="footer-bottom"><p>&copy; 2024 PlusConvert. All rights reserved.</p></div>
+            <div class="footer-bottom"><p>&copy; 2025 PlusConvert. All rights reserved.</p></div>
         </div>
     </footer>
+    
+    <!-- Signup Modal HTML -->
+    <div id="signup-modal" class="modal"><div class="modal-content"><span class="close-button" id="close-modal">&times;</span><h2 id="modal-title">Create Your Free Account</h2><form id="signup-form"><div class="form-group"><label for="email">Email Address</label><input type="email" id="email" name="email" required="required" placeholder="you@example.com" oninvalid="this.setCustomValidity('Please fill out this field.')" oninput="this.setCustomValidity('')"/></div><div class="form-group"><label for="password">Password</label><input type="password" id="password" name="password" required="required" placeholder="••••••••" oninvalid="this.setCustomValidity('Please fill out this field.')" oninput="this.setCustomValidity('')"/></div><div class="form-group" id="confirm-password-group"><label for="confirm-password">Confirm Password</label><input type="password" id="confirm-password" name="confirm-password" required="required" placeholder="••••••••" oninvalid="this.setCustomValidity('Please fill out this field.')" oninput="this.setCustomValidity('')"/></div><button type="submit" class="btn btn-primary" id="modal-submit-button">Create Account</button></form><p class="modal-toggle-text"><span id="toggle-prompt">Already have an account?</span> <a href="#" id="modal-toggle-link">Log In</a></p><div class="social-signup"><div class="divider">OR</div><div class="social-buttons"><button type="button" class="social-button" id="google-signup"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8c-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4C12.955 4 4 12.955 4 24s8.955 20 20 20s20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/><path fill="#FF3D00" d="m6.306 14.691l6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4C16.318 4 9.656 8.337 6.306 14.691z"/><path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238C29.211 35.091 26.715 36 24 36c-5.222 0-9.657-3.356-11.303-7.962l-6.571 4.819C9.656 40.663 16.318 44 24 44z"/><path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303c-.792 2.237-2.231 4.166-4.087 5.571l6.19 5.238C39.601 36.453 44 30.817 44 24c0-1.341-.138-2.65-.389-3.917z"/></svg> Google</button><button type="button" class="social-button" id="facebook-signup"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" aria-hidden="true"><path fill="#039be5" d="M24 5A19 19 0 1 0 24 43A19 19 0 1 0 24 5Z"/><path fill="#fff" d="M26.572 15.116c0-1.486.956-2.583 2.871-2.583h2.534V5.129H27.22c-5.061 0-8.156 3.093-8.156 7.828v3.498H14.07v5.528h4.994v15.021h6.054V21.954h5.272l.83-5.528h-6.102v-3.31z"/></svg> Facebook</button></div></div></div></div>
+
+    <!-- Firebase Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyBbmUxk8E2-8YoixX9oJvytjf5Ui0hDi1A",
+            authDomain: "plusconvert-151c0.firebaseapp.com",
+            projectId: "plusconvert-151c0",
+            storageBucket: "plusconvert-151c0.firebasestorage.app",
+            messagingSenderId: "436503666639",
+            appId: "1:436503666639:web:78e1d892b023079f787cba",
+            measurementId: "G-Z162R99KPP"
+        };
+        const app = firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const googleProvider = new firebase.auth.GoogleAuthProvider();
+        const facebookProvider = new firebase.auth.FacebookAuthProvider();
+    </script>
+    
+    <!-- Page Interaction and Modal Script -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // Theme Toggle
             const themeToggleBtn = document.getElementById('theme-toggle');
-            if(themeToggleBtn) themeToggleBtn.addEventListener('click', () => { document.body.classList.toggle('dark-mode'); localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light'); });
+            if(themeToggleBtn) {
+                if (localStorage.getItem('theme') === 'dark') {
+                    document.body.classList.add('dark-mode');
+                }
+                themeToggleBtn.addEventListener('click', () => { 
+                    document.body.classList.toggle('dark-mode'); 
+                    localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light'); 
+                });
+            }
+
+            // Modal Logic
+            const modal = document.getElementById('signup-modal');
+            if(modal) {
+                const openModalBtn = document.getElementById('signup-button');
+                const closeModalBtn = document.getElementById('close-modal');
+                const signupForm = document.getElementById('signup-form');
+                const modalTitle = document.getElementById('modal-title');
+                const modalSubmitButton = document.getElementById('modal-submit-button');
+                const confirmPasswordGroup = document.getElementById('confirm-password-group');
+                const emailInput = document.getElementById('email');
+                const passwordInput = document.getElementById('password');
+                const confirmPasswordInput = document.getElementById('confirm-password');
+                const modalToggleLink = document.getElementById('modal-toggle-link');
+                const googleSignUpBtn = document.getElementById('google-signup');
+                const facebookSignUpBtn = document.getElementById('facebook-signup');
+                let isLoginMode = false;
+                
+                function setModalMode(isLogin) {
+                    isLoginMode = isLogin;
+                    modalTitle.textContent = isLogin ? 'Log In to Your Account' : 'Create Your Free Account';
+                    confirmPasswordGroup.style.display = isLogin ? 'none' : 'block';
+                    confirmPasswordInput.required = !isLogin;
+                    modalSubmitButton.textContent = isLogin ? 'Log In' : 'Create Account';
+                    document.getElementById('toggle-prompt').textContent = isLogin ? "Don't have an account? " : 'Already have an account? ';
+                    modalToggleLink.textContent = isLogin ? 'Sign Up' : 'Log In';
+                }
+
+                openModalBtn.addEventListener('click', (e) => { e.preventDefault(); setModalMode(false); modal.style.display = 'block'; });
+                modalToggleLink.addEventListener('click', (e) => { e.preventDefault(); setModalMode(!isLoginMode); });
+                closeModalBtn.addEventListener('click', () => { modal.style.display = 'none'; });
+                window.addEventListener('click', (e) => { if (e.target == modal) modal.style.display = 'none'; });
+
+                signupForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const email = emailInput.value;
+                    const password = passwordInput.value;
+                    if (isLoginMode) {
+                        auth.signInWithEmailAndPassword(email, password).then(() => { alert("Login Successful!"); modal.style.display = 'none'; signupForm.reset(); }).catch(error => alert("Error: " + error.message));
+                    } else {
+                        if (password !== confirmPasswordInput.value) { alert("Passwords do not match."); return; }
+                        auth.createUserWithEmailAndPassword(email, password).then(() => { alert("Sign Up Successful! Welcome."); modal.style.display = 'none'; signupForm.reset(); }).catch(error => alert("Error: " + error.message));
+                    }
+                });
+
+                googleSignUpBtn.addEventListener('click', () => { auth.signInWithPopup(googleProvider).then(result => { alert("Welcome, " + result.user.displayName); modal.style.display = 'none'; }).catch(error => alert("Google Sign-In Error: " + error.message)); });
+                facebookSignUpBtn.addEventListener('click', () => { auth.signInWithPopup(facebookProvider).then(result => { alert("Welcome, " + result.user.displayName); modal.style.display = 'none'; }).catch(error => { if (error.code === 'auth/account-exists-with-different-credential') { alert("An account already exists with the same email address."); } else { alert("Facebook Sign-In Error: " + error.message); } }); });
+            }
+
+            // Mobile Navigation
+            const mobileNavToggle = document.getElementById('mobile-nav-toggle');
+            const mobileNavMenu = document.getElementById('mobile-nav-menu');
+            const mobileNavList = document.getElementById('mobile-nav-list');
+            const desktopNavList = document.getElementById('desktop-nav-list');
+            if (desktopNavList && mobileNavList) { mobileNavList.innerHTML = desktopNavList.innerHTML; }
+            if (mobileNavToggle) {
+                mobileNavToggle.addEventListener('click', () => {
+                    const isActive = mobileNavToggle.classList.toggle('is-active');
+                    mobileNavToggle.setAttribute('aria-expanded', isActive);
+                    mobileNavMenu.style.display = isActive ? 'block' : 'none';
+                });
+            }
         });
     </script>
 </body>
