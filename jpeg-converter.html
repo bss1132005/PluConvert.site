@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8"/>
-    <meta name="description" content="Convert any image file to high-quality JPEG format. Fast, secure, and easy-to-use online JPEG converter."/>
-    <meta name="keywords" content="jpeg converter, to jpeg, image to jpeg, convert to jpeg, free converter"/>
+    <meta name="description" content="Convert any image file to high-quality JPEG format for free. Fast, secure, and easy-to-use online JPEG converter."/>
+    <meta name="keywords" content="jpeg converter, to jpeg, image to jpeg, convert to jpeg, free converter, png to jpeg"/>
     <meta name="author" content="PlusConvert"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>JPEG Converter - PlusConvert</title>
@@ -53,6 +53,7 @@
         .nav-item-dropdown .dropdown-toggle svg { transition: transform 0.3s ease; }
         .nav-item-dropdown:hover .dropdown-toggle svg { transform: rotate(180deg); }
 
+        /* --- STYLES FOR TOOLS POPUP --- */
         .tools-popup-menu {
             display: none;
             position: fixed;
@@ -128,7 +129,8 @@
             flex-shrink: 0;
             color: var(--primary-color);
         }
-
+        /* --- END STYLES FOR TOOLS POPUP --- */
+        
         #signup-modal { display: none; position: fixed; z-index: 200; padding-top: 100px; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.5); -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px); }
         .modal-content { background-color: var(--bg-color); margin: auto; padding: 30px; border-radius: 12px; width: 90%; max-width: 400px; box-shadow: 0 10px 25px rgba(0,0,0,0.4); color: var(--text-color); animation: fadeIn 0.3s; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
@@ -343,7 +345,7 @@
             <section class="hero drop-zone">
                 <div class="container">
                     <h1>JPEG Converter</h1>
-                    <p>Convert PNG, GIF, WEBP, BMP, and more to high-quality JPEG images with adjustable compression.</p>
+                    <p>Convert PNG, GIF, WEBP, and more to high-quality JPEG images.</p>
                     <div id="file-upload-area">
                         <input type="file" id="file-upload" name="file-upload" accept="image/*,application/pdf" multiple="multiple"/>
                         <label for="file-upload" class="upload-btn">
@@ -352,13 +354,14 @@
                         </label>
                         <p class="drop-text" style="margin-top: 12px; color: var(--text-secondary-color);">or drop files here</p>
                     </div>
+                    
                     <div id="file-info" class="file-info-area"></div>
                     
                     <div id="options-panel" class="options-panel">
                         <div class="options-row">
                             <div id="quality-option" class="option-group">
-                                <label for="quality-slider">Quality: <span id="quality-value">85%</span></label>
-                                <input type="range" id="quality-slider" min="1" max="100" value="85"/>
+                                <label for="quality-slider">Quality: <span id="quality-value">92%</span></label>
+                                <input type="range" id="quality-slider" min="1" max="100" value="92"/>
                             </div>
                              <div id="resize-option" class="option-group">
                                 <label for="max-width">Resize (optional)</label>
@@ -372,76 +375,6 @@
 
                     <button id="convert-button" class="convert-btn" disabled="disabled">Convert to JPEG</button>
                     <div id="status-area" class="status-area"></div>
-                </div>
-            </section>
-
-            <section class="features">
-                <div class="container">
-                    <h2>Why Convert to JPEG?</h2>
-                    <p class="section-subtitle">JPEG is the most widely used image format for photographs and complex images on the web.</p>
-                    <div class="features-grid">
-                        <div class="feature-card">
-                            <div class="feature-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="color: var(--primary-color);">
-                                    <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
-                                    <path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clip-rule="evenodd" />
-                                </svg>
-                            </div>
-                            <h3>Optimal File Size</h3>
-                            <p>JPEG compression significantly reduces file size while maintaining good visual quality, perfect for web use.</p>
-                        </div>
-                        <div class="feature-card">
-                            <div class="feature-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="color: var(--primary-color);">
-                                    <path fill-rule="evenodd" d="M4.5 5.653c0-1.426 1.529-2.33 2.779-1.643l11.54 6.348c1.295.712 1.295 2.573 0 3.285L7.28 19.991c-1.25.687-2.779-.217-2.779-1.643V5.653z" clip-rule="evenodd" />
-                                </svg>
-                            </div>
-                            <h3>Universal Compatibility</h3>
-                            <p>JPEG is supported by virtually all devices, browsers, and applications, ensuring your images work everywhere.</p>
-                        </div>
-                        <div class="feature-card">
-                            <div class="feature-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="color: var(--primary-color);">
-                                    <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-4.28 9.22a.75.75 0 000 1.06l3 3a.75.75 0 101.06-1.06l-1.72-1.72h5.69a.75.75 0 000-1.5h-5.69l1.72-1.72a.75.75 0 00-1.06-1.06l-3 3z" clip-rule="evenodd" />
-                                </svg>
-                            </div>
-                            <h3>Fast Conversion</h3>
-                            <p>Our optimized conversion process delivers high-quality JPEG files in seconds, even with batch processing.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="supported-formats">
-                <div class="container">
-                    <h2>Supported Input Formats</h2>
-                    <p class="section-subtitle">Convert from these popular formats to JPEG with our tool</p>
-                    <div class="formats-grid">
-                        <div class="format-card">
-                            <h3>PNG</h3>
-                            <p>Convert PNG images with transparency to JPEG format</p>
-                        </div>
-                        <div class="format-card">
-                            <h3>GIF</h3>
-                            <p>Convert animated or static GIFs to JPEG format</p>
-                        </div>
-                        <div class="format-card">
-                            <h3>WEBP</h3>
-                            <p>Convert modern WebP images to widely compatible JPEG</p>
-                        </div>
-                        <div class="format-card">
-                            <h3>BMP</h3>
-                            <p>Convert uncompressed BMP files to compressed JPEG</p>
-                        </div>
-                        <div class="format-card">
-                            <h3>TIFF</h3>
-                            <p>Convert high-quality TIFF images to web-friendly JPEG</p>
-                        </div>
-                        <div class="format-card">
-                            <h3>PDF</h3>
-                            <p>Convert PDF pages to JPEG images</p>
-                        </div>
-                    </div>
                 </div>
             </section>
 
@@ -564,7 +497,8 @@
             if (mobileNavMenu) {
                 mobileNavMenu.addEventListener('click', (e) => { if (e.target.tagName === 'A') { mobileNavToggle.classList.remove('is-active'); mobileNavToggle.setAttribute('aria-expanded', 'false'); mobileNavMenu.style.display = 'none'; } });
             }
-            
+
+            // --- JAVASCRIPT FOR HOVER-ACTIVATED TOOLS POPUP ---
             const toolsDropdown = document.querySelector('#tools-menu-button').parentElement;
             const toolsPopupMenu = document.getElementById('tools-popup-menu');
             let hoverTimeout;
@@ -644,53 +578,28 @@
                 window.addEventListener('click', (e) => { if (e.target == paymentModal) paymentModal.style.display = 'none'; });
             }
 
-            // --- CONVERTER SCRIPT FOR JPEG PAGE ---
-            const fileUpload = document.getElementById('file-upload'), 
-                  fileInfo = document.getElementById('file-info'), 
-                  convertButton = document.getElementById('convert-button'), 
-                  statusArea = document.getElementById('status-area'), 
-                  dropZone = document.querySelector('.drop-zone'), 
-                  optionsPanel = document.getElementById('options-panel'), 
-                  qualitySlider = document.getElementById('quality-slider'),
-                  qualityValue = document.getElementById('quality-value'),
-                  resizeOption = document.getElementById('resize-option'), 
-                  maxWidthInput = document.getElementById('max-width'), 
-                  maxHeightInput = document.getElementById('max-height');
-                  
+            // --- JPEG CONVERTER SCRIPT ---
+            const fileUpload = document.getElementById('file-upload'), fileInfo = document.getElementById('file-info'), convertButton = document.getElementById('convert-button'), statusArea = document.getElementById('status-area'), dropZone = document.querySelector('.drop-zone'), optionsPanel = document.getElementById('options-panel'), qualityOption = document.getElementById('quality-option'), qualitySlider = document.getElementById('quality-slider'), qualityValue = document.getElementById('quality-value'), resizeOption = document.getElementById('resize-option'), maxWidthInput = document.getElementById('max-width'), maxHeightInput = document.getElementById('max-height');
             if(fileUpload) {
                 let selectedFiles = [];
-                
-                // Update quality value display
-                if(qualitySlider && qualityValue) {
-                    qualitySlider.addEventListener('input', () => {
-                        qualityValue.textContent = `${qualitySlider.value}%`;
-                    });
-                }
-                
                 function checkConversionReady() {
                     convertButton.disabled = selectedFiles.length === 0;
                 }
-                
-                function handleFileSelection(files) { 
-                    if (!files || files.length === 0) return; 
-                    selectedFiles = Array.from(files); 
-                    statusArea.innerHTML = ''; 
-                    fileInfo.innerHTML = selectedFiles.length === 1 ? 
-                        `Selected: <span class="file-name">${selectedFiles[0].name}</span>` : 
-                        `Selected <span class="file-name">${selectedFiles.length} files</span>`; 
-                    updateOptionsUI(); 
-                    checkConversionReady(); 
-                }
+                function handleFileSelection(files) { if (!files || files.length === 0) return; selectedFiles = Array.from(files); statusArea.innerHTML = ''; fileInfo.innerHTML = selectedFiles.length === 1 ? `Selected: <span class="file-name">${selectedFiles[0].name}</span>` : `Selected <span class="file-name">${selectedFiles.length} files</span>`; updateOptionsUI(); checkConversionReady(); }
                 
                 function updateOptionsUI() {
+                    const toFormat = 'jpeg'; // Hardcoded for this page
+                    const qualityFormats = ['jpeg', 'webp'];
                     const resizeApplicable = selectedFiles.length > 0 && selectedFiles.every(f => f.type.startsWith('image/'));
+                    
+                    qualityOption.style.display = qualityFormats.includes(toFormat) ? 'block' : 'none';
                     resizeOption.style.display = resizeApplicable ? 'flex' : 'none';
+
                     if (selectedFiles.length > 0) {
                        optionsPanel.style.display = 'flex';
                     } else {
                        optionsPanel.style.display = 'none';
                     }
-                    checkConversionReady();
                 }
 
                 fileUpload.addEventListener('change', (e) => handleFileSelection(e.target.files));
@@ -698,12 +607,12 @@
                 dropZone.addEventListener('dragenter', (e) => { e.preventDefault(); dropZone.classList.add('drag-over'); });
                 dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
                 dropZone.addEventListener('drop', (e) => { e.preventDefault(); dropZone.classList.remove('drag-over'); if (e.dataTransfer.files.length) handleFileSelection(e.dataTransfer.files); });
+                qualitySlider.addEventListener('input', (e) => { qualityValue.textContent = `${e.target.value}%`; });
                 convertButton.addEventListener('click', () => { startProgress("Initializing..."); handleConversion(); });
                 
                 async function handleConversion() {
-                    const toFormat = 'jpeg';
-                    const isSinglePdfInput = selectedFiles.length === 1 && selectedFiles[0].type === 'application/pdf'; 
-                    const areImageInputs = selectedFiles.length > 0 && selectedFiles.every(f => f.type.startsWith('image/'));
+                    const toFormat = 'jpeg'; // HARDCODED for this page
+                    const isSinglePdfInput = selectedFiles.length === 1 && selectedFiles[0].type === 'application/pdf'; const areImageInputs = selectedFiles.length > 0 && selectedFiles.every(f => f.type.startsWith('image/'));
                     try {
                         if (isSinglePdfInput) await convertPdfToImages(selectedFiles[0], toFormat);
                         else if (areImageInputs) await batchConvertImages(selectedFiles, toFormat);
@@ -711,139 +620,18 @@
                     } catch (error) { showError("An unexpected error occurred during conversion.", error); }
                 }
 
-                async function convertPdfToImages(file, toFormat) { 
-                    const pdf = await pdfjsLib.getDocument({ data: await file.arrayBuffer() }).promise; 
-                    const zip = new JSZip(); 
-                    for (let i = 1; i <= pdf.numPages; i++) { 
-                        updateProgress(i / pdf.numPages, `Processing page ${i} of ${pdf.numPages}...`); 
-                        const page = await pdf.getPage(i); 
-                        const viewport = page.getViewport({ scale: 2.0 }); 
-                        const canvas = document.createElement('canvas'); 
-                        canvas.width = viewport.width; 
-                        canvas.height = viewport.height; 
-                        await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise; 
-                        const { data: blob, ext } = await canvasToBlob(canvas, toFormat, getOptions()); 
-                        zip.file(`${file.name.replace(/\.pdf$/i, '')}_page_${i}.${ext}`, blob); 
-                    } 
-                    const zipBlob = await zip.generateAsync({ type: "blob" }); 
-                    showSuccessUI(URL.createObjectURL(zipBlob), `${file.name.replace(/\.pdf$/i, '')}.zip`, "ZIP Archive"); 
-                }
-                
-                async function batchConvertImages(files, toFormat) { 
-                    const results = []; 
-                    for (let i = 0; i < files.length; i++) { 
-                        updateProgress(i / files.length, `Converting file ${i + 1}...`); 
-                        const { data: blob, ext } = await processSingleImage(files[i], toFormat, getOptions()); 
-                        results.push({ name: `${files[i].name.split('.').slice(0, -1).join('.')}.${ext}`, blob }); 
-                    } 
-                    if (results.length === 1) { 
-                        showSuccessUI(URL.createObjectURL(results[0].blob), results[0].name, toFormat.toUpperCase()); 
-                    } else if (results.length > 1) { 
-                        const zip = new JSZip(); 
-                        results.forEach(r => zip.file(r.name, r.blob)); 
-                        const zipBlob = await zip.generateAsync({ type: "blob" }); 
-                        showSuccessUI(URL.createObjectURL(zipBlob), "plusconvert_batch.zip", "ZIP Archive"); 
-                    } 
-                }
-                
-                async function processSingleImage(file, toFormat, options) { 
-                    let img = await loadImage(await fileToDataURL(file)); 
-                    const canvas = document.createElement('canvas'); 
-                    const ratio = img.width / img.height; 
-                    let { width, height } = img; 
-                    if (options.maxWidth && width > options.maxWidth) { 
-                        width = options.maxWidth; 
-                        height = width / ratio; 
-                    } 
-                    if (options.maxHeight && height > options.maxHeight) { 
-                        height = options.maxHeight; 
-                        width = height * ratio; 
-                    } 
-                    canvas.width = width; 
-                    canvas.height = height; 
-                    
-                    // Create a white background for JPEG conversion (since JPEG doesn't support transparency)
-                    const ctx = canvas.getContext('2d');
-                    ctx.fillStyle = 'white';
-                    ctx.fillRect(0, 0, width, height);
-                    ctx.drawImage(img, 0, 0, width, height);
-                    
-                    return await canvasToBlob(canvas, toFormat, options); 
-                }
-                
-                const fileToDataURL = file => new Promise((resolve, reject) => { 
-                    const reader = new FileReader(); 
-                    reader.onload = () => resolve(reader.result); 
-                    reader.onerror = reject; 
-                    reader.readAsDataURL(file); 
-                });
-                
-                const loadImage = src => new Promise((resolve, reject) => { 
-                    const img = new Image(); 
-                    img.onload = () => resolve(img); 
-                    img.onerror = reject; 
-                    img.src = src; 
-                });
-                
-                const getOptions = () => ({ 
-                    quality: parseInt(qualitySlider.value) / 100,
-                    maxWidth: parseInt(maxWidthInput.value) || null, 
-                    maxHeight: parseInt(maxHeightInput.value) || null 
-                });
-                
-                function startProgress(message) { 
-                    convertButton.disabled = true; 
-                    statusArea.innerHTML = `<div class="progress-bar-container"><div class="progress-bar" id="progress-bar"></div></div><p id="progress-text">${message}</p>`; 
-                }
-                
-                function updateProgress(percentage, message) { 
-                    const bar = document.getElementById('progress-bar'), 
-                          text = document.getElementById('progress-text'); 
-                    if (bar) bar.style.width = `${percentage * 100}%`; 
-                    if (text) text.textContent = message; 
-                }
-                
-                function showError(message, error = null) { 
-                    let detailedMessage = message; 
-                    if (error) { 
-                        console.error("A conversion error occurred:", error); 
-                        detailedMessage += `<br><small style="color: var(--text-secondary-color);">Details: ${error.message}</small>`; 
-                    } 
-                    statusArea.innerHTML = `<div class="error-message">❌ Conversion Failed</div><p style="text-align:center;max-width:500px;margin:15px auto;">${detailedMessage}</p>`; 
-                    checkConversionReady(); 
-                }
-                
-                function showSuccessUI(downloadUrl, fileName, fileType) { 
-                    updateProgress(1, "Done!"); 
-                    let downloadButtonHTML = ''; 
-                    if (downloadUrl) { 
-                        downloadButtonHTML = `<a href="${downloadUrl}" download="${fileName}" id="download-link" class="download-btn"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>Download</a>`; 
-                    } 
-                    setTimeout(() => { 
-                        statusArea.innerHTML = `<div class="success-message">✅ Conversion Successful!</div><div style="display:flex; gap: 15px; justify-content: center;">${downloadButtonHTML}<button id="reset-button" class="reset-btn">Convert More Files</button></div>`; 
-                        document.getElementById('reset-button').addEventListener('click', resetUI); 
-                    }, 500); 
-                }
-                
-                function resetUI() { 
-                    selectedFiles = []; 
-                    fileUpload.value = ''; 
-                    fileInfo.innerHTML = ''; 
-                    statusArea.innerHTML = ''; 
-                    optionsPanel.style.display = 'none'; 
-                    checkConversionReady(); 
-                }
-                
-                async function canvasToBlob(canvas, format, options) { 
-                    return new Promise(async (resolve, reject) => { 
-                        const mime = 'image/jpeg'; 
-                        const ext = 'jpg'; 
-                        canvas.toBlob(blob => { 
-                            if (!blob) return reject(new Error(`Conversion to ${format.toUpperCase()} failed.`)); 
-                            resolve({ data: blob, ext: ext }); 
-                        }, mime, options.quality); 
-                    }); 
-                }
+                async function convertPdfToImages(file, toFormat) { const pdf = await pdfjsLib.getDocument({ data: await file.arrayBuffer() }).promise; const zip = new JSZip(); for (let i = 1; i <= pdf.numPages; i++) { updateProgress(i / pdf.numPages, `Processing page ${i} of ${pdf.numPages}...`); const page = await pdf.getPage(i); const viewport = page.getViewport({ scale: 2.0 }); const canvas = document.createElement('canvas'); canvas.width = viewport.width; canvas.height = viewport.height; await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise; const { data: blob, ext } = await canvasToBlob(canvas, toFormat, getOptions()); zip.file(`${file.name.replace(/\.pdf$/i, '')}_page_${i}.${ext}`, blob); } const zipBlob = await zip.generateAsync({ type: "blob" }); showSuccessUI(URL.createObjectURL(zipBlob), `${file.name.replace(/\.pdf$/i, '')}.zip`, "ZIP Archive"); }
+                async function batchConvertImages(files, toFormat) { const results = []; for (let i = 0; i < files.length; i++) { updateProgress(i / files.length, `Converting file ${i + 1}...`); const { data: blob, ext } = await processSingleImage(files[i], toFormat, getOptions()); results.push({ name: `${files[i].name.split('.').slice(0, -1).join('.')}.${ext}`, blob }); } if (results.length === 1) { showSuccessUI(URL.createObjectURL(results[0].blob), results[0].name, toFormat.toUpperCase()); } else if (results.length > 1) { const zip = new JSZip(); results.forEach(r => zip.file(r.name, r.blob)); const zipBlob = await zip.generateAsync({ type: "blob" }); showSuccessUI(URL.createObjectURL(zipBlob), "plusconvert_batch.zip", "ZIP Archive"); } }
+                async function processSingleImage(file, toFormat, options) { let img = await loadImage(await fileToDataURL(file)); const canvas = document.createElement('canvas'); const ratio = img.width / img.height; let { width, height } = img; if (options.maxWidth && width > options.maxWidth) { width = options.maxWidth; height = width / ratio; } if (options.maxHeight && height > options.maxHeight) { height = options.maxHeight; width = height * ratio; } canvas.width = width; canvas.height = height; canvas.getContext('2d').drawImage(img, 0, 0, width, height); return await canvasToBlob(canvas, toFormat, options); }
+                const fileToDataURL = file => new Promise((resolve, reject) => { const reader = new FileReader(); reader.onload = () => resolve(reader.result); reader.onerror = reject; reader.readAsDataURL(file); });
+                const loadImage = src => new Promise((resolve, reject) => { const img = new Image(); img.onload = () => resolve(img); img.onerror = reject; img.src = src; });
+                const getOptions = () => ({ quality: parseInt(qualitySlider.value) / 100, maxWidth: parseInt(maxWidthInput.value) || null, maxHeight: parseInt(maxHeightInput.value) || null });
+                function startProgress(message) { convertButton.disabled = true; statusArea.innerHTML = `<div class="progress-bar-container"><div class="progress-bar" id="progress-bar"></div></div><p id="progress-text">${message}</p>`; }
+                function updateProgress(percentage, message) { const bar = document.getElementById('progress-bar'), text = document.getElementById('progress-text'); if (bar) bar.style.width = `${percentage * 100}%`; if (text) text.textContent = message; }
+                function showError(message, error = null) { let detailedMessage = message; if (error) { console.error("A conversion error occurred:", error); detailedMessage += `<br><small style="color: var(--text-secondary-color);">Details: ${error.message}</small>`; } statusArea.innerHTML = `<div class="error-message">❌ Conversion Failed</div><p style="text-align:center;max-width:500px;margin:15px auto;">${detailedMessage}</p>`; checkConversionReady(); }
+                function showSuccessUI(downloadUrl, fileName, fileType) { updateProgress(1, "Done!"); let downloadButtonHTML = ''; if (downloadUrl) { downloadButtonHTML = `<a href="${downloadUrl}" download="${fileName}" id="download-link" class="download-btn"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>Download</a>`; } setTimeout(() => { statusArea.innerHTML = `<div class="success-message">✅ Conversion Successful!</div><div style="display:flex; gap: 15px; justify-content: center;">${downloadButtonHTML}<button id="reset-button" class="reset-btn">Convert More Files</button></div>`; document.getElementById('reset-button').addEventListener('click', resetUI); }, 500); }
+                function resetUI() { selectedFiles = []; fileUpload.value = ''; fileInfo.innerHTML = ''; statusArea.innerHTML = ''; optionsPanel.style.display = 'none'; checkConversionReady(); }
+                async function canvasToBlob(canvas, format, options) { return new Promise(async (resolve, reject) => { const mime = 'image/jpeg'; const ext = 'jpeg'; canvas.toBlob(blob => { if (!blob) return reject(new Error(`Conversion to ${format.toUpperCase()} failed.`)); resolve({ data: blob, ext: ext }); }, mime, options.quality); }); }
             }
         });
     </script>
