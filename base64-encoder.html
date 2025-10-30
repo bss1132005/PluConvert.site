@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8"/>
-    <meta name="description" content="Convert any image file to the high-quality, lossless TIFF (TIF) format. Ideal for professional photography and archival purposes."/>
-    <meta name="keywords" content="tiff converter, to tiff, image to tiff, convert to tif, png to tiff, jpg to tiff"/>
+    <meta name="description" content="Encode any image file (JPG, PNG, GIF) into a Base64 text string. Perfect for embedding images directly into HTML, CSS, or JS."/>
+    <meta name="keywords" content="base64 encoder, image to base64, base64 converter, data uri, inline image"/>
     <meta name="author" content="PlusConvert"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>TIFF Converter - PlusConvert</title>
+    <title>Base64 Image Encoder - PlusConvert</title>
 
     <link rel="icon" href="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;defs&gt;&lt;linearGradient id=%22g%22 x1=%220%25%22 y1=%22100%25%22 x2=%22100%25%22 y2=%220%25%22&gt;&lt;stop offset=%220%25%22 stop-color=%22%230052FF%22/&gt;&lt;stop offset=%22100%25%22 stop-color=%22%2300A9FF%22/&gt;&lt;/defs&gt;&lt;text y=%22.9em%22 font-size=%2290%22 fill=%22url(%23g)%22&gt;P&lt;/text&gt;&lt;/svg&gt;"/>
     <link rel="apple-touch-icon" href="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;defs&gt;&lt;linearGradient id=%22g%22 x1=%220%25%22 y1=%22100%25%22 x2=%22100%25%22 y2=%220%25%22&gt;&lt;stop offset=%220%25%22 stop-color=%22%230052FF%22/&gt;&lt;stop offset=%22100%25%22 stop-color=%22%2300A9FF%22/&gt;&lt;/defs&gt;&lt;text y=%22.9em%22 font-size=%2290%22 fill=%22url(%23g)%22&gt;P&lt;/text&gt;&lt;/svg&gt;"/>
@@ -15,18 +15,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="true"/>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>  
     
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gifshot/dist/gifshot.min.js"></script>
-    <script src="https://unpkg.com/docx@7.1.0/build/index.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/utif@3.1.0/UTIF.js"></script>
-    
-    <script>
-        pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js`;
-    </script>
-    
+
     <style>
         :root {
             --primary-color: #0052FF; --secondary-color: #00A9FF; --light-theme-bg: #ffffff; --light-theme-bg-secondary: #f8f9fa; --light-theme-text-dark: #0B2D5B; --light-theme-text-primary: #333; --light-theme-text-secondary: #555; --light-theme-border: #e9ecef; --light-theme-shadow: rgba(0,0,0,0.05); --dark-theme-bg: #121212; --dark-theme-bg-secondary: #1E1E1E; --dark-theme-text-dark: #EAEAEA; --dark-theme-text-primary: #D1D1D1; --dark-theme-text-secondary: #AAAAAA; --dark-theme-border: #333333; --dark-theme-shadow: rgba(0, 82, 255, 0.1); --bg-color: var(--light-theme-bg); --bg-secondary-color: var(--light-theme-bg-secondary); --heading-color: var(--light-theme-text-dark); --text-color: var(--light-theme-text-primary); --text-secondary-color: var(--light-theme-text-secondary); --border-color: var(--light-theme-border); --shadow-color: var(--light-theme-shadow); --success-color: #28a745; --error-color: #dc3545; --font-family: 'Poppins', sans-serif;
@@ -44,98 +34,26 @@
         .main-header { background: var(--bg-color); padding: 20px 0; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px var(--shadow-color); transition: background-color 0.3s ease, box-shadow 0.3s ease; }
         .main-header .container { display: flex; justify-content: space-between; align-items: center; }
         .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--heading-color); font-size: 1.5rem; font-weight: 700; }
-        .logo svg { width: 36px; height: 36px; }
         .main-nav { display: flex; align-items: center; gap: 30px; } .main-nav ul { display: flex; list-style: none; gap: 30px; align-items: center; } .main-nav a { text-decoration: none; color: var(--text-color); font-weight: 500; transition: color 0.3s ease; } .main-nav a:hover { color: var(--primary-color); }
         .btn { display: inline-flex; align-items: center; justify-content: center; padding: 10px 24px; border-radius: 50px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; } .btn-primary { background-color: var(--primary-color); color: white; } .btn-primary:hover { background-color: #0041CC; transform: translateY(-2px); } .btn-secondary { background-color: transparent; color: var(--primary-color); border: 2px solid var(--primary-color); } .btn-secondary:hover { background-color: var(--primary-color); color: white; }
         .theme-toggle-btn { background: none; border: 2px solid var(--border-color); border-radius: 50%; width: 40px; height: 40px; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 5px; transition: background-color 0.3s ease, border-color 0.3s ease; } .theme-toggle-btn:hover { background-color: var(--bg-secondary-color); } .theme-toggle-btn svg { width: 22px; height: 22px; color: var(--text-secondary-color); } .moon-icon { display: none; } body.dark-mode .sun-icon { display: none; } body.dark-mode .moon-icon { display: block; }
         
         .nav-item-dropdown { position: relative; }
         .nav-item-dropdown .dropdown-toggle { display: flex; align-items: center; gap: 8px; cursor: pointer; }
-        .dropdown-menu { display: none; position: absolute; top: 150%; left: 50%; transform: translateX(-50%); background-color: var(--bg-color); border: 1px solid var(--border-color); border-radius: 12px; box-shadow: 0 8px 25px var(--shadow-color); min-width: 220px; z-index: 101; list-style: none; padding: 8px; flex-direction: column; opacity: 0; visibility: hidden; transition: opacity 0.2s ease, visibility 0.2s ease; }
-        .nav-item-dropdown:hover .dropdown-menu:not(.tools-popup-menu) { display: flex; opacity: 1; visibility: visible; }
-        .dropdown-menu li { width: 100%; }
-        .dropdown-menu a { display: block; padding: 12px 18px; border-radius: 8px; transition: background-color 0.2s ease, color 0.2s ease; }
-        .dropdown-menu a:hover { background-color: var(--bg-secondary-color); color: var(--primary-color); }
-        .dropdown-menu a.disabled-link { color: var(--text-secondary-color); cursor: not-allowed; pointer-events: none; }
-        .dropdown-menu a.disabled-link:hover { background-color: transparent; color: var(--text-secondary-color); }
         .nav-item-dropdown .dropdown-toggle svg { transition: transform 0.3s ease; }
         .nav-item-dropdown:hover .dropdown-toggle svg { transform: rotate(180deg); }
 
-        .tools-popup-menu {
-            display: none;
-            position: fixed;
-            top: 100px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 960px;
-            max-width: calc(100vw - 40px);
-            background-color: var(--bg-color);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-            padding: 2rem 2.5rem;
-            z-index: 999;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.2s ease-out, visibility 0.2s ease-out;
-        }
-        .tools-popup-menu.is-open {
-            display: block;
-            opacity: 1;
-            visibility: visible;
-        }
-        .popup-close-btn {
-            position: absolute;
-            top: 1rem;
-            right: 1.25rem;
-            background: none;
-            border: none;
-            font-size: 2rem;
-            font-weight: 300;
-            color: var(--text-secondary-color);
-            cursor: pointer;
-            line-height: 1;
-        }
+        .tools-popup-menu { display: none; position: fixed; top: 100px; left: 50%; transform: translateX(-50%); width: 960px; max-width: calc(100vw - 40px); background-color: var(--bg-color); border: 1px solid var(--border-color); border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); padding: 2rem 2.5rem; z-index: 999; opacity: 0; visibility: hidden; transition: opacity 0.2s ease-out, visibility 0.2s ease-out; }
+        .tools-popup-menu.is-open { display: block; opacity: 1; visibility: visible; }
+        .popup-close-btn { position: absolute; top: 1rem; right: 1.25rem; background: none; border: none; font-size: 2rem; font-weight: 300; color: var(--text-secondary-color); cursor: pointer; line-height: 1; }
         .popup-close-btn:hover { color: var(--text-color); }
-        .popup-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1rem 2rem;
-        }
-        .popup-column h4 {
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: var(--heading-color);
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .popup-column ul {
-            list-style: none;
-        }
-        .popup-column li a {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 9px 0;
-            font-weight: 500;
-            font-size: 0.95rem;
-            color: var(--text-color);
-            text-decoration: none;
-        }
-        .popup-column li a span {
-             transition: color 0.2s ease;
-        }
-        .popup-column li a:hover span {
-            color: var(--primary-color);
-            text-decoration: none;
-        }
-        .popup-column li a svg {
-            width: 20px;
-            height: 20px;
-            flex-shrink: 0;
-            color: var(--primary-color);
-        }
+        .popup-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem 2rem; }
+        .popup-column h4 { font-size: 0.8rem; font-weight: 600; color: var(--heading-color); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.5px; }
+        .popup-column ul { list-style: none; }
+        .popup-column li a { display: flex; align-items: center; gap: 12px; padding: 9px 0; font-weight: 500; font-size: 0.95rem; color: var(--text-color); text-decoration: none; }
+        .popup-column li a span { transition: color 0.2s ease; }
+        .popup-column li a:hover span { color: var(--primary-color); text-decoration: none; }
+        .popup-column li a svg { width: 20px; height: 20px; flex-shrink: 0; color: var(--primary-color); }
         
         #signup-modal { display: none; position: fixed; z-index: 200; padding-top: 100px; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.5); -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px); }
         .modal-content { background-color: var(--bg-color); margin: auto; padding: 30px; border-radius: 12px; width: 90%; max-width: 400px; box-shadow: 0 10px 25px rgba(0,0,0,0.4); color: var(--text-color); animation: fadeIn 0.3s; }
@@ -172,38 +90,16 @@
         .status-area { margin-top: 20px; min-height: 80px; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; }
         .progress-bar-container { width: 80%; max-width: 400px; height: 10px; background-color: var(--border-color); border-radius: 5px; overflow: hidden; margin-bottom: 15px;} .progress-bar { width: 0%; height: 100%; background: linear-gradient(90deg, var(--secondary-color), var(--primary-color)); transition: width 0.4s ease-in-out; }
         .success-message { text-align: center; color: var(--success-color); font-size: 1.2rem; font-weight: 600; } .error-message { text-align: center; color: var(--error-color); font-size: 1.2rem; font-weight: 600; }
-        .download-btn { display: inline-flex; align-items: center; gap: 10px; margin-top: 15px; background-color: var(--success-color); color: white; padding: 12px 28px; border-radius: 8px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; } .download-btn:hover { background-color: #218838; transform: translateY(-2px); }
         .reset-btn { display: inline-flex; align-items: center; gap: 10px; margin-top: 15px; background-color: var(--primary-color); color: white; padding: 12px 28px; border-radius: 8px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; border: none; cursor: pointer; font-family: var(--font-family); font-size: 1rem; } .reset-btn:hover { background-color: #0041CC; transform: translateY(-2px); }
-        .converter-tool { display: flex; flex-direction: column; align-items: center; margin-top: 20px; }
-        .converter-tool span { font-weight: 700; margin-bottom: 10px; }
-        .select-wrapper { position: relative; } .converter-tool select { -webkit-appearance: none; -moz-appearance: none; appearance: none; background-color: var(--bg-color); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px 35px 10px 15px; font-size: 1rem; font-family: var(--font-family); color: var(--text-color); cursor: pointer; min-width: 150px; transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease; } .converter-tool select:hover { border-color: var(--primary-color); }
-        .select-wrapper::after { content: ''; position: absolute; top: 50%; right: 15px; transform: translateY(-50%); width: 16px; height: 16px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23555555'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: center; pointer-events: none; transition: filter 0.3s ease; } body.dark-mode .select-wrapper::after { filter: invert(1); }
         .convert-btn { margin-top: 30px; padding: 15px 50px; font-size: 1.2rem; font-weight: 600; color: white; background: linear-gradient(90deg, var(--secondary-color), var(--primary-color)); border: none; border-radius: 12px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(0, 82, 255, 0.3); } .convert-btn:hover:not(:disabled) { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(0, 82, 255, 0.4); } .convert-btn:disabled { background: #999; color: #ccc; cursor: not-allowed; box-shadow: none; }
-        .options-panel { background-color: var(--bg-secondary-color); border-radius: 12px; padding: 20px; margin: 30px auto 0; max-width: 600px; display: none; flex-direction: column; gap: 20px; border: 1px solid var(--border-color); }
-        .options-row { display: flex; justify-content: space-between; align-items: center; gap: 20px; } .option-group { flex: 1; text-align: left; } .option-group label { display: block; margin-bottom: 8px; font-weight: 500; color: var(--text-color); } .option-group input[type="range"] { width: 100%; } .option-group input[type="number"] { width: 100%; padding: 8px; border-radius: 6px; border: 1px solid var(--border-color); background-color: var(--bg-color); color: var(--text-color); font-family: var(--font-family); font-size: 0.9rem; } #quality-value { font-weight: 600; color: var(--primary-color); }
-        .text-output-area { margin-top: 15px; width: 100%; max-width: 600px; }
+        .text-output-area { margin-top: 15px; width: 100%; max-width: 800px; }
         .text-output-area textarea { width: 100%; height: 150px; background-color: var(--bg-secondary-color); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px; font-family: monospace; font-size: 0.8rem; color: var(--text-secondary-color); resize: vertical; }
-        #text-input-area { width: 100%; max-width: 800px; margin: 0 auto; }
-        #text-input-area textarea {
-            width: 100%;
-            height: 300px;
-            background-color: var(--bg-secondary-color);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 15px;
-            font-family: var(--font-family);
-            font-size: 1rem;
-            color: var(--text-color);
-            resize: vertical;
-            margin-bottom: 20px;
-        }
         .copy-btn { margin-top: 10px; padding: 8px 16px; background-color: var(--primary-color); color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 500; } .copy-btn:hover { background-color: #0041CC; }
-        .supported-formats, .features, .main-footer, .pricing-section { padding: 80px 0; background-color: var(--bg-secondary-color); } .features { background-color: var(--bg-color); } .main-footer { border-top: 1px solid var(--border-color); }
+
+        .main-footer, .pricing-section { padding: 80px 0; background-color: var(--bg-secondary-color); }
+        .main-footer { border-top: 1px solid var(--border-color); }
         .section-subtitle { text-align: center; font-size: 1.1rem; color: var(--text-secondary-color); margin-bottom: 40px; max-width: 700px; margin-left: auto; margin-right: auto; } 
         h2 { text-align: center; font-size: 2.5rem; color: var(--heading-color); margin-bottom: 50px; }
-        .formats-grid, .features-grid { display: grid; gap: 30px; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
-        .format-card, .feature-card { background: var(--bg-color); border: 1px solid var(--border-color); border-radius: 12px; padding: 30px; text-align: center; transition: all 0.3s ease; } .feature-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px var(--shadow-color); }
-        .feature-card h3 { font-size: 1.2rem; color: var(--heading-color); margin-bottom: 15px; } .feature-icon { display: inline-block; margin-bottom: 20px; width: 64px; height: 64px; } .feature-card p { color: var(--text-secondary-color); font-size: 0.95rem; }
         .pricing-toggle-container { display: flex; justify-content: center; align-items: center; gap: 15px; margin-bottom: 40px; font-weight: 600; }
         .pricing-toggle { background-color: var(--border-color); border-radius: 50px; padding: 5px; display: flex; cursor: pointer; }
         .pricing-toggle span { padding: 8px 20px; border-radius: 50px; transition: all 0.3s ease; }
@@ -222,12 +118,10 @@
         .pricing-card .btn { margin-top: auto; width: 100%; padding: 15px; font-size: 1rem; }
         .pricing-card.recommended { border: 2px solid var(--primary-color); transform: scale(1.05); position: relative; }
         .pricing-card.recommended .badge { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: linear-gradient(90deg, var(--secondary-color), var(--primary-color)); color: white; padding: 5px 15px; border-radius: 50px; font-size: 0.9rem; font-weight: 600; }
-        .article-content { padding: 80px 0; background-color: var(--bg-secondary-color); } .article-content .container { max-width: 800px; } .article-content h2 { margin-bottom: 40px; } .article-content h3 { font-size: 1.8rem; color: var(--heading-color); margin-top: 40px; margin-bottom: 20px; border-bottom: 2px solid var(--border-color); padding-bottom: 10px; text-align: left; } .article-content h4 { font-size: 1.4rem; color: var(--primary-color); margin-top: 30px; margin-bottom: 15px; text-align: left; } .article-content p, .article-content li { font-size: 1rem; line-height: 1.8; color: var(--text-secondary-color); margin-bottom: 15px; } .article-content strong { color: var(--text-color); font-weight: 600; } .article-content ul { list-style-position: inside; padding-left: 10px; }
-        .back-to-main-btn { display: inline-block; margin-bottom: 40px; font-weight: 600; color: var(--primary-color); text-decoration: none; cursor: pointer; }
-        .back-to-main-btn:hover { text-decoration: underline; }
+        
         .footer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; margin-bottom: 40px; } .footer-col h4 { color: var(--heading-color); margin-bottom: 15px; font-size: 1.1rem; } .footer-col ul { list-style: none; } .footer-col ul li { margin-bottom: 10px; } .footer-col a { text-decoration: none; color: var(--text-secondary-color); transition: color 0.3s ease; } .footer-col a:hover { color: var(--primary-color); }
-        .footer-col a.footer-link { cursor: pointer; }
         .footer-bottom { text-align: center; padding-top: 20px; border-top: 1px solid var(--border-color); font-size: 0.9rem; }
+        
         #payment-modal { display: none; position: fixed; z-index: 300; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.6); -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px); padding-top: 80px; }
         .payment-modal-content { background-color: var(--bg-color); margin: auto; padding: 30px; border-radius: 12px; width: 90%; max-width: 450px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); color: var(--text-color); animation: fadeIn 0.3s; position: relative; }
         .payment-modal-content h2 { text-align: center; font-size: 1.5rem; margin-bottom: 15px; }
@@ -245,9 +139,6 @@
         .mobile-nav-menu ul { list-style: none; display: flex; flex-direction: column; gap: 20px; }
         .mobile-nav-menu ul li a { font-size: 1.5rem; font-weight: 600; color: var(--heading-color); text-decoration: none; padding: 10px; display: block; }
         .mobile-nav-menu ul li .btn { font-size: 1.2rem; margin-top: 20px; }
-        .mobile-nav-menu .nav-item-dropdown .dropdown-menu { position: static; display: block; transform: none; border: none; box-shadow: none; background: transparent; min-width: unset; opacity: 1; visibility: visible; padding-top: 15px; }
-        .mobile-nav-menu .nav-item-dropdown .dropdown-menu a { font-size: 1.1rem; font-weight: 400; color: var(--text-secondary-color); }
-        .mobile-nav-menu .nav-item-dropdown:hover .dropdown-toggle svg { transform: none; }
         
         @media (max-width: 960px) {
             .popup-grid { grid-template-columns: repeat(2, 1fr); }
@@ -255,11 +146,10 @@
         @media (max-width: 768px) {
             .main-nav ul { display: none; }
             .mobile-nav-toggle { display: block; }
-            .hero h1 { font-size: 2.5rem; } .hero p { font-size: 1rem; } .features-grid, .formats-grid, .pricing-grid { grid-template-columns: 1fr; } 
+            .hero h1 { font-size: 2.5rem; } .hero p { font-size: 1rem; }
+            .pricing-grid { grid-template-columns: 1fr; } 
             .pricing-card.recommended { transform: scale(1); }
-            .footer-grid { grid-template-columns: repeat(2, 1fr); } .article-content h3 { font-size: 1.5rem; } .article-content h4 { font-size: 1.2rem; }
-            .options-row { flex-direction: column; align-items: stretch; }
-            .ad-placeholder { min-height: 60px; }
+            .footer-grid { grid-template-columns: repeat(2, 1fr); }
         }
          @media (max-width: 500px) {
             .popup-grid { grid-template-columns: 1fr; }
@@ -312,11 +202,10 @@
                 <h4>WEB & IMAGE</h4>
                 <ul>
                     <li><a href="jpg-converter.html"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 8h.01"></path><rect x="4" y="4" width="16" height="16" rx="3"></rect><path d="m4 15.5 4-4a3 3 0 0 1 4 0l5 5"></path><path d="m14 14 1-1a3 3 0 0 1 4 0l2 2"></path></svg><span>JPG</span></a></li>
+                    <li><a href="jpeg-converter.html"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 8h.01"></path><rect x="4" y="4" width="16" height="16" rx="3"></rect><path d="m4 15.5 4-4a3 3 0 0 1 4 0l5 5"></path><path d="m14 14 1-1a3 3 0 0 1 4 0l2 2"></path></svg><span>JPEG</span></a></li>
                     <li><a href="png-converter.html"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 8h.01"></path><rect x="4" y="4" width="16" height="16" rx="3"></rect><path d="m4 15.5 4-4a3 3 0 0 1 4 0l5 5"></path><path d="m14 14 1-1a3 3 0 0 1 4 0l2 2"></path></svg><span>PNG</span></a></li>
                     <li><a href="gif-converter.html"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="9" y1="10" x2="15" y2="10"></line><line x1="9" y1="14" x2="15" y2="14"></line><line x1="9" y1="12" x2="13" y2="12"></line></svg><span>GIF</span></a></li>
                     <li><a href="webp-converter.html"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.75 2.75"></path><path d="M3 12a9 9 0 0 1 9 9 9.75 9.75 0 0 1 6.75-2.75"></path><path d="m15 6 3-3 3 3"></path><path d="m9 18-3 3-3-3"></path></svg><span>WEBP</span></a></li>
-                    <li><a href="avif-converter.html"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.75 2.75"></path><path d="M3 12a9 9 0 0 1 9 9 9.75 9.75 0 0 1 6.75-2.75"></path><path d="m15 6 3-3 3 3"></path><path d="m9 18-3 3-3-3"></path></svg><span>AVIF</span></a></li>
-                    <li><a href="jp2-converter.html"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 8h.01"></path><rect x="4" y="4" width="16" height="16" rx="3"></rect><path d="m4 15.5 4-4a3 3 0 0 1 4 0l5 5"></path><path d="m14 14 1-1a3 3 0 0 1 4 0l2 2"></path></svg><span>JP2</span></a></li>
                 </ul>
             </div>
             <div class="popup-column">
@@ -333,9 +222,10 @@
                 <ul>
                     <li><a href="svg-converter.html"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9" /><path d="M15.49 15.49L7 21l-1.5-4.5L10 12l-1.5-1.5L4.5 9 1 7.5l6-4.5" /></svg><span>SVG Converter</span></a></li>
                     <li><a href="bmp-converter.html"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 8h.01"></path><rect x="4" y="4" width="16" height="16" rx="3"></rect><path d="m4 15.5 4-4a3 3 0 0 1 4 0l5 5"></path><path d="m14 14 1-1a3 3 0 0 1 4 0l2 2"></path></svg><span>BMP Converter</span></a></li>
-                    <li><a href="tiff-converter.html"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 8h.01"></path><rect x="4" y="4" width="16" height="16" rx="3"></rect><path d="m4 15.5 4-4a3 3 0 0 1 4 0l5 5"></path><path d="m14 14 1-1a3 3 0 0 1 4 0l2 2"></path></svg><span>TIFF Converter</span></a></li>
                     <li><a href="tga-converter.html"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 8h.01"></path><rect x="4" y="4" width="16" height="16" rx="3"></rect><path d="m4 15.5 4-4a3 3 0 0 1 4 0l5 5"></path><path d="m14 14 1-1a3 3 0 0 1 4 0l2 2"></path></svg><span>TGA Converter</span></a></li>
                     <li><a href="pcx-converter.html"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 8h.01"></path><rect x="4" y="4" width="16" height="16" rx="3"></rect><path d="m4 15.5 4-4a3 3 0 0 1 4 0l5 5"></path><path d="m14 14 1-1a3 3 0 0 1 4 0l2 2"></path></svg><span>PCX Converter</span></a></li>
+                    <li><a href="ppm-converter.html"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 8h.01"></path><rect x="4" y="4" width="16" height="16" rx="3"></rect><path d="m4 15.5 4-4a3 3 0 0 1 4 0l5 5"></path><path d="m14 14 1-1a3 3 0 0 1 4 0l2 2"></path></svg><span>PPM Converter</span></a></li>
+                    <li><a href="xbm-converter.html"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 8h.01"></path><rect x="4" y="4" width="16" height="16" rx="3"></rect><path d="m4 15.5 4-4a3 3 0 0 1 4 0l5 5"></path><path d="m14 14 1-1a3 3 0 0 1 4 0l2 2"></path></svg><span>XBM Converter</span></a></li>
                 </ul>
             </div>
             <div class="popup-column">
@@ -577,8 +467,8 @@
                 closePaymentModalBtn.addEventListener('click', () => paymentModal.style.display = 'none');
                 window.addEventListener('click', (e) => { if (e.target == paymentModal) paymentModal.style.display = 'none'; });
             }
-
-            // --- CONVERTER SCRIPT FOR THIS PAGE (ASCII ART) ---
+            
+            // --- CONVERTER SCRIPT FOR THIS PAGE (BASE64) ---
             const fileUpload = document.getElementById('file-upload'), fileInfo = document.getElementById('file-info'), convertButton = document.getElementById('convert-button'), statusArea = document.getElementById('status-area'), dropZone = document.querySelector('.drop-zone');
             if(fileUpload) {
                 let selectedFile = null;
@@ -587,8 +477,8 @@
                 }
                 function handleFileSelection(files) {
                     if (!files || files.length === 0) return;
-                     if (files.length > 1) {
-                        alert("Please select only one image to generate ASCII art.");
+                    if (files.length > 1) {
+                        alert("Please select only one image for Base64 encoding.");
                         fileUpload.value = ''; // Reset file input
                         return;
                     }
@@ -611,32 +501,18 @@
                         return;
                     }
                     try {
-                        await processSingleImage(selectedFile);
-                    } catch (error) { showError("An unexpected error occurred during ASCII generation.", error); }
-                }
-
-                async function processSingleImage(file) {
-                    updateProgress(0.2, `Analyzing image...`);
-                    let img = await loadImage(await fileToDataURL(file));
-                    const canvas = document.createElement('canvas');
-                    canvas.width = img.width;
-                    canvas.height = img.height;
-                    canvas.getContext('2d').drawImage(img, 0, 0, img.width, img.height);
-                    
-                    updateProgress(0.6, `Generating art...`);
-                    const asciiText = canvasToAscii(canvas);
-                    showTextOutput(asciiText, 'ASCII Art');
+                        updateProgress(0.5, `Encoding image...`);
+                        const base64String = await fileToDataURL(selectedFile);
+                        showTextOutput(base64String, 'Base64 String');
+                    } catch (error) { showError("An unexpected error occurred during encoding.", error); }
                 }
 
                 const fileToDataURL = file => new Promise((resolve, reject) => { const reader = new FileReader(); reader.onload = () => resolve(reader.result); reader.onerror = reject; reader.readAsDataURL(file); });
-                const loadImage = src => new Promise((resolve, reject) => { const img = new Image(); img.onload = () => resolve(img); img.onerror = reject; img.src = src; });
                 function startProgress(message) { convertButton.disabled = true; statusArea.innerHTML = `<div class="progress-bar-container"><div class="progress-bar" id="progress-bar"></div></div><p id="progress-text">${message}</p>`; }
                 function updateProgress(percentage, message) { const bar = document.getElementById('progress-bar'), text = document.getElementById('progress-text'); if (bar) bar.style.width = `${percentage * 100}%`; if (text) text.textContent = message; }
-                function showError(message, error = null) { if (error) { console.error("An error occurred:", error); } statusArea.innerHTML = `<div class="error-message">❌ Generation Failed</div><p style="text-align:center;max-width:500px;margin:15px auto;">${message}</p>`; checkConversionReady(); }
-                function showTextOutput(text, formatName) { updateProgress(1, "Done!"); setTimeout(() => { statusArea.innerHTML = `<div class="success-message">✅ ${formatName} Generated!</div><div class="text-output-area"><textarea readonly>${text}</textarea><button class="copy-btn" id="copy-btn">Copy to Clipboard</button></div> <button id="reset-button" class="reset-btn" style="margin-top:20px;">Convert Another Image</button>`; document.getElementById('copy-btn').addEventListener('click', (e) => { const textarea = e.target.previousElementSibling; navigator.clipboard.writeText(textarea.value).then(() => { e.target.textContent = "Copied!"; setTimeout(() => e.target.textContent = "Copy to Clipboard", 2000); }); }); document.getElementById('reset-button').addEventListener('click', resetUI); }, 500); }
+                function showError(message, error = null) { if (error) { console.error("An error occurred:", error); } statusArea.innerHTML = `<div class="error-message">❌ Encoding Failed</div><p style="text-align:center;max-width:500px;margin:15px auto;">${message}</p>`; checkConversionReady(); }
+                function showTextOutput(text, formatName) { updateProgress(1, "Done!"); setTimeout(() => { statusArea.innerHTML = `<div class="success-message">✅ ${formatName} Generated!</div><div class="text-output-area"><textarea readonly>${text}</textarea><button class="copy-btn" id="copy-btn">Copy to Clipboard</button></div> <button id="reset-button" class="reset-btn" style="margin-top:20px;">Encode Another Image</button>`; document.getElementById('copy-btn').addEventListener('click', (e) => { const textarea = e.target.previousElementSibling; navigator.clipboard.writeText(textarea.value).then(() => { e.target.textContent = "Copied!"; setTimeout(() => e.target.textContent = "Copy to Clipboard", 2000); }); }); document.getElementById('reset-button').addEventListener('click', resetUI); }, 500); }
                 function resetUI() { selectedFile = null; fileUpload.value = ''; fileInfo.innerHTML = ''; statusArea.innerHTML = ''; checkConversionReady(); }
-                
-                function canvasToAscii(canvas) { const MAX_WIDTH = 120; const tempCanvas = document.createElement('canvas'); const tempCtx = tempCanvas.getContext('2d'); const ratio = canvas.height / canvas.width; tempCanvas.width = Math.min(canvas.width, MAX_WIDTH); tempCanvas.height = Math.round(tempCanvas.width * ratio * 0.5); tempCtx.drawImage(canvas, 0, 0, tempCanvas.width, tempCanvas.height); const data = tempCtx.getImageData(0, 0, tempCanvas.width, tempCanvas.height).data; const density = ' .,:;irsXA253hMHGS#9B&@'; let ascii = ''; for (let y = 0; y < tempCanvas.height; y++) { for (let x = 0; x < tempCanvas.width; x++) { const i = (y * tempCanvas.width + x) * 4; const avg = (data[i] + data[i + 1] + data[i + 2]) / 3; ascii += density[Math.floor((avg / 255) * (density.length - 1))]; } ascii += '\n'; } return ascii; }
             }
         });
     </script>
