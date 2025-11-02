@@ -282,7 +282,7 @@
                              <div class="option-group">
                                 <label for="ppm-format-select">PPM Format Type</label>
                                 <select id="ppm-format-select">
-                                    <option value="P3">P3 (ASCII - Plain Text)</option>
+                                    <option value="P3" selected>P3 (ASCII - Plain Text)</option>
                                     <option value="P6">P6 (Binary - Raw)</option>
                                 </select>
                             </div>
@@ -544,36 +544,48 @@
                     } catch (error) { showError("An unexpected error occurred during conversion.", error); }
                 }
 
-                async function convertPdfToImages(file, toFormat) { const pdf = await pdfjsLib.getDocument({ data: await file.arrayBuffer() }).promise; const zip = new JSZip(); for (let i = 1; i <= pdf.numPages; i++) { updateProgress(i / pdf.numPages, `Processing page ${i} of ${pdf.numPages}...`); const page = await pdf.getPage(i); const viewport = page.getViewport({ scale: 2.0 }); const canvas = document.createElement('canvas'); canvas.width = viewport.width; canvas.height = viewport.height; await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise; const blob = await canvasToPPM(canvas); zip.file(`${file.name.replace(/\.pdf$/i, '')}_page_${i}.ppm`, blob); } const zipBlob = await zip.generateAsync({ type: "blob" }); showSuccessUI(URL.createObjectURL(zipBlob), `${file.name.replace(/\.pdf$/i, '')}.zip`, "ZIP Archive"); }
+                async function convertPdfToImages(file, toFormat) { const pdf = await pdfjsLib.getDocument({ data: await file.arrayBuffer() }).promise; const zip = new JSZip(); for (let i = 1; i <= pdf.numPages; i++) { updateProgress(i / pdf.numPages, `Processing page ${i} of ${pdf.numPages}...`); const page = await pdf.getPage(i); const viewport = page.getViewport({ scale: 2.0 }); const canvas = document.createElement('canvas'); canvas.width = viewport.width; canvas.height = viewport.height; await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise; const blob = canvasToPPM(canvas); zip.file(`${file.name.replace(/\.pdf$/i, '')}_page_${i}.ppm`, blob); } const zipBlob = await zip.generateAsync({ type: "blob" }); showSuccessUI(URL.createObjectURL(zipBlob), `${file.name.replace(/\.pdf$/i, '')}.zip`, "ZIP Archive"); }
                 async function batchConvertImages(files, toFormat) { const results = []; for (let i = 0; i < files.length; i++) { updateProgress(i / files.length, `Converting file ${i + 1}...`); const { data: blob, ext } = await processSingleImage(files[i], toFormat, getOptions()); results.push({ name: `${files[i].name.split('.').slice(0, -1).join('.')}.${ext}`, blob }); } if (results.length === 1) { showSuccessUI(URL.createObjectURL(results[0].blob), results[0].name, toFormat.toUpperCase()); } else if (results.length > 1) { const zip = new JSZip(); results.forEach(r => zip.file(r.name, r.blob)); const zipBlob = await zip.generateAsync({ type: "blob" }); showSuccessUI(URL.createObjectURL(zipBlob), "plusconvert_batch.zip", "ZIP Archive"); } }
-                async function processSingleImage(file, toFormat, options) { let img = await loadImage(await fileToDataURL(file)); const canvas = document.createElement('canvas'); const ratio = img.width / img.height; let { width, height } = img; if (options.maxWidth && width > options.maxWidth) { width = options.maxWidth; height = width / ratio; } if (options.maxHeight && height > options.maxHeight) { height = options.maxHeight; width = height * ratio; } canvas.width = width; canvas.height = height; canvas.getContext('2d').drawImage(img, 0, 0, width, height); const blob = await canvasToPPM(canvas); return { data: blob, ext: 'ppm' }; }
+                async function processSingleImage(file, toFormat, options) { let img = await loadImage(await fileToDataURL(file)); const canvas = document.createElement('canvas'); const ratio = img.width / img.height; let { width, height } = img; if (options.maxWidth && width > options.maxWidth) { width = options.maxWidth; height = width / ratio; } if (options.maxHeight && height > options.maxHeight) { height = options.maxHeight; width = height * ratio; } canvas.width = width; canvas.height = height; canvas.getContext('2d').drawImage(img, 0, 0, width, height); const blob = canvasToPPM(canvas); return { data: blob, ext: 'ppm' }; }
                 const fileToDataURL = file => new Promise((resolve, reject) => { const reader = new FileReader(); reader.onload = () => resolve(reader.result); reader.onerror = reject; reader.readAsDataURL(file); });
                 const loadImage = src => new Promise((resolve, reject) => { const img = new Image(); img.onload = () => resolve(img); img.onerror = reject; img.src = src; });
                 const getOptions = () => ({ maxWidth: parseInt(maxWidthInput.value) || null, maxHeight: parseInt(maxHeightInput.value) || null });
                 function startProgress(message) { convertButton.disabled = true; statusArea.innerHTML = `<div class="progress-bar-container"><div class="progress-bar" id="progress-bar"></div></div><p id="progress-text">${message}</p>`; }
                 function updateProgress(percentage, message) { const bar = document.getElementById('progress-bar'), text = document.getElementById('progress-text'); if (bar) bar.style.width = `${percentage * 100}%`; if (text) text.textContent = message; }
-                function showError(message, error = null) { if (error) { console.error("A conversion error occurred:", error); } statusArea.innerHTML = `<div class="error-message">❌ Conversion Failed</div><p style="text-align:center;max-width:500px;margin:15px auto;">${message}</p>`; checkConversionReady(); }
+                function showError(message, error = null) { if (error) { console.error("A conversion error occurred:", error); } statusArea.innerHTML = `<div class="error-message">❌ Conversion Failed</div><p style="text-align:center;max-width:500px;margin:15px auto;">${message}</p><button id="reset-button" class="reset-btn">Try Again</button>`; document.getElementById('reset-button').addEventListener('click', resetUI); checkConversionReady(); }
                 function showSuccessUI(downloadUrl, fileName, fileType) { updateProgress(1, "Done!"); let downloadButtonHTML = ''; if (downloadUrl) { downloadButtonHTML = `<a href="${downloadUrl}" download="${fileName}" id="download-link" class="download-btn"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>Download</a>`; } setTimeout(() => { statusArea.innerHTML = `<div class="success-message">✅ Conversion Successful!</div><div style="display:flex; gap: 15px; justify-content: center;">${downloadButtonHTML}<button id="reset-button" class="reset-btn">Convert More Files</button></div>`; document.getElementById('reset-button').addEventListener('click', resetUI); }, 500); }
                 function resetUI() { selectedFiles = []; fileUpload.value = ''; fileInfo.innerHTML = ''; statusArea.innerHTML = ''; optionsPanel.style.display = 'none'; checkConversionReady(); }
                 function canvasToPPM(canvas) {
                     const ctx = canvas.getContext('2d');
-                    const { width, height, data } = ctx.getImageData(0, 0, width, height);
+                    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                    const { width, height, data } = imageData;
                     const formatType = ppmFormatSelect.value;
                     
                     if (formatType === 'P3') {
                         let ppmData = `P3\n${width} ${height}\n255\n`;
+                        let line = '';
                         for (let i = 0; i < data.length; i += 4) {
-                            ppmData += `${data[i]} ${data[i+1]} ${data[i+2]} `;
+                            const r = data[i];
+                            const g = data[i+1];
+                            const b = data[i+2];
+                            const newNumbers = `${r} ${g} ${b} `;
+                            if ((line + newNumbers).length > 70) {
+                                ppmData += line.trim() + '\n';
+                                line = newNumbers;
+                            } else {
+                                line += newNumbers;
+                            }
                         }
+                        ppmData += line.trim();
                         return new Blob([ppmData], { type: 'image/x-portable-pixmap' });
                     } else { // P6
                         const header = `P6\n${width} ${height}\n255\n`;
                         const binaryData = new Uint8Array(width * height * 3);
                         let k = 0;
                         for (let i = 0; i < data.length; i += 4) {
-                            binaryData[k++] = data[i];     // R
-                            binaryData[k++] = data[i+1];   // G
-                            binaryData[k++] = data[i+2];   // B
+                            binaryData[k++] = data[i];
+                            binaryData[k++] = data[i+1];
+                            binaryData[k++] = data[i+2];
                         }
                         const headerBytes = new TextEncoder().encode(header);
                         return new Blob([headerBytes, binaryData], { type: 'image/x-portable-pixmap' });
